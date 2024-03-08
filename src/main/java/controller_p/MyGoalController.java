@@ -22,7 +22,7 @@ public class MyGoalController extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String mainfolder = "myGoal/";
-		String mainJsp = request.getRequestURI().substring((mainfolder).length()+1);
+		String mainJsp = request.getRequestURI().substring((mainfolder).length()+5);
 		
 		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");
 		
