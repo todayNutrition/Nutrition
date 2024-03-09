@@ -1,5 +1,7 @@
 package myGoal_p;
 
+import java.util.ArrayList;
+
 import dao_p.RecommendNutriDAO;
 import dto_p.RecommendNutriDTO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,8 +12,7 @@ public class MyGoalDetail implements MyGoalService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		RecommendNutriDTO dto = new RecommendNutriDAO().recommendNutrition(request.getParameter("kind"),request.getParameter("gender"));
-		
+		ArrayList<RecommendNutriDTO> dto = new RecommendNutriDAO().list();
 		request.setAttribute("data", dto);
 	}
 	

@@ -21,7 +21,7 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String mainfolder = "main/";
-		String mainJsp = request.getRequestURI().substring((mainfolder).length());
+		String mainJsp = request.getRequestURI().substring((request.getContextPath()+"/"+mainfolder).length());
 		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");
 		
 		try {

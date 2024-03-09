@@ -19,13 +19,10 @@ public class MyGoalController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String mainfolder = "myGoal/";
-		String mainJsp = request.getRequestURI().substring((mainfolder).length()+5);
-		
-		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");
-		
+		String mainJsp = request.getRequestURI().substring((request.getContextPath()+"/"+mainfolder).length());
+		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");		
 		try {
 			MyGoalService ser = (MyGoalService)Class.forName("myGoal_p."+mainJsp).newInstance();
 			ser.execute(request, response); 

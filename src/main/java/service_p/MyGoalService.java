@@ -5,4 +5,5 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public interface MyGoalService {
 	void execute(HttpServletRequest request, HttpServletResponse response);
+	
 }
