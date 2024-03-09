@@ -1,5 +1,15 @@
 package main_p;
 
-public class Main{
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import service_p.MainService;
+
+public class Main implements MainService{
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
 }
