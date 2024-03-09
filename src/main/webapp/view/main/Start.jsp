@@ -1,49 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-시작하시겠습니까?
-<a href="StartInput.jsp">Start</a>
 
-
-<nav class="navbar navbar-light bg-light fixed-top">
-  <div class="container-fluid">
-<!--     <a class="navbar-brand" href="#">메인페이지</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-<!--         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5> -->
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">메인페이지</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">성분표 업로드</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">그래프</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">목표 설정</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              달력
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-              <li><a class="dropdown-item" href="#">상세내역</a></li>
-<!--               <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul> -->
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
+<form action="StartReg" method="set">
+	<table border="">
+		<h1>기초 정보 입력</h1>
+		<tr>
+			<td>닉네임</td>
+			<td><input type="text" name="name"/></td>
+		</tr>
+		<tr>
+			<td>키</td>
+			<td><input type="text" name="height"/></td>
+		</tr>
+		<tr>
+			<td>몸무게</td>
+			<td><input type="text" name="weight"/></td>
+		</tr>
+		<tr>
+			<td>나이</td>
+			<td><input type="text" name="age"/></td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td><input type="radio" name="gender" value="남자"/>남자<input type="radio" name="gender" value="여자"/>여자</td>
+		</tr>
+		
+<!-- 		<h1>일일 섭취 목표 설정</h1>
+		<tr>
+			<td>나트륨</td>
+			<td><input type="text" name="na" placeholder="미입력시 DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>탄수화물</td>
+			<td><input type="text" name="carbo"placeholder="DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>당류</td>
+			<td><input type="text" name="sugar"placeholder="DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>지방</td>
+			<td><input type="text" name="fat" placeholder="DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>트렌스지방</td>
+			<td><input type="text" name="tFat" placeholder="DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>포화지방</td>
+			<td><input type="text" name="sFat" placeholder="DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>콜레스테롤</td>
+			<td><input type="text" name="chole" placeholder="DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>단백질</td>
+			<td><input type="text" name="protein" placeholder="DB기본 권장량"/></td>
+		</tr>
+		<tr>
+			<td>칼로리</td>
+			<td><input type="text" name="kcal" placeholder="DB기본 권장량"/></td>
+		</tr> -->
+		<tr>
+			<td colspan="2">시작하시겠습니까?<input type="submit" value="Start"/></td>
+		</tr>
+	</table>
+</form>
