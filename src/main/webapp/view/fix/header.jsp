@@ -17,7 +17,7 @@
                 <a href="#" class="nav-item nav-link">성분표 업로드</a>
                 <a href="/Nutrition/graph/Graph" class="nav-item nav-link">그래프</a>
                 <a href="/Nutrition/myGoal/MyGoalDetail" class="nav-item nav-link">목표 설정</a>
-                <a href="#" class="nav-item nav-link">달력</a>
+                <a href="/Nutrition/calendar/CalendarMain" class="nav-item nav-link">달력</a>
             </div>
         </div>
     </nav>
