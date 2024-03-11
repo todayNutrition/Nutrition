@@ -40,11 +40,8 @@ public class ReadNutriController extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
