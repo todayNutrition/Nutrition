@@ -37,10 +37,19 @@ public class RecommendNutriDAO {
 		if(con!=null) {try {con.close();} catch (SQLException e) {}}
 	}
 	
+
 	
-	public ArrayList<RecommendNutriDTO> list(){
+	public ArrayList<RecommendNutriDTO> list(int age){
 		ArrayList<RecommendNutriDTO> res = new ArrayList<RecommendNutriDTO>();
-		sql = "select * from rda"; //등록 날짜 기준 내림차순
+		if (age>=6 && age<=8) {
+			sql = "select * from rda where kind='어린이'";
+		}else if(age >= 9 && age <= 18) {
+			sql = "select * from rda where kind='청소년'";
+		}else if(age >=19 && age < 65) {
+			sql = "select * from rda where kind='성인'";
+		}else if(age >= 65) {
+			sql = "select * from rda where kind='노년'";
+		}
 		try {
 			psmt = con.prepareStatement(sql);
 			rs = psmt.executeQuery();		
@@ -68,36 +77,28 @@ public class RecommendNutriDAO {
 		return res;
 	}
 	
-	
-	
-	public RecommendNutriDTO recommendNutrition(String kind, String gender){
-		RecommendNutriDTO dto = null;
-		sql = "select * from rda where kind=?,gender=?"; // 하루 권장 섭취량 읽어오기
+	public void modify(RecommendNutriDTO dto,int age,String gender) {
+		if (age>=6 && age<=8) {
+			sql = "update rda set kcal=? where kind='어린이' && gender = ?";
+		}else if(age >= 9 && age <= 18) {
+			sql = "update rda set kcal=? where kind='청소년' && gender = ?";
+		}else if(age >=19 && age < 65) {
+			sql = "update rda set kcal=? where kind='성인' && gender = ?";
+		}else if(age >= 65) {
+			sql = "update rda set kcal=? where kind='노년' && gender = ?";
+		}
+		
 		try {
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, kind);
+			psmt.setInt(1, dto.getKcal());
 			psmt.setString(2, gender);
-			rs = psmt.executeQuery();		
-			while(rs.next()) {
-				dto = new RecommendNutriDTO();
-				dto.setKind(rs.getString("kind"));
-				dto.setGender(rs.getString("gender"));
-				dto.setKcal(rs.getInt("kcal"));
-				dto.setCarbo(rs.getInt("carbo"));
-				dto.setNa(rs.getInt("na"));
-				dto.setSugar(rs.getInt("sugar"));
-				dto.setProtein(rs.getInt("protein"));
-				dto.setFat(rs.getInt("fat"));
-				dto.settFat(rs.getInt("tFat"));
-				dto.setsFat(rs.getInt("sFat"));
-				dto.setChole(rs.getInt("chole"));
-			}
+			
+			psmt.executeUpdate();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			close();
-		}		
-		return dto;
+		}
+		
 	}
 	
 	

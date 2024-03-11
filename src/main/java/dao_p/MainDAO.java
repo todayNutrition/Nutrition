@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -35,6 +36,7 @@ public class MainDAO {
 		if(psmt!=null) {try {psmt.close();} catch (SQLException e) {}}
 		if(con!=null) {try {con.close();} catch (SQLException e) {}}
 	}
+	
 	
 	/**메인 사용자 입력 정보 저장하기*/
 	public void userWrite(MainDTO dto) {
@@ -113,4 +115,25 @@ public class MainDAO {
 		}
 		return res;
 	}
+	
+	public MainDTO detail(){
+		MainDTO dto = null;
+		sql = "select age, gender from user ";
+		try {
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();		
+			while(rs.next()) {
+				dto = new MainDTO();
+				dto.setAge(rs.getInt("age"));
+				dto.setGender(rs.getString("gender"));
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}		
+		return dto;
+	}
+	
 }
