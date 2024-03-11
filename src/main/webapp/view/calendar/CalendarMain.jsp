@@ -18,7 +18,7 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            background-color: 	;
+            background-color: ;
             display: none;
             z-index: 1000;
         }
@@ -27,8 +27,8 @@
             margin: 50px auto;
             width: 50%;
             height: 70%;
-            background-color: white;
-            color: pink;
+            background-color: green;
+            color: white;
         }
         
         .fc-day-sun a {
@@ -46,13 +46,14 @@
         <div id="cont" style="text-align: center;">
             <br>
             <h1>일일 성취표</h1>
-            시작일 <input type="text" id="schStart" value=""><br>
+            날짜 <input type="text" id="schStart" value="" readonly="true"><br>
             종료일 <input type="text" id="schEnd" value=""><br>
             제목 <input type="text" id="schTitle" value=""><br>
             하루종일 <input type="checkbox" id="allDay"><br>
             배경색<input type="color" id="schBColor" value="">
             글자색<input type="color" id="schFColor" value="">
             <button onclick="fCalAdd()">추강</button><br>
+            <div><img style="width:300px;" src="/Nutrition/fff/IMG_2820.jpg"></div>
             <button onclick="fMClose()">X</button>
         </div>
     </div>
