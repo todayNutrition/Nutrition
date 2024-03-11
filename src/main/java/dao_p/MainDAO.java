@@ -7,9 +7,7 @@ import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 import dto_p.MainDTO;
 
@@ -41,16 +39,19 @@ public class MainDAO {
 	/**메인 사용자 입력 정보 저장하기*/
 	public void userWrite(MainDTO dto) {
 		
-		sql = "insert into user(name, height, weight, age, gender, goalKcal) values(?,?,?,?,?,?)";
-		
+		sql = "insert into user(name, height, weight, age, gender) values(?,?,?,?,?)";
+		System.out.println("저장 확인해보께1");
 		try {
 			psmt = con.prepareStatement(sql);
+
 			psmt.setString(1, dto.getName());
 			psmt.setString(2, dto.getHeight());
 			psmt.setString(3, dto.getWeight());
 			psmt.setInt(4, dto.getAge());
 			psmt.setString(5, dto.getGender());
-			psmt.setInt(6, dto.getGoalKcal());
+			System.out.println("저장 확인해보께2");
+			
+			psmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -58,6 +59,58 @@ public class MainDAO {
 		}finally {
 			close();
 		}
+	}
+	
+	/**메인 사용자 기초정보 수정*/
+	public void userModify(MainDTO dto) {
 		
+		sql ="update user set name = ?, height = ?, weight = ?, age = ?";
+		System.out.println("수정 확인해보께1");
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, dto.getName());
+			psmt.setString(2, dto.getHeight());
+			psmt.setString(3, dto.getWeight());
+			psmt.setInt(4, dto.getAge());
+			
+			System.out.println("수정 확인해보께2");
+			psmt.executeUpdate();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+	}
+	
+	/**메인 사용자 정보 가져오기*/
+	public MainDTO userRead(MainDTO dto) {
+		MainDTO res = null;
+		
+		sql ="select * from user";
+		System.out.println("읽기 확인해보께1");
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			System.out.println("읽기 확인해보께2");
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				res = new MainDTO();
+				res.setName(rs.getString("name")); 
+				res.setHeight(rs.getString("height")); 
+				res.setWeight(rs.getString("weight")); 
+				res.setAge(Integer.parseInt(rs.getString("age")));
+				res.setGender(rs.getString("gender")); 
+//				res.setGoalKcal(Integer.parseInt(rs.getString("goalKcal")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return res;
 	}
 }
