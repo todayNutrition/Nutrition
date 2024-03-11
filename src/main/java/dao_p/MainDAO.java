@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 import dto_p.MainDTO;
 
@@ -38,6 +37,7 @@ public class MainDAO {
 		if(con!=null) {try {con.close();} catch (SQLException e) {}}
 	}
 	
+	
 	/**메인 사용자 입력 정보 저장하기*/
 	public void userWrite(MainDTO dto) {
 		
@@ -60,4 +60,25 @@ public class MainDAO {
 		}
 		
 	}
+	
+	public MainDTO detail(){
+		MainDTO dto = null;
+		sql = "select age, gender from user ";
+		try {
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();		
+			while(rs.next()) {
+				dto = new MainDTO();
+				dto.setAge(rs.getInt("age"));
+				dto.setGender(rs.getString("gender"));
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}		
+		return dto;
+	}
+	
 }
