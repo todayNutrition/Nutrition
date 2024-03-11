@@ -6,25 +6,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service_p.MyGoalService;
+import service_p.MainService;
 
 import java.io.IOException;
 
-@WebServlet("/myGoal/*")
-public class MyGoalController extends HttpServlet {
+@WebServlet("/main/*")
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public MyGoalController() {
+    public MainController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String mainfolder = "myGoal/";
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String mainfolder = "main/";
 		String mainJsp = request.getRequestURI().substring((request.getContextPath()+"/"+mainfolder).length());
-		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");		
+		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");
+		
 		try {
-			MyGoalService ser = (MyGoalService)Class.forName("myGoal_p."+mainJsp).newInstance();
+			MainService ser = (MainService)Class.forName("main_p."+mainJsp).newInstance();
 			ser.execute(request, response); 
 			
 			RequestDispatcher dispatcher = null;
