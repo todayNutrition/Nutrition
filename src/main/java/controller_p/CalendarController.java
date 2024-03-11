@@ -7,19 +7,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service_p.ReadNutriService;
+import service_p.CalendarService;
 
 import java.io.IOException;
 
-@WebServlet("/readNutri/*")
+
+@WebServlet("/calendar/*")
 @MultipartConfig()
-public class ReadNutriController extends HttpServlet {
+public class CalendarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReadNutriController() {
+    public CalendarController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,18 +29,18 @@ public class ReadNutriController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String cate = "readNutri/";
+		String cate = "calendar/";
 		String service = request.getRequestURI().substring((request.getContextPath()+"/"+cate).length());
-		request.setAttribute("mainUrl",cate+service+".jsp");
+		System.out.println(service);
+		request.setAttribute("mainUrl", cate+service+".jsp");
 		try {
-			ReadNutriService ser = (ReadNutriService)Class.forName("readNutri_p."+service).newInstance();
-			ser.execute(request, response);
-			
+			CalendarService cs = (CalendarService)Class.forName("calendar_p."+service).newInstance();
+			cs.execute(request, response);			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/view/template.jsp");
 			dispatcher.forward(request, response);
 			
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
