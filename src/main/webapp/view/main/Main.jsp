@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
-<jsp:include page="/view/fix/header.jsp"></jsp:include>
 <form action="ModifyReg" method="post">
 	<table border="">
 		<h1>나의 프로필</h1>

@@ -20,8 +20,8 @@ public class ModifyReg implements MainService{
 		dto.setGender(request.getParameter("gender"));
 		
 		new MainDAO().userModify(dto);
-		request.setAttribute("mainUrl", "/view/main/Main.jsp");
-		
-
+		request.setAttribute("msg", "수정이 완료되었습니다.");
+		request.setAttribute("move", "/Nutrition/main/Main");
+		request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
 	}
 }
