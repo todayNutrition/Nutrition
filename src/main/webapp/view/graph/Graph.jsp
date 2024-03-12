@@ -26,8 +26,7 @@
         labels: ['나트륨', '탄수화물', '당류', '지방', '트렌스지방', '포화지방', '콜레스테롤', '단백질'],
         datasets: [{
           label: '하루 섭취량',
-          data: /* ${MainUser.na}, ${MainUser.carbo}, ${MainUser.sugar}, ${MainUser.fat},${MainUser.tFat},${MainUser.sFat},${MainUser.chole},${MainUser.protein}, */
-        	   [12, 19, 32, 57, 22, 13, 40, 25], 
+          data: [${readDay.na}, ${readDay.carbo}, ${readDay.sugar}, ${readDay.fat},${readDay.tFat},${readDay.sFat},${readDay.chole},${readDay.protein}],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -53,10 +52,10 @@
         },
         {
             label: '하루 평균 권장 섭취량',
-            data: 
+             data: 
              	<c:forEach items="${readUser}" var="dto">
         			[${dto.na}, ${dto.carbo}, ${dto.sugar}, ${dto.fat},${dto.tFat},${dto.sFat},${dto.chole},${dto.protein}],
-            	</c:forEach> 
+            	</c:forEach>
             backgroundColor: 'transparent',
             borderColor: 'skyblue',
             type: 'line'

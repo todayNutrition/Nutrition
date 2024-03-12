@@ -35,42 +35,42 @@
 	</table>
 </form>
 	<table>
-			<h1>일일 섭취량</h1>
+		
+		<h1>일일 섭취량</h1>
 		<tr>
 			<td>칼로리</td>
-
-			<td>${param.goalKcal}mg</td>
+			<td>${readDay.kcal}kcal</td>
 		</tr>
 		<tr>
 			<td>나트륨</td>
-			<td>${param.na}mg</td>
+			<td>${readDay.na}mg</td>
 		</tr>
 		<tr>
 			<td>탄수화물</td>
-			<td>${param.carbo}mg</td>
+			<td>${readDay.carbo}g</td>
 		</tr>
 		<tr>
 			<td>당류</td>
-			<td>${param.sugar}mg</td>
+			<td>${readDay.sugar}g</td>
 		</tr>
 		<tr>
 			<td>지방</td>
-			<td>${param.fat}mg</td>
+			<td>${readDay.fat}g</td>
 		</tr>
 		<tr>
 			<td>트렌스지방</td>
-			<td>${param.tFat}mg</td>
+			<td>${readDay.tFat}g</td>
 		</tr>
 		<tr>
 			<td>포화지방</td>
-			<td>${param.sFat}mg</td>
+			<td>${readDay.sFat}g</td>
 		</tr>
 		<tr>
 			<td>콜레스테롤</td>
-			<td>${param.chole}mg</td>
+			<td>${readDay.chole}mg</td>
 		</tr>
 		<tr>
 			<td>단백질</td>
-			<td>${param.protein}mg</td>
+			<td>${readDay.protein}g</td>
 		</tr>
 	</table>

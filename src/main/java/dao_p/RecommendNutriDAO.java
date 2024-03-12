@@ -102,5 +102,39 @@ public class RecommendNutriDAO {
 		
 	}
 	
+	/**구분, 성별로 평균 권장량 가져오기*/
+	public ArrayList<RecommendNutriDTO> list1(String kind, String gender){
+		ArrayList<RecommendNutriDTO> res = new ArrayList<RecommendNutriDTO>();
+		
+		sql = "select * from rda where kind = ? and rda.gender = ?";
 	
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, kind);
+			psmt.setString(2, gender);
+			rs = psmt.executeQuery();		
+			
+			while(rs.next()) {
+				RecommendNutriDTO dto = new RecommendNutriDTO();
+				dto.setKind(rs.getString("kind"));
+				dto.setGender(rs.getString("gender"));
+				dto.setKcal(rs.getInt("kcal"));
+				dto.setCarbo(rs.getInt("carbo"));
+				dto.setNa(rs.getInt("na"));
+				dto.setSugar(rs.getInt("sugar"));
+				dto.setProtein(rs.getInt("protein"));
+				dto.setFat(rs.getInt("fat"));
+				dto.settFat(rs.getInt("tFat"));
+				dto.setsFat(rs.getInt("sFat"));
+				dto.setChole(rs.getInt("chole"));
+				res.add(dto);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}		
+		return res;
+	}
 }
