@@ -44,7 +44,7 @@ public class CalendarDAO {
    public ArrayList<CalendarDTO> list() {
 	    ArrayList<CalendarDTO> res = new ArrayList<CalendarDTO>();
 	    sql = "SELECT regDate, SUM(kcal) AS total_kcal, SUM(na) AS total_na, SUM(carbo) AS total_carbo, SUM(sugar) AS total_sugar, SUM(fat) AS total_fat, " +
-	          "SUM(tFat) AS total_tFat, SUM(sFat) AS total_sFat, SUM(chole) AS total_chole, SUM(protein) AS total_protein " +
+	          "SUM(tFat) AS total_tFat, SUM(sFat) AS total_sFat, SUM(chole) AS total_chole, SUM(protein) AS total_protein, dayavg " +
 	          "FROM nutrition GROUP BY regDate";
 
 	    try {
@@ -63,6 +63,7 @@ public class CalendarDAO {
 	            dto.setsFat(rs.getInt("total_sFat"));
 	            dto.setChole(rs.getInt("total_chole"));
 	            dto.setProtein(rs.getInt("total_protein"));
+	            dto.setDayavg(rs.getInt("dayavg"));
 
 	            res.add(dto);
 	        }

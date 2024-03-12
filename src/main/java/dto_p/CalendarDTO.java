@@ -6,8 +6,14 @@ import java.util.Date;
 
 public class CalendarDTO {
    Date regDate;
-   int kcal,na,carbo,sugar,fat,tFat,sFat,chole,protein;
+   int kcal,na,carbo,sugar,fat,tFat,sFat,chole,protein,dayavg;
    
+	public int getDayavg() {
+		return dayavg;
+	}
+	public void setDayavg(int dayavg) {
+		this.dayavg = dayavg;
+	}
 	public Date getRegDate() {
 		return regDate;
 	}

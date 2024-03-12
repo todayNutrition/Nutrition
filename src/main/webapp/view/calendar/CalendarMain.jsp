@@ -26,7 +26,7 @@
         #cont {
             margin: 50px auto;
             width: 50%;
-            height: 70%;
+            height: 75%;
             background-color: green;
             color: white;
         }
@@ -47,8 +47,9 @@
             <br>
             <h1>일일 성취표</h1>
             날짜 <input type="text" id="schStart" value="" readonly="readonly"><br>
-            점수 <input type="text" id="schTitle" value="" readonly="readonly"><br>
-            <div><img id="schImg" style="width:300px;" src=""></div>
+            점수 <input type="text" id="schJum" value="" readonly="readonly"><br>
+            평가 <input type="text" id="schComment" value="" readonly="readonly"><br>
+            <div><img id="schImg" style="width:300px; height:300px; margin:10px;" src=""></div>
             <button onclick="fMClose()">X</button>
         </div>
     </div>
@@ -61,7 +62,8 @@
         const YrModal = document.querySelector("#yrModal");
         const calendarEl = document.querySelector('#calendar');
         const mySchStart = document.querySelector("#schStart");
-        const mySchTitle = document.querySelector("#schTitle");
+        const mySchJum = document.querySelector("#schJum");
+        const mySchComment = document.querySelector("#schComment");
         const mySchImg = document.querySelector("#schImg");
 
 
@@ -76,7 +78,7 @@
 
         // 캘린더 생성 옵션(참공)
         const calendarOption = {
-            height: '1000px', // calendar 높이 설정
+            height: '600px', // calendar 높이 설정
             expandRows: true, // 화면에 맞게 높이 재설정
             slotMinTime: '00:00', // Day 캘린더 시작 시간
             slotMaxTime: '24:00', // Day 캘린더 종료 시간
@@ -94,13 +96,12 @@
             eventDurationEditable: true,
             */
             dayMaxEventRows: true,  // Row 높이보다 많으면 +숫자 more 링크 보임!
-            /*
+            
             views: {
                 dayGridMonth: {
-                    dayMaxEventRows: 3
+                    dayMaxEventRows: 5
                 }
             },
-            */
             nowIndicator: true,
             //events:[],
             events: ev,
@@ -117,29 +118,19 @@
         calendar.on("eventChange", info => console.log("Change:", info));
         calendar.on("eventRemove", info => console.log("Remove:", info));
         calendar.on("eventClick", info => {
-            console.log("eClick:", info);
-            console.log('Event: ', info.event.extendedProps);
-            console.log('Coordinates: ', info.jsEvent);
-            console.log('View: ', info.view);
-            // 재미로 그냥 보더색 바꾸깅
-            info.el.style.borderColor = 'red';
-        });
-        calendar.on("eventMouseEnter", info => console.log("eEnter:", info));
-        calendar.on("eventMouseLeave", info => console.log("eLeave:", info));
-        calendar.on("dateClick", info => console.log("dateClick:", info));
-        calendar.on("select", info => {
-            console.log("체킁:", info);
-
-            mySchStart.value = info.startStr;
-            mySchTitle.value = ${jum}
-            let num = parseInt(${jum/20});
-            mySchImg.src = "/Nutrition/fff/pepe"+num+".jpg"
+            mySchStart.value = info.event.startStr;
+            let jum = info.event.title;
+            console.log(jum);
+            mySchJum.value = info.event.title;
+            let num = parseInt((parseInt(jum))/20);
+            mySchComment.value = "${comments}".split(",")[num];
+            mySchImg.src = "/Nutrition/fff/pepe"+num+".jpg";
 
             YrModal.style.display = "block";
         });
+        calendar.on("dateClick", info => console.log("dateClick:", info));
+        
 		
-        
-        
         // 모달 닫기
         function fMClose() {
             YrModal.style.display = "none";
