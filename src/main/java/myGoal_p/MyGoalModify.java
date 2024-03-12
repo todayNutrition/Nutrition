@@ -18,8 +18,9 @@ public class MyGoalModify implements MyGoalService{
 		dto.setKcal(Integer.parseInt(request.getParameter("kcal")));
 		
 		new RecommendNutriDAO().modify(dto,mdto.getAge(),mdto.getGender());
+		request.setAttribute("msg", "목표칼로리가 수정되었습니다");
 		request.setAttribute("move", "MyGoalDetail");
-		request.setAttribute("mainUrl", "moveUrl.jsp");
+		request.setAttribute("mainUrl", "inc/moveUrl.jsp");
 		
 	}
 

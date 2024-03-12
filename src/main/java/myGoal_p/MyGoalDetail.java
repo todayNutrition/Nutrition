@@ -18,11 +18,13 @@ public class MyGoalDetail implements MyGoalService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		MainDTO mdto = new MainDAO().detail();
 		NutritionDTO ndto = new NutritionDAO().todayNutrition();
+		NutritionDTO total = new NutritionDAO().totalNutrition();
+		
+		request.setAttribute("total", total);
 		request.setAttribute("mdata", mdto);
 		request.setAttribute("ndata", ndto);
 		
-		
-		ArrayList<RecommendNutriDTO> dto = new RecommendNutriDAO().list(mdto.getAge());
+		ArrayList<RecommendNutriDTO> dto = new RecommendNutriDAO().list(mdto.getAge(),mdto.getGender());
 		request.setAttribute("data", dto);
 		}
 	

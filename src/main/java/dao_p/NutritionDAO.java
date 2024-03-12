@@ -38,12 +38,50 @@ public class NutritionDAO {
 		if(con!=null) {try {con.close();} catch (SQLException e) {}}
 	}
 	
-
-
 	public NutritionDTO todayNutrition(){
 		NutritionDTO dto = null;
-		sql = "select sum(na),sum(carbo),sum(sugar),sum(fat),sum(tFat),sum(sFat),sum(chole),sum(protein),sum(kcal),regDate  \r\n"
-				+ "from nutrition where regDate = curdate()";
+		sql = "select"
+				+ "	IF(sum(a.na)/b.na*100 > 100, IF(sum(a.na)/b.na*100 >= 200,0,100+(100-(sum(a.na)/b.na*100))), sum(a.na)/b.na*100) AS na,"
+				+ "	IF(sum(a.carbo)/b.carbo*100 > 100, IF(sum(a.carbo)/b.carbo*100 >= 200,0,100+(100-(sum(a.carbo)/b.carbo*100))), sum(a.carbo)/b.carbo*100) AS carbo,"
+				+ "	IF(sum(a.sugar)/b.sugar*100 > 100, IF(sum(a.sugar)/b.sugar*100 >= 200,0,100+(100-(sum(a.sugar)/b.sugar*100))), sum(a.sugar)/b.sugar*100) AS sugar,"
+				+ "	IF(sum(a.fat)/b.fat*100 > 100, IF(sum(a.fat)/b.fat*100 >= 200,0,100+(100-(sum(a.fat)/b.fat*100))), sum(a.fat)/b.fat*100) AS fat,"
+				+ "	IF(sum(a.tFat)/b.tFat*100 > 100, IF(sum(a.tFat)/b.tFat*100 >= 200,0,100+(100-(sum(a.tFat)/b.tFat*100))), sum(a.tFat)/b.tFat*100) AS tFat,"
+				+ "	IF(sum(a.sFat)/b.sFat*100 > 100, IF(sum(a.sFat)/b.sFat*100 >= 200,0,100+(100-(sum(a.sFat)/b.sFat*100))), sum(a.sFat)/b.sFat*100) AS sFat,"
+				+ "	IF(sum(a.chole)/b.chole*100 > 100, IF(sum(a.chole)/b.chole*100 >= 200,0,100+(100-(sum(a.chole)/b.chole*100))), sum(a.chole)/b.chole*100) AS chole,"
+				+ "	IF(sum(a.protein)/b.protein*100 > 100, IF(sum(a.protein)/b.protein*100 >= 200,0,100+(100-(sum(a.protein)/b.protein*100))), sum(a.protein)/b.protein*100) AS protein,"
+				+ "	IF(sum(a.kcal)/b.kcal*100 > 100, IF(sum(a.kcal)/b.kcal*100 >= 200,0,100+(100-(sum(a.kcal)/b.kcal*100))), sum(a.kcal)/b.kcal*100) AS kcal "
+				+ "	from nutrition a, rda b"
+				+ "	where regDate = curdate() && b.kind = '성인' && b.gender = '남'";
+		try {
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();		
+			while(rs.next()) {
+				dto = new NutritionDTO();
+				dto.setKcal(rs.getInt("kcal"));
+				dto.setCarbo(rs.getInt("carbo"));
+				dto.setNa(rs.getInt("na"));
+				dto.setSugar(rs.getInt("sugar"));
+				dto.setProtein(rs.getInt("protein"));
+				dto.setFat(rs.getInt("fat"));
+				dto.settFat(rs.getInt("tFat"));
+				dto.setsFat(rs.getInt("sFat"));
+				dto.setChole(rs.getInt("chole"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}		
+		return dto;
+	}
+	
+	public NutritionDTO totalNutrition(){
+		NutritionDTO dto = null;
+		sql = "select "
+				+ " sum(na), sum(kcal), sum(carbo), sum(sugar), sum(protein), "
+				+ " sum(fat), sum(tFat), sum(sFat), sum(chole), regDate "
+				+ " from nutrition "
+				+ " where regDate = curdate()";
 		try {
 			psmt = con.prepareStatement(sql);
 			rs = psmt.executeQuery();		
