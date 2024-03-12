@@ -7,6 +7,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import dao_p.CalendarDAO;
 import dto_p.CalendarDTO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,7 +38,7 @@ public class CalendarMain implements CalendarService {
 			hm2.put("title", "탄수화물 "+dto.getCarbo()+"g");
 			hm2.put("start", dto.getRegDateStr());
 			hm2.put("allDay", true);
-			hm2.put("backgroundColor", "blue");
+			hm2.put("backgroundColor", "rgba(54, 162, 235, 0.5)");
 			hm2.put("textColor", "white");
 			hm2.put("sortIdx", 0);
 			events.add(hm2);
@@ -44,22 +47,31 @@ public class CalendarMain implements CalendarService {
 			hm3.put("title", "단백질 "+dto.getProtein()+"g");
 			hm3.put("start", dto.getRegDateStr());
 			hm3.put("allDay", true);
-			hm3.put("backgroundColor", "green");
+			hm3.put("backgroundColor", "rgba(153, 102, 255, 0.5)");
 			hm3.put("textColor", "white");
 			hm3.put("sortIdx", 3);
 			events.add(hm3);
 			
 			HashMap hm4 = new HashMap();
-			hm4.put("title", "칼로리 "+dto.getFat()+"g");
+			hm4.put("title", "지방 "+dto.getFat()+"g");
 			hm4.put("start", dto.getRegDateStr());
 			hm4.put("allDay", true);
-			hm4.put("backgroundColor", "red");
+			hm4.put("backgroundColor", "rgba(75, 192, 192, 0.5)");
 			hm4.put("textColor", "white");
 			hm4.put("sortIdx", 4);
 			events.add(hm4);
 			
 		}
-		request.setAttribute("events", events);
+		
+		JSONArray ja = new JSONArray();
+        for (HashMap<String, Object> map : events) {
+            JSONObject jsonObject = new JSONObject(map);
+            ja.add(jsonObject);
+        }
+
+        String jsonString = ja.toJSONString();
+        System.out.println(jsonString);
+		request.setAttribute("events", jsonString);
 		System.out.println("CalendarMain.execute() 실행 : ");
 		
 	}
