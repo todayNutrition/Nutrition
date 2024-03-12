@@ -68,9 +68,14 @@ public class CalendarMain implements CalendarService {
             JSONObject jsonObject = new JSONObject(map);
             ja.add(jsonObject);
         }
-
+        int jum = 10;
+        String [] comments = {"넌 망했어요","이게 맞아?","더 노력하세요","조금 아쉬워요","참 잘했어요","완벽해요"};
+        
         String jsonString = ja.toJSONString();
         System.out.println(jsonString);
+        
+        request.setAttribute("jum", jum);
+        request.setAttribute("comment", comments[jum/20]);
 		request.setAttribute("events", jsonString);
 		System.out.println("CalendarMain.execute() 실행 : ");
 		

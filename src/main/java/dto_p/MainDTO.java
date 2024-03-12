@@ -1,7 +1,7 @@
 package dto_p;
 
 public class MainDTO {
-	String name, height, weight, gender; // 이름, 키, 몸무게, 성별
+	String name, height, weight, gender, kind; // 이름, 키, 몸무게, 성별, 구분
 	int age, goalKcal;	// 나이, 목표칼로리
 	
 	
@@ -40,6 +40,12 @@ public class MainDTO {
 	}
 	public void setGoalKcal(int goalKcal) {
 		this.goalKcal = goalKcal;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	
 	
