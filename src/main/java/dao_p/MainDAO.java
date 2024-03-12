@@ -39,9 +39,9 @@ public class MainDAO {
 	
 	
 	/**메인 사용자 입력 정보 저장하기*/
-	public void userWrite(MainDTO dto) {
+	public void userWrite(MainDTO dto, String kind) {
 		
-		sql = "insert into user(name, height, weight, age, gender) values(?,?,?,?,?)";
+		sql = "insert into user(name, height, weight, age, gender, kind) values(?,?,?,?,?,?)";
 		System.out.println("저장 확인해보께1");
 		try {
 			psmt = con.prepareStatement(sql);
@@ -51,6 +51,17 @@ public class MainDAO {
 			psmt.setString(3, dto.getWeight());
 			psmt.setInt(4, dto.getAge());
 			psmt.setString(5, dto.getGender());
+			
+			if (dto.getAge()>=6 && dto.getAge()<=8) {
+				kind="어린이";
+			}else if(dto.getAge() >= 9 && dto.getAge() <= 18) {
+				kind="청소년";
+			}else if(dto.getAge() >=19 && dto.getAge() < 65) {
+				kind="성인";
+			}else if(dto.getAge() >= 65) {
+				kind="노년";
+			}
+			psmt.setString(6, kind);
 			System.out.println("저장 확인해보께2");
 			
 			psmt.executeUpdate();
@@ -64,9 +75,9 @@ public class MainDAO {
 	}
 	
 	/**메인 사용자 기초정보 수정*/
-	public void userModify(MainDTO dto) {
+	public void userModify(MainDTO dto, String kind) {
 		
-		sql ="update user set name = ?, height = ?, weight = ?, age = ?";
+		sql ="update user set name = ?, height = ?, weight = ?, age = ?, kind = ?";
 		System.out.println("수정 확인해보께1");
 		
 		try {
@@ -75,6 +86,17 @@ public class MainDAO {
 			psmt.setString(2, dto.getHeight());
 			psmt.setString(3, dto.getWeight());
 			psmt.setInt(4, dto.getAge());
+			
+			if (dto.getAge()>=6 && dto.getAge()<=8) {
+				kind="어린이";
+			}else if(dto.getAge() >= 9 && dto.getAge() <= 18) {
+				kind="청소년";
+			}else if(dto.getAge() >=19 && dto.getAge() < 65) {
+				kind="성인";
+			}else if(dto.getAge() >= 65) {
+				kind="노년";
+			}
+			psmt.setString(5, kind);
 			
 			System.out.println("수정 확인해보께2");
 			psmt.executeUpdate();	
