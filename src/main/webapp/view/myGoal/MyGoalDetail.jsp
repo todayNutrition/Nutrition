@@ -21,10 +21,11 @@
     
 <script>
 $(function(){
+	var gradient_value = 100 / 3000
+	var color = 'linear-gradient(to right, #7fccde 0%, #7fccde '+gradient_value * $(".rangeInput").val() +'%, rgb(236, 236, 236) ' +gradient_value * $(".rangeInput").val() + '%, rgb(236, 236, 236) 100%)';
+	$(".rangeInput").css("background",color);
 	$(".rangeInput").on("input",function(event){
-		$(".goalKcal").val($(this).val())
-		
-		var gradient_value = 100 / event.target.attributes.max.value;
+		$(".goalKcal").val($(this).val())		
 		event.target.style.background = 'linear-gradient(to right, #7fccde 0%, #7fccde '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 	})	
 })
@@ -47,7 +48,6 @@ $(function(){
 
 .rangeInput{
   width: 100%;
-  background: linear-gradient(to right,#7fccde 0%, #ececec 50%, #ececec 100%);
   border-radius: 8px;
   outline: none;
   transition: background 400ms ease-in;
@@ -164,24 +164,49 @@ $(function(){
   </div>
 
  <script>
- const canvas = document.getElementById("doughnutChartCanvas");
- const data = {
-  
- };
+ var data = {
+		  labels: [
+		    "total",
+		  ],
+		  datasets: [
+		    {
+		      data: [${dayAvg},${100-dayAvg}],
+		      backgroundColor: [
+		    	  "#6EB4F0", "#ffffff00"
+		      ],
+		      hoverBackgroundColor: [
+		    	  "#6EB4F0", "#ffffff00"
+		      ]
+		    }]
+		};
 
- new Chart(canvas, {
-   type: "doughnut",
-   data: {
-	   labels:['total',''],
-   	datasets: [{
-   		   label: 'total',
-	       data: [${dayAvg},${100-dayAvg}],
-	       backgroundColor: ["#6EB4F0", "#ffffff00"],
-	       borderWidth: 0,
-	 }],
-   }
- 	
- });
+		Chart.pluginService.register({
+		  beforeDraw: function(chart) {
+		    var width = chart.chart.width,
+		        height = chart.chart.height,
+		        ctx = chart.chart.ctx;
+
+		    ctx.restore();
+		    var fontSize = (height / 114).toFixed(2);
+		   
+		    var text = ${dayAvg}+"점",
+		        textX = Math.round((width - ctx.measureText(text).width) / 2),
+		        textY = height / 2;
+
+		    ctx.fillText(text, textX, textY);
+		    ctx.save();
+		  }
+		});
+
+		var chart = new Chart(document.getElementById('doughnutChartCanvas'), {
+		  type: 'doughnut',
+		  data: data,
+		  options: {
+		  	legend: {
+		      display: false
+		    }
+		  }
+		});
  
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
