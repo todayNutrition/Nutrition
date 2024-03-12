@@ -23,15 +23,15 @@ public class MainController extends HttpServlet {
 		String mainfolder = "main/";
 		String mainJsp = request.getRequestURI().substring((request.getContextPath()+"/"+mainfolder).length());
 		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");
-		
+		System.out.println(1);
 		try {
 			MainService ser = (MainService)Class.forName("main_p."+mainJsp).newInstance();
 			ser.execute(request, response); 
-			
+			System.out.println(2);
 			RequestDispatcher dispatcher = null;
 			dispatcher = request.getRequestDispatcher("/view/template.jsp");
 			dispatcher.forward(request, response);
-			
+			System.out.println(3);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -19,7 +19,7 @@ public class ModifyReg implements MainService{
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
 		dto.setGender(request.getParameter("gender"));
 		
-		new MainDAO().userModify(dto);
+		new MainDAO().userModify(dto, dto.getKind());
 		request.setAttribute("msg", "수정이 완료되었습니다.");
 		request.setAttribute("move", "/Nutrition/main/Main");
 		request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
