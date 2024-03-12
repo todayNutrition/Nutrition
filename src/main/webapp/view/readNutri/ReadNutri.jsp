@@ -5,11 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="../js/jquery-3.7.1.js"></script>
 <script>
 	function setThumbnail(event){
 		var reader = new FileReader();
 		
-		reader.onload = function(event){
+		reader.onload = function(event){ 
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
 			document.querySelector("div#image_container").appendChild(img);
@@ -17,11 +18,26 @@
 		
 		reader.readAsDataURL(event.target.files[0]);
 	}
+	
+	$(function(){
+		$("#btn").click(function(){
+			$.ajax({
+				url:"../ajaxx/read",
+				type:"get",
+				success:function(ttt){
+					console.log(ttt)
+				},
+				error:function(e){
+					console.log(e.responseText)
+				}
+			})	
+		})
+	})
 </script>
 <style>
 	img{
 		width:498px;
-		height:498px;
+		height:568px;
 	}
 </style>
 <title>성분표 업로드</title>
@@ -31,12 +47,13 @@
 	<form action="ReadNutriReg" method="post" enctype="multipart/form-data">
 		<div style="justify-content: space-around; display: flex; align-items: center; width: 1200px; height: 60px;">
 			<input type="file" name="nutriFile" onchange="setThumbnail(event);" style="border: 1px solid #000; width: 800px;">
-			<input type="submit" value="확인" style=" width: 200px;">
+			<input type="submit" value="확인" style=" width: 100px;">
 		</div>
 	</form>
+	<input id="btn" type="button" value="ajax" style=" width: 100px;">
 	<form action="">
 		<div style="justify-content: space-around; display:flex; width: 1200px; height: 602px">
-			<div style="border: 1px solid #000; width: 500px;  height: 500px;">
+			<div style="border: 1px solid #000; width: 500px;  height: 570px;">
 				<table class="table table-striped-columns">
 					<tr>
 						<td class="table-dark">칼로리</td>
@@ -76,14 +93,11 @@
 					</tr>
 				</table>
 			</div>
-			<div style="border: 1px solid #000; width: 500px; height: 500px;">
-				<div id="image_container">
-					<c:if test="">
-						<img src="../fff/cat.jpg">
-					</c:if>
-				</div>
+			<div style="border: 1px solid #000; width: 500px; height: 570px;">
+				<div id="image_container"></div>
 			</div>
 		</div>
+		<div id="con"></div>
 	</form>
 </body>
 </html>
