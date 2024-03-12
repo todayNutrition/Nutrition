@@ -42,7 +42,7 @@ public class MainDAO {
 	public void userWrite(MainDTO dto, String kind) {
 		
 		sql = "insert into user(name, height, weight, age, gender, kind) values(?,?,?,?,?,?)";
-		System.out.println("저장 확인해보께1");
+//		System.out.println("저장 확인해보께1");
 		try {
 			psmt = con.prepareStatement(sql);
 
@@ -62,7 +62,7 @@ public class MainDAO {
 				kind="노년";
 			}
 			psmt.setString(6, kind);
-			System.out.println("저장 확인해보께2");
+//			System.out.println("저장 확인해보께2");
 			
 			psmt.executeUpdate();
 			
@@ -78,7 +78,7 @@ public class MainDAO {
 	public void userModify(MainDTO dto, String kind) {
 		
 		sql ="update user set name = ?, height = ?, weight = ?, age = ?, kind = ?";
-		System.out.println("수정 확인해보께1");
+//		System.out.println("수정 확인해보께1");
 		
 		try {
 			psmt = con.prepareStatement(sql);
@@ -98,7 +98,7 @@ public class MainDAO {
 			}
 			psmt.setString(5, kind);
 			
-			System.out.println("수정 확인해보께2");
+//			System.out.println("수정 확인해보께2");
 			psmt.executeUpdate();	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -113,11 +113,11 @@ public class MainDAO {
 		MainDTO res = null;
 		
 		sql ="select * from user";
-		System.out.println("읽기 확인해보께1");
+//		System.out.println("읽기 확인해보께1");
 		
 		try {
 			psmt = con.prepareStatement(sql);
-			System.out.println("읽기 확인해보께2");
+//			System.out.println("읽기 확인해보께2");
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
