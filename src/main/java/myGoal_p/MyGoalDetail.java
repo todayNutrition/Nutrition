@@ -17,7 +17,8 @@ public class MyGoalDetail implements MyGoalService {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		MainDTO mdto = new MainDAO().detail();
-		NutritionDTO ndto = new NutritionDAO().todayNutrition();
+		
+		NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender());
 		NutritionDTO total = new NutritionDAO().totalNutrition();
 		
 		request.setAttribute("total", total);
@@ -26,6 +27,16 @@ public class MyGoalDetail implements MyGoalService {
 		
 		ArrayList<RecommendNutriDTO> dto = new RecommendNutriDAO().list(mdto.getAge(),mdto.getGender());
 		request.setAttribute("data", dto);
+		
+		//view 에서 총점 보여주기 위한 계산
+		int dayAvg = (int)((ndto.getKcal()+ndto.getCarbo()+ndto.getNa()+ndto.getSugar()+ndto.getProtein()+ndto.getChole()+ndto.getFat()+ndto.getsFat()+ndto.gettFat())/9);
+		request.setAttribute("dayAvg", dayAvg);
+		
+		
+		ndto = new NutritionDTO();
+		new NutritionDAO().dayAvg(dayAvg);
+		
+		
 		}
 	
 	

@@ -3,7 +3,13 @@ package dto_p;
 import java.util.Date;
 
 public class NutritionDTO {
-	int kcal, na, carbo, sugar, protein, fat, tFat, sFat, chole;
+	int kcal, na, carbo, sugar, protein, fat, tFat, sFat, chole, dayAvg;
+	public int getDayAvg() {
+		return dayAvg;
+	}
+	public void setDayAvg(int dayAvg) {
+		this.dayAvg = dayAvg;
+	}
 	Date regDate;
 	
 	public Date getRegDate() {

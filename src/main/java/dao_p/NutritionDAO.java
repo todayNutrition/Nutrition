@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import dto_p.MainDTO;
 import dto_p.NutritionDTO;
 import dto_p.RecommendNutriDTO;
 
@@ -38,7 +39,8 @@ public class NutritionDAO {
 		if(con!=null) {try {con.close();} catch (SQLException e) {}}
 	}
 	
-	public NutritionDTO todayNutrition(){
+	
+	public NutritionDTO todayNutrition(String kind, String gender){
 		NutritionDTO dto = null;
 		sql = "select"
 				+ "	IF(sum(a.na)/b.na*100 > 100, IF(sum(a.na)/b.na*100 >= 200,0,100+(100-(sum(a.na)/b.na*100))), sum(a.na)/b.na*100) AS na,"
@@ -51,9 +53,11 @@ public class NutritionDAO {
 				+ "	IF(sum(a.protein)/b.protein*100 > 100, IF(sum(a.protein)/b.protein*100 >= 200,0,100+(100-(sum(a.protein)/b.protein*100))), sum(a.protein)/b.protein*100) AS protein,"
 				+ "	IF(sum(a.kcal)/b.kcal*100 > 100, IF(sum(a.kcal)/b.kcal*100 >= 200,0,100+(100-(sum(a.kcal)/b.kcal*100))), sum(a.kcal)/b.kcal*100) AS kcal "
 				+ "	from nutrition a, rda b"
-				+ "	where regDate = curdate() && b.kind = '성인' && b.gender = '남'";
+				+ "	where regDate = curdate() && b.kind = ? && b.gender = ?";
 		try {
 			psmt = con.prepareStatement(sql);
+			psmt.setString(1, kind);
+			psmt.setString(2, gender);
 			rs = psmt.executeQuery();		
 			while(rs.next()) {
 				dto = new NutritionDTO();
@@ -105,6 +109,23 @@ public class NutritionDAO {
 		}		
 		return dto;
 	}
+	
+	public void dayAvg(int dayAvg) {
+		
+		sql ="update nutrition set dayAvg = ? where regdate = curdate()";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, dayAvg);
+			psmt.executeUpdate();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+	}
+	
 	
 	
 }

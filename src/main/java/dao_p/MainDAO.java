@@ -140,7 +140,7 @@ public class MainDAO {
 	
 	public MainDTO detail(){
 		MainDTO dto = null;
-		sql = "select age, gender from user ";
+		sql = "select age, gender,kind from user ";
 		try {
 			psmt = con.prepareStatement(sql);
 			rs = psmt.executeQuery();		
@@ -148,6 +148,7 @@ public class MainDAO {
 				dto = new MainDTO();
 				dto.setAge(rs.getInt("age"));
 				dto.setGender(rs.getString("gender"));
+				dto.setKind(rs.getString("kind"));
 			}
 		
 		} catch (SQLException e) {
