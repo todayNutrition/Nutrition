@@ -46,14 +46,9 @@
         <div id="cont" style="text-align: center;">
             <br>
             <h1>일일 성취표</h1>
-            날짜 <input type="text" id="schStart" value="" readonly="true"><br>
-            종료일 <input type="text" id="schEnd" value=""><br>
-            제목 <input type="text" id="schTitle" value=""><br>
-            하루종일 <input type="checkbox" id="allDay"><br>
-            배경색<input type="color" id="schBColor" value="">
-            글자색<input type="color" id="schFColor" value="">
-            <button onclick="fCalAdd()">추강</button><br>
-            <div><img style="width:300px;" src="/Nutrition/fff/IMG_2820.jpg"></div>
+            날짜 <input type="text" id="schStart" value="" readonly="readonly"><br>
+            점수 <input type="text" id="schTitle" value="" readonly="readonly"><br>
+            <div><img id="schImg" style="width:300px;" src=""></div>
             <button onclick="fMClose()">X</button>
         </div>
     </div>
@@ -66,11 +61,8 @@
         const YrModal = document.querySelector("#yrModal");
         const calendarEl = document.querySelector('#calendar');
         const mySchStart = document.querySelector("#schStart");
-        const mySchEnd = document.querySelector("#schEnd");
         const mySchTitle = document.querySelector("#schTitle");
-        const mySchAllday = document.querySelector("#allDay");
-        const mySchBColor = document.querySelector("#schBColor");
-        const mySchFColor = document.querySelector("#schFColor");
+        const mySchImg = document.querySelector("#schImg");
 
 
         //캘린더 헤더 옵션
@@ -139,37 +131,14 @@
             console.log("체킁:", info);
 
             mySchStart.value = info.startStr;
-            mySchEnd.value = info.endStr;
+            mySchTitle.value = ${jum}
+            let num = parseInt(${jum/20});
+            mySchImg.src = "/Nutrition/fff/pepe"+num+".jpg"
 
             YrModal.style.display = "block";
         });
 		
-        // 일정(이벤트) 추가하깅
-        function fCalAdd() {
-            if (!mySchTitle.value) {
-                alert("제모게 머라도 써주삼")
-                mySchTitle.focus();
-                return;
-            }
-            let bColor = mySchBColor.value;
-            let fColor = mySchFColor.value;
-            if (fColor == bColor) {
-                bColor = "black";
-                fColor = "yellow";
-            }
-
-            let event = {
-                start: mySchStart.value,
-                end: mySchEnd.value,
-                title: mySchTitle.value,
-                allDay: mySchAllday.checked,
-                backgroundColor: bColor,
-                textColor: fColor
-            };
-
-            calendar.addEvent(event);
-            fMClose();
-        }
+        
         
         // 모달 닫기
         function fMClose() {
