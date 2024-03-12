@@ -39,19 +39,20 @@ public class RecommendNutriDAO {
 	
 
 	
-	public ArrayList<RecommendNutriDTO> list(int age){
+	public ArrayList<RecommendNutriDTO> list(int age,String gender){
 		ArrayList<RecommendNutriDTO> res = new ArrayList<RecommendNutriDTO>();
 		if (age>=6 && age<=8) {
-			sql = "select * from rda where kind='어린이'";
+			sql = "select * from rda where kind='어린이' && gender = ?";
 		}else if(age >= 9 && age <= 18) {
-			sql = "select * from rda where kind='청소년'";
+			sql = "select * from rda where kind='청소년' && gender = ?";
 		}else if(age >=19 && age < 65) {
-			sql = "select * from rda where kind='성인'";
+			sql = "select * from rda where kind='성인' && gender = ?";
 		}else if(age >= 65) {
-			sql = "select * from rda where kind='노년'";
+			sql = "select * from rda where kind='노년' && gender = ?";
 		}
 		try {
 			psmt = con.prepareStatement(sql);
+			psmt.setString(1, gender);
 			rs = psmt.executeQuery();		
 			while(rs.next()) {
 				RecommendNutriDTO dto = new RecommendNutriDTO();
