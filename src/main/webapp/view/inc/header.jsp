@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="expand">
             <div class="navbar-nav">
                 <a href="/Nutrition/main/Main" class="nav-item nav-link">메인페이지</a>
-                <a href="#" class="nav-item nav-link">성분표 업로드</a>
+                <a href="/Nutrition/readNutri/ReadNutri" class="nav-item nav-link">성분표 업로드</a>
                 <a href="/Nutrition/graph/Graph" class="nav-item nav-link">그래프</a>
                 <a href="/Nutrition/myGoal/MyGoalDetail" class="nav-item nav-link">목표 설정</a>
                 <a href="/Nutrition/calendar/CalendarMain" class="nav-item nav-link">달력</a>
