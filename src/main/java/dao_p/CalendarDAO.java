@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import dto_p.CalendarDTO;
+import dto_p.MainDTO;
+import jakarta.servlet.http.Cookie;
 
 
 
@@ -76,5 +78,66 @@ public class CalendarDAO {
 	    return res;
 	}
    
+	/**새로운 user 입장시 기존 사용자 정보 삭제*/
+	public CalendarDTO delete(Cookie coo) {
+		CalendarDTO dto = null;
+		sql = "delete from nutrition";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return dto;
+	}
+	
+	/**월 통계 데이터 가져오기*/	
+	   public ArrayList<CalendarDTO> monthlist() {
+		   ArrayList<CalendarDTO> res = new ArrayList<CalendarDTO>();
+		   sql = "SELECT MONTH(regDate) AS month, "
+		   		+ "       AVG(na) AS avg_na, "
+		   		+ "       AVG(carbo) AS avg_carbo, "
+		   		+ "       AVG(sugar) AS avg_sugar, "
+		   		+ "       AVG(fat) AS avg_fat, "
+		   		+ "       AVG(tFat) AS avg_tFat, "
+		   		+ "       AVG(sFat) AS avg_sFat, "
+		   		+ "       AVG(chole) AS avg_chole, "
+		   		+ "       AVG(protein) AS avg_protein  "
+		   		+ "FROM nutrition "
+		   		+ "GROUP BY MONTH(regDate)";
+		   
+		   try {
+		        psmt = con.prepareStatement(sql);
+		        rs = psmt.executeQuery();
+
+		        while (rs.next()) {
+		            CalendarDTO dto = new CalendarDTO();
+					/*
+					 * dto.setRegDateStr(rs.getString("regDate"));
+					 * dto.setKcal(rs.getInt("total_kcal"));
+					 */
+		            dto.setNa(rs.getInt("avg_na"));
+		            dto.setCarbo(rs.getInt("avg_carbo"));
+		            dto.setSugar(rs.getInt("avg_sugar"));
+		            dto.setFat(rs.getInt("avg_fat"));
+		            dto.settFat(rs.getInt("avg_tFat"));
+		            dto.setsFat(rs.getInt("avg_sFat"));
+		            dto.setChole(rs.getInt("avg_chole"));
+		            dto.setProtein(rs.getInt("avg_protein"));
+
+		            res.add(dto);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        close();
+		    }
+
+		    return res;
+		}
 
 }

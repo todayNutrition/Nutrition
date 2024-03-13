@@ -2,7 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
+<style>
+	.container{
+		margin-top: 100px;
+		background-color: #fff;
+	}
+</style>
  <!-- 차트 링크 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   
@@ -17,7 +22,13 @@
   <div class="container">
     <canvas id="myChart"></canvas>
   </div>
-
+  
+  <div>
+  	<a href="MonthGraph">month</a>
+  	<a href="#">week</a>
+  	<a href="Graph">day</a>
+  </div>
+  
  <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
@@ -73,3 +84,9 @@
     });
 
   </script>
+  
+  <c:forEach items="${readUser}" var="dto">
+        			[${dto.na}, ${dto.carbo}, ${dto.sugar}, ${dto.fat},${dto.tFat},${dto.sFat},${dto.chole},${dto.protein}],
+            	</c:forEach>
+  
+  

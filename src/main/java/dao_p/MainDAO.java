@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import dto_p.MainDTO;
+import jakarta.servlet.http.Cookie;
 
 public class MainDAO {
 	
@@ -159,4 +160,20 @@ public class MainDAO {
 		return dto;
 	}
 	
+	/**새로운 user 입장시 기존 사용자 정보 삭제*/
+	public MainDTO delete(Cookie coo) {
+		MainDTO dto = null;
+		sql = "delete from user";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return dto;
+	}
 }
