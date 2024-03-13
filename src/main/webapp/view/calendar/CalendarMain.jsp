@@ -10,8 +10,9 @@
 
     <style>
         #calendar {
-            width: 80vw;
-            height: 80vh;
+            width: 1000px;
+            margin: auto;
+            padding-top: 70px;
         }
 
         #yrModal {
@@ -29,14 +30,46 @@
             height: 75%;
             background-color: green;
             color: white;
-        }
-        
+        }       
         .fc-day-sun a {
     		color: red;
 		}
 		.fc-day-sat a {
    			 color: blue;
 		}
+		.fc-h-event{
+			font-weight: 500;
+			border: none;
+		}
+		 .fc .fc-daygrid-day-frame {
+    		padding-bottom: 17px;
+  		}
+
+  		.fc .fc-button-primary:disabled {
+		    background-color: #C8D1FF;
+		    border: none;
+		
+		}
+		.fc .fc-button-primary:not(:disabled),.fc .fc-button-primary:not(:disabled).fc-button-active {
+		  	border: none;
+			background-color: #C8E5FA;
+			font-weight: bold;
+		    span {
+		      font-weight: 600;
+		    }
+		}		
+
+		.fc .fc-button-primary:hover,  .fc .fc-button-primary:not(:disabled).fc-button-active:hover {
+			background-color: #CAD6FA;
+
+		}
+		.fc .fc-button-primary:not(:disabled):active{
+			background-color: #CAD6FA;
+			border-color: 1px solid black;
+		}
+
+
+  }
     </style>
 </head>
 
@@ -78,7 +111,7 @@
 
         // 캘린더 생성 옵션(참공)
         const calendarOption = {
-            height: '600px', // calendar 높이 설정
+            height: '800px', // calendar 높이 설정
             expandRows: true, // 화면에 맞게 높이 재설정
             slotMinTime: '00:00', // Day 캘린더 시작 시간
             slotMaxTime: '24:00', // Day 캘린더 종료 시간
