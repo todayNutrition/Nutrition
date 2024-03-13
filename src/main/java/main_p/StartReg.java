@@ -19,6 +19,7 @@ public class StartReg implements MainService{
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
 		dto.setGender(request.getParameter("gender"));
 		
+		
 		new MainDAO().userWrite(dto, dto.getKind());
 		request.setAttribute("msg", "영양해를 시작합니다.");
 		request.setAttribute("move", "/Nutrition/main/Main");

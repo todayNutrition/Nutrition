@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	nav{
+
+	}
+</style>    
+    
  <!-- 부트스트랩 -->  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a href="#" class="navbar-brand"> Navbar </a>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a href="/Nutrition/main/Main" class="navbar-brand">todayNutrition</a>
 
         <button class="navbar-toggler" data-toggle="collapse" data-target="#expand">
             <span class="navbar-toggler-icon"></span>
@@ -20,7 +26,7 @@
                 <a href="/Nutrition/calendar/CalendarMain" class="nav-item nav-link">달력</a>
             </div>
         </div>
-    </nav>
+    </nav> 
 <!--
 navbar-light
 텍스트 요소가 밝은 배경에서 잘보이게 설정 (폰트색이 검정으로 변함)
