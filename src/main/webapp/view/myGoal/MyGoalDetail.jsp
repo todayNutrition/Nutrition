@@ -32,6 +32,10 @@ $(function(){
  </script>
  
 <style>
+.myGoalPage{
+	width: 1000px;
+	margin: auto;
+}
 .todayMyGoal{
 	text-align: center;
 	padding: 40px 0 40px;
@@ -84,6 +88,7 @@ $(function(){
 .chart span.title{position: relative; display: block; width: 100%; text-align: center; }
 </style>
 
+<div class="myGoalPage">
 <div class="todayMyGoal"><fmt:formatDate value="<%= new Date() %>" pattern="yyyy-MM-dd (E) "/></div>
 
 <form action="MyGoalModify">
@@ -96,7 +101,7 @@ $(function(){
  		<div><input type="range" min="0" max="3000" step="1" style="width: 400px" id="rangeInput" class="rangeInput" value="${dto.kcal }"/></div>
 		<div><input type="number" class="goalKcal" value="${dto.kcal }" name="kcal" min="0" max="3000">kcal</div>
  		<div><input type="submit" value="수정" class="btn-mini"/></div>
- 		<div style="width: 80px;">
+ 		<div style="width: 100px;">
 			<canvas id="doughnutChartCanvas"></canvas>
 		</div>
  	</div>
@@ -187,12 +192,16 @@ $(function(){
 		        ctx = chart.chart.ctx;
 
 		    ctx.restore();
-		    var fontSize = (height / 114).toFixed(2);
 		   
-		    var text = ${dayAvg}+"점",
+		    ctx.font = "16px " + "Arial";
+
+		    var fontSize = (height / 114).toFixed(2);
+		        console.log( ctx)
+		        ctx.textBaseline = "middle";
+		   var text = ${dayAvg}+"점",
 		        textX = Math.round((width - ctx.measureText(text).width) / 2),
 		        textY = height / 2;
-
+		   
 		    ctx.fillText(text, textX, textY);
 		    ctx.save();
 		  }
@@ -204,7 +213,8 @@ $(function(){
 		  options: {
 		  	legend: {
 		      display: false
-		    }
+		    },
+		     cutoutPercentage: 70,
 		  }
 		});
  
@@ -227,5 +237,6 @@ $(function(){
     });
 </script>
 </c:forEach>
+</div>
 
 
