@@ -36,16 +36,21 @@
 				processData:false,
 				contentType:false,
 				success:function(ttt){
-					var arr = ttt.split("..")
-					$("#kcal").val(arr[0].substring(0,arr[0].indexOf("k")))
-					$("#na").val(arr[1].substring(0,arr[1].indexOf("m")))
-					$("#carbo").val(arr[2].substring(0,arr[2].indexOf("9")))
-					$("#sugar").val(arr[3].substring(0,arr[3].indexOf("9")))
-					$("#fat").val(arr[4].substring(0,arr[4].indexOf("9")))
-					$("#tFat").val(arr[5].substring(0,arr[5].indexOf("9")))
-					$("#sFat").val(arr[6].substring(0,arr[6].indexOf("9")))
-					$("#chole").val(arr[7].substring(0,arr[7].indexOf("m")))
-					$("#protein").val(arr[8].substring(0,arr[8].indexOf("9")))
+					if(ttt=='err'){
+						alert("이미지 데이터 형식 오류");
+						return
+					}
+					
+					var arr = ttt.split("/")
+					$("#kcal").val(arr[0].substring(0,arr[0].indexOf(" ")))
+					$("#na").val(arr[1].substring(0,arr[1].indexOf(" ")))
+					$("#carbo").val(arr[2].substring(0,arr[2].indexOf(" ")))
+					$("#sugar").val(arr[3].substring(0,arr[3].indexOf(" ")))
+					$("#fat").val(arr[4].substring(0,arr[4].indexOf(" ")))
+					$("#tFat").val(arr[5].substring(0,arr[5].indexOf(" ")))
+					$("#sFat").val(arr[6].substring(0,arr[6].indexOf(" ")))
+					$("#chole").val(arr[7].substring(0,arr[7].indexOf(" ")))
+					$("#protein").val(arr[8].substring(0,arr[8].indexOf(" ")))
 					
 					$('#preview').attr("src","../fff/"+arr[9])
 				},

@@ -38,21 +38,37 @@ public class read implements ReadNutriService{
 			InputStreamReader isr = new InputStreamReader(process.getInputStream(),"ms949");
 			BufferedReader br = new BufferedReader(isr);
 			
+			response.setContentType("text/html; charset=UTF-8");
+			
 			String info = "";
 			String line = null;
+			
+			boolean chk = true;
 			while((line=br.readLine())!=null) {
-				//System.out.println("pythonf 출력 : "+line);
-				info += line+".";
+				System.out.println("pythonf 출력 : "+line);
+				if(line.equals("err")) {
+					chk = false;
+					System.out.println("에러");
+					info="err";
+					break;
+				}else {
+					info += line+"/";
+				}
 			}
-			info += upLoadFile;
+			
 			br.close();
 			isr.close();
+			
+			
+			if(chk) {
+				info += upLoadFile;
+			}
 			System.out.println(info);
 
 			int exitCode = process.waitFor();
 			System.out.println("종료 코드 : "+ exitCode);
 			
-			response.setContentType("text/html; charset=UTF-8");
+			
 			response.getWriter().append(info);
 			
 		} catch (Exception e) {

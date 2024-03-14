@@ -66,15 +66,15 @@ numpy.array([
 ])
 ,
 numpy.array([
-     [[330, 470]],
-     [[330, 520]],
-     [[420, 520]],
+     [[300, 470]],
+     [[300, 530]],
+     [[420, 530]],
      [[420, 470]]  # 트랜스지방
 ])
 ,
 numpy.array([
-     [[280, 550]],
-     [[280, 610]],
+     [[250, 550]],
+     [[250, 610]],
      [[450, 610]],
      [[450, 550]]  # 포화지방
 ])
@@ -118,5 +118,7 @@ for i, cc in enumerate( pts):
 
     rectangle = recImg[lowY:highY, lowX:highX].copy()
     ttt = pytesseract.image_to_string(rectangle, lang='kor+eng')
-    print(ttt)
-
+    if(len(ttt[:-1].split(' '))!=2):
+        print("err")
+    else:
+        print(ttt[:-1])
