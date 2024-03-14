@@ -42,7 +42,7 @@ public class MainDAO {
 	/**메인 사용자 입력 정보 저장하기*/
 	public void userWrite(MainDTO dto, String kind) {
 		
-		sql = "insert into user(name, height, weight, age, gender, kind) values(?,?,?,?,?,?)";
+		sql = "insert into user(name, height, weight, age, gender, kind, goalKcal) values(?,?,?,?,?,?,?)";
 //		System.out.println("저장 확인해보께1");
 		try {
 			psmt = con.prepareStatement(sql);
@@ -53,19 +53,41 @@ public class MainDAO {
 			psmt.setInt(4, dto.getAge());
 			psmt.setString(5, dto.getGender());
 			
+			int gk = 0;
 			if (dto.getAge()>=6 && dto.getAge()<=8) {
 				kind="어린이";
+				if(dto.getGender()=="남") {
+					gk = 1700;
+				}else {
+					gk = 1500;
+				}
 			}else if(dto.getAge() >= 9 && dto.getAge() <= 18) {
 				kind="청소년";
+				if(dto.getGender()=="남") {
+					gk = 2500;
+				}else {
+					gk = 2000;
+				}
 			}else if(dto.getAge() >=19 && dto.getAge() < 65) {
 				kind="성인";
+				if(dto.getGender()=="남") {
+					gk = 2500;
+				}else {
+					gk = 2000;
+				}
 			}else if(dto.getAge() >= 65) {
 				kind="노년";
+				if(dto.getGender()=="남") {
+					gk = 1950;
+				}else {
+					gk = 1550;
+				}
 			}
 			psmt.setString(6, kind);
-//			System.out.println("저장 확인해보께2");
-			
+			psmt.setInt(7, gk);
+
 			psmt.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -129,6 +151,7 @@ public class MainDAO {
 				res.setWeight(rs.getString("weight")); 
 				res.setAge(Integer.parseInt(rs.getString("age")));
 				res.setGender(rs.getString("gender")); 
+				res.setGoalKcal(rs.getInt("goalKcal")); 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -194,6 +217,7 @@ public class MainDAO {
 				res.setWeight(rs.getString("weight")); 
 				res.setAge(Integer.parseInt(rs.getString("age")));
 				res.setGender(rs.getString("gender")); 
+				res.setGoalKcal(rs.getInt("goalKcal")); 
 			}
 			
 		} catch (SQLException e) {

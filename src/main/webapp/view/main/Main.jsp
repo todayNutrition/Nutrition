@@ -80,7 +80,10 @@ input{
 	border: 2px dashed #00ADB2;
 	border-radius: 50px;
 }
+
+
 </style>    
+
 <div class="big">
 	<div class="profile">
 		<div class="dash">
