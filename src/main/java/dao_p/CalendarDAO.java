@@ -43,14 +43,15 @@ public class CalendarDAO {
       if(con!=null) { try { con.close();} catch (SQLException e) {}}
    }
    
-   public ArrayList<CalendarDTO> list() {
+   public ArrayList<CalendarDTO> list(String name) {
 	    ArrayList<CalendarDTO> res = new ArrayList<CalendarDTO>();
 	    sql = "SELECT regDate, SUM(kcal) AS total_kcal, SUM(na) AS total_na, SUM(carbo) AS total_carbo, SUM(sugar) AS total_sugar, SUM(fat) AS total_fat, " +
 	          "SUM(tFat) AS total_tFat, SUM(sFat) AS total_sFat, SUM(chole) AS total_chole, SUM(protein) AS total_protein, dayavg " +
-	          "FROM nutrition GROUP BY regDate";
+	          "FROM nutrition where name = ? GROUP BY regDate";
 
 	    try {
 	        psmt = con.prepareStatement(sql);
+	        psmt.setString(1, name);
 	        rs = psmt.executeQuery();
 
 	        while (rs.next()) {

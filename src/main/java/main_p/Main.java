@@ -32,7 +32,7 @@ public class Main implements MainService {
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		//System.out.println(day.format(da));
 		// 전체 DB가 오기 때문에 오늘날짜일 때 자료만 불러오게 조건 걸자
-		ArrayList<CalendarDTO> dayData = new CalendarDAO().list();
+		ArrayList<CalendarDTO> dayData = new CalendarDAO().list(ss.getName());
 		CalendarDTO ddd = new CalendarDTO();
 		for (CalendarDTO ddt : dayData) {
 			if(ddt.getRegDateStr().equals(day.format(da))) {
