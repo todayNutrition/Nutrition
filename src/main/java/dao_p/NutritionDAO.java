@@ -40,7 +40,7 @@ public class NutritionDAO {
 	}
 	
 	
-	public NutritionDTO todayNutrition(String kind, String gender){
+	public NutritionDTO todayNutrition(String kind, String gender, String name){
 		NutritionDTO dto = null;
 		sql = "select"
 				+ "	IF(sum(a.na)/b.na*100 > 100, IF(sum(a.na)/b.na*100 >= 200,0,100+(100-(sum(a.na)/b.na*100))), sum(a.na)/b.na*100) AS na,"
@@ -51,13 +51,17 @@ public class NutritionDAO {
 				+ "	IF(sum(a.sFat)/b.sFat*100 > 100, IF(sum(a.sFat)/b.sFat*100 >= 200,0,100+(100-(sum(a.sFat)/b.sFat*100))), sum(a.sFat)/b.sFat*100) AS sFat,"
 				+ "	IF(sum(a.chole)/b.chole*100 > 100, IF(sum(a.chole)/b.chole*100 >= 200,0,100+(100-(sum(a.chole)/b.chole*100))), sum(a.chole)/b.chole*100) AS chole,"
 				+ "	IF(sum(a.protein)/b.protein*100 > 100, IF(sum(a.protein)/b.protein*100 >= 200,0,100+(100-(sum(a.protein)/b.protein*100))), sum(a.protein)/b.protein*100) AS protein,"
-				+ "	IF(sum(a.kcal)/b.kcal*100 > 100, IF(sum(a.kcal)/b.kcal*100 >= 200,0,100+(100-(sum(a.kcal)/b.kcal*100))), sum(a.kcal)/b.kcal*100) AS kcal "
-				+ "	from nutrition a, rda b"
-				+ "	where regDate = curdate() && b.kind = ? && b.gender = ?";
+				+ "	IF(sum(a.kcal)/c.goalKcal*100 > 100, IF(sum(a.kcal)/c.goalKcal*100 >= 200,0,100+(100-(sum(a.kcal)/c.goalKcal*100))), sum(a.kcal)/c.goalKcal*100) AS kcal "
+				+ "	from nutrition a "
+				+ " JOIN rda b "
+				+ " LEFT OUTER JOIN user c"
+				+ " ON a.name = c.name"
+				+ "	where regDate = curdate() && b.kind = ? && b.gender = ? && a.name = ? ";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, kind);
 			psmt.setString(2, gender);
+			psmt.setString(3, name);
 			rs = psmt.executeQuery();		
 			while(rs.next()) {
 				dto = new NutritionDTO();
@@ -79,28 +83,31 @@ public class NutritionDAO {
 		return dto;
 	}
 	
-	public NutritionDTO totalNutrition(){
+	public NutritionDTO totalNutrition(String name){
 		NutritionDTO dto = null;
 		sql = "select "
-				+ " sum(na), sum(kcal), sum(carbo), sum(sugar), sum(protein), "
-				+ " sum(fat), sum(tFat), sum(sFat), sum(chole), regDate "
-				+ " from nutrition "
-				+ " where regDate = curdate()";
+				+ " sum(a.na), sum(b.goalKcal), sum(a.carbo), sum(a.sugar), sum(a.protein), "
+				+ " sum(a.fat), sum(a.tFat), sum(a.sFat), sum(a.chole), a.regDate "
+				+ " from nutrition a "
+				+ " LEFT OUTER JOIN user b "
+				+ " ON a.name = b.name"
+				+ " where a.regDate = curdate() && a.name= ? ";
 		try {
 			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
 			rs = psmt.executeQuery();		
 			while(rs.next()) {
 				dto = new NutritionDTO();
-				dto.setKcal(rs.getInt("sum(kcal)"));
-				dto.setCarbo(rs.getInt("sum(carbo)"));
-				dto.setNa(rs.getInt("sum(na)"));
-				dto.setSugar(rs.getInt("sum(sugar)"));
-				dto.setProtein(rs.getInt("sum(protein)"));
-				dto.setFat(rs.getInt("sum(fat)"));
-				dto.settFat(rs.getInt("sum(tFat)"));
-				dto.setsFat(rs.getInt("sum(sFat)"));
-				dto.setChole(rs.getInt("sum(chole)"));
-				dto.setRegDate(rs.getDate("regDate"));
+				dto.setKcal(rs.getInt("sum(b.goalKcal)"));
+				dto.setCarbo(rs.getInt("sum(a.carbo)"));
+				dto.setNa(rs.getInt("sum(a.na)"));
+				dto.setSugar(rs.getInt("sum(a.sugar)"));
+				dto.setProtein(rs.getInt("sum(a.protein)"));
+				dto.setFat(rs.getInt("sum(a.fat)"));
+				dto.settFat(rs.getInt("sum(a.tFat)"));
+				dto.setsFat(rs.getInt("sum(a.sFat)"));
+				dto.setChole(rs.getInt("sum(a.chole)"));
+				dto.setRegDate(rs.getDate("a.regDate"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,13 +117,14 @@ public class NutritionDAO {
 		return dto;
 	}
 	
-	public void dayAvg(int dayAvg) {
+	public void dayAvg(int dayAvg, String name) {
 		
-		sql ="update nutrition set dayAvg = ? where regdate = curdate()";
+		sql ="update nutrition set dayAvg = ? where regdate = curdate() && name = ? ";
 		
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1, dayAvg);
+			psmt.setString(2, name);
 			psmt.executeUpdate();	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -128,7 +136,7 @@ public class NutritionDAO {
 	
 
 	/**하루 섭취량과 권장섭취량 비교해 평균치 보기*/
-	public NutritionDTO todayGraph(String kind, String gender){
+	public NutritionDTO todayGraph(String kind, String gender, String name){
 		NutritionDTO dto = null;
 		sql = "select"
 				+ " sum(a.na)/b.na*100 AS na,"
@@ -139,13 +147,17 @@ public class NutritionDAO {
 				+ "	sum(a.sFat)/b.sFat*100 AS sFat,"
 				+ "	sum(a.chole)/b.chole*100 AS chole,"
 				+ "	sum(a.protein)/b.protein*100 AS protein,"
-				+ "	sum(a.kcal)/b.kcal*100 AS kcal "
-				+ "	from nutrition a, rda b"
-				+ "	where regDate = curdate() && b.kind = ? && b.gender = ?";
+				+ "	sum(a.kcal)/c.goalKcal*100 AS kcal "
+				+ "	from nutrition a"
+				+ " JOIN rda b"
+				+ " LEFT OUTER JOIN user c"
+				+ " ON a.name = c.name"
+				+ "	where regDate = curdate() && b.kind = ? && b.gender = ? && a.name = ? ";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, kind);
 			psmt.setString(2, gender);
+			psmt.setString(3, name);
 			rs = psmt.executeQuery();		
 			while(rs.next()) {
 				dto = new NutritionDTO();
@@ -170,7 +182,7 @@ public class NutritionDAO {
 
 	public void write(NutritionDTO dto) {
 		
-		sql = "insert into nutrition(regDate, na, carbo, sugar, fat, tFat, sFat, chole, protein, kcal) values (sysdate(),?,?,?,?,?,?,?,?,?)";
+		sql = "insert into nutrition(regDate, na, carbo, sugar, fat, tFat, sFat, chole, protein, kcal, name) values (sysdate(),?,?,?,?,?,?,?,?,?,?)";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setInt(1,  dto.getNa());
@@ -182,6 +194,7 @@ public class NutritionDAO {
 			psmt.setInt(7,  dto.getChole());
 			psmt.setInt(8,  dto.getProtein());
 			psmt.setInt(9,  dto.getKcal());
+			psmt.setString(10, dto.getName());
 			
 			
 			psmt.executeUpdate();

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class NutritionDTO {
 	int kcal, na, carbo, sugar, protein, fat, tFat, sFat, chole, dayAvg;
+	String name;
 	public int getDayAvg() {
 		return dayAvg;
 	}
@@ -72,4 +73,12 @@ public class NutritionDTO {
 	public void setChole(int chole) {
 		this.chole = chole;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 }

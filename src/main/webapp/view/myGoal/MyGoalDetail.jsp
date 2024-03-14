@@ -94,6 +94,7 @@ $(function(){
 <form action="MyGoalModify">
 <input type="hidden" name="age" value="${mdata.age }">
 <input type="hidden" name="gender" value="${mdata.gender }">
+<input type="hidden" name="name" value="${mdata.name }">
 <input type="hidden" name="dayAvg" value="${dayAvg }">
 	<div class="changeMyGoal">
 		<div>목표칼로리</div>
