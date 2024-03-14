@@ -25,7 +25,7 @@ public class Main implements MainService {
 		// 메인 페이지 저장된 기초정보
 		MainDTO user = new MainDAO().nameChk(ss.getName());
 		request.setAttribute("MainUser", user);
-
+		System.out.println(user.getGoalKcal());
 		
 		// 메인페이지 하루 섭취량 데이터 정보 
 		Date da = new Date();
