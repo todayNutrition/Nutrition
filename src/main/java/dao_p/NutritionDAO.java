@@ -126,6 +126,45 @@ public class NutritionDAO {
 		}
 	}
 	
+	/**하루 섭취량과 권장섭취량 비교해 평균치 보기*/
+	public NutritionDTO todayGraph(String kind, String gender){
+		NutritionDTO dto = null;
+		sql = "select"
+				+ " sum(a.na)/b.na*100 AS na,"
+				+ " sum(a.carbo)/b.carbo*100 AS carbo,"
+				+ "	sum(a.sugar)/b.sugar*100 AS sugar,"
+				+ "	sum(a.fat)/b.fat*100 AS fat,"
+				+ "	sum(a.tFat)/b.tFat*100 AS tFat,"
+				+ "	sum(a.sFat)/b.sFat*100 AS sFat,"
+				+ "	sum(a.chole)/b.chole*100 AS chole,"
+				+ "	sum(a.protein)/b.protein*100 AS protein,"
+				+ "	sum(a.kcal)/b.kcal*100 AS kcal "
+				+ "	from nutrition a, rda b"
+				+ "	where regDate = curdate() && b.kind = ? && b.gender = ?";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, kind);
+			psmt.setString(2, gender);
+			rs = psmt.executeQuery();		
+			while(rs.next()) {
+				dto = new NutritionDTO();
+				dto.setKcal(rs.getInt("kcal"));
+				dto.setCarbo(rs.getInt("carbo"));
+				dto.setNa(rs.getInt("na"));
+				dto.setSugar(rs.getInt("sugar"));
+				dto.setProtein(rs.getInt("protein"));
+				dto.setFat(rs.getInt("fat"));
+				dto.settFat(rs.getInt("tFat"));
+				dto.setsFat(rs.getInt("sFat"));
+				dto.setChole(rs.getInt("chole"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}		
+		return dto;
+	}
 	
 	
 }
