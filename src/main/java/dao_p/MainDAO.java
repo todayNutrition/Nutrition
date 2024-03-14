@@ -76,9 +76,9 @@ public class MainDAO {
 	}
 	
 	/**메인 사용자 기초정보 수정*/
-	public void userModify(MainDTO dto, String kind) {
+	public void userModify(MainDTO dto, String kind, String name) {
 		
-		sql ="update user set name = ?, height = ?, weight = ?, age = ?, kind = ?";
+		sql ="update user set name = ?, height = ?, weight = ?, age = ?, kind = ? where name = ?";
 //		System.out.println("수정 확인해보께1");
 		
 		try {
@@ -87,6 +87,7 @@ public class MainDAO {
 			psmt.setString(2, dto.getHeight());
 			psmt.setString(3, dto.getWeight());
 			psmt.setInt(4, dto.getAge());
+			
 			
 			if (dto.getAge()>=6 && dto.getAge()<=8) {
 				kind="어린이";
@@ -98,6 +99,7 @@ public class MainDAO {
 				kind="노년";
 			}
 			psmt.setString(5, kind);
+			psmt.setString(6, name);
 			
 //			System.out.println("수정 확인해보께2");
 			psmt.executeUpdate();	
@@ -113,12 +115,11 @@ public class MainDAO {
 	public MainDTO userRead(MainDTO dto) {
 		MainDTO res = null;
 		
-		sql ="select * from user";
-//		System.out.println("읽기 확인해보께1");
+		sql ="select * from user where name = ?";
 		
 		try {
 			psmt = con.prepareStatement(sql);
-//			System.out.println("읽기 확인해보께2");
+			psmt.setString(1, dto.getName());
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
@@ -128,7 +129,6 @@ public class MainDAO {
 				res.setWeight(rs.getString("weight")); 
 				res.setAge(Integer.parseInt(rs.getString("age")));
 				res.setGender(rs.getString("gender")); 
-//				res.setGoalKcal(Integer.parseInt(rs.getString("goalKcal")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -175,5 +175,33 @@ public class MainDAO {
 			close();
 		}
 		return dto;
+	}
+	
+	/**새로운 유저 이름 체크*/
+	public MainDTO nameChk(String name) {
+		MainDTO res = null;
+		sql = "select * from user where name = ?";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				res = new MainDTO();
+				res.setName(rs.getString("name")); 
+				res.setHeight(rs.getString("height")); 
+				res.setWeight(rs.getString("weight")); 
+				res.setAge(Integer.parseInt(rs.getString("age")));
+				res.setGender(rs.getString("gender")); 
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return res;
 	}
 }

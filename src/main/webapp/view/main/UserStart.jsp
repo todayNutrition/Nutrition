@@ -64,37 +64,17 @@ input[type="text"]{
 </style>
  
 <div class="big">
-<form action="/Nutrition/main/StartReg" method="get">
+<form action="/Nutrition/realStart/RealStartReg" method="get">
 	<div class="profile">
-		<h1 class="title">기초 정보 입력</h1>
+		<h1 class="title">회원</h1>
 		<div class="litle_d">
 			<div class="cate">닉네임</div>
-			<div><input type="text" name="name" value="${param.name}"/></div>
-		</div>
-		<div class="litle_d">
-			<div class="cate">키</div>
-			<div><input type="text" name="height"/></div>
-		</div>
-		<div class="litle_d">
-			<div class="cate">몸무게</div>
-			<div><input type="text" name="weight"/></div>
-		</div>
-		<div class="litle_d">
-			<div class="cate">나이</div>
-			<div><input type="text" name="age"/></div>
-		</div>
-		<div class="litle_d">
-			<div class="cate">성별</div>
-				<div>
-					<input type="radio" name="gender" value="남"/>남자
-					<input type="radio" name="gender" value="여"/>여자
-				</div>
+			<div><input type="text" name="name"/></div>
 		</div>
 		<div>
 			<div align="center" class="litle_d"><input type="submit" value="Start" class="btn-mini"/></div>
 		</div>
 	</div>
-	<div><a href="/Nutrition/realStart/RealStart">메인화면</a></div>
-	<div><a href="/Nutrition/main/UserStart">회원</a></div>
+	<div><a href="/Nutrition/main/Start">기초정보입력</a></div>
 </form>
 </div>
