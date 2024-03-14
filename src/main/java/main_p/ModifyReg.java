@@ -19,9 +19,15 @@ public class ModifyReg implements MainService{
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
 		dto.setGender(request.getParameter("gender"));
 		
-		new MainDAO().userModify(dto, dto.getKind());
+		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+		// 메인 페이지 저장된 기초정보
+		MainDTO user = new MainDAO().nameChk(dto.getName());
+		request.setAttribute("MainUser", user);
+		
+		new MainDAO().userModify(dto, dto.getKind(),ss.getName());
 		request.setAttribute("msg", "수정이 완료되었습니다.");
-		request.setAttribute("move", "/Nutrition/main/Main");
+		request.setAttribute("move", "/Nutrition/main/Main?name="+dto.getName());
 		request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
+		request.getSession().setAttribute("UserSS",dto);
 	}
 }

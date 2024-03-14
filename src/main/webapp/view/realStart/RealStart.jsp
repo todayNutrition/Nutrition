@@ -57,5 +57,5 @@ div{
 	</p>
 	</div>
 	<div id="gogo">영양해! 지금 시작하시겠습니까?</div>
-	<div align="center"><a id="st" href="RealStartReg">Start</a></div>
+	<div align="center"><a id="st" href="/Nutrition/main/UserStart">Start</a></div>
 </div>

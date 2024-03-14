@@ -20,9 +20,10 @@ public class Main implements MainService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("메인띠");
 
+		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+		
 		// 메인 페이지 저장된 기초정보
-		MainDTO dto = new MainDTO();
-		MainDTO user = new MainDAO().userRead(dto);
+		MainDTO user = new MainDAO().nameChk(ss.getName());
 		request.setAttribute("MainUser", user);
 
 		

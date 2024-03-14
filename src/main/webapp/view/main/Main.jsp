@@ -81,12 +81,10 @@ input{
 	border-radius: 50px;
 }
 </style>    
-
-
 <div class="big">
 	<div class="profile">
 		<div class="dash">
-		<form action="ModifyReg" method="post">
+		<form action="ModifyReg" method="get">
 			<div>
 	 			<h1 class="title">나의 프로필</h1>
 				<div class="litle_d">
