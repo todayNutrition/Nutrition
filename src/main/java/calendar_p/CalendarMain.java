@@ -12,7 +12,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dao_p.CalendarDAO;
+import dao_p.MainDAO;
+import dao_p.NutritionDAO;
 import dto_p.CalendarDTO;
+import dto_p.MainDTO;
+import dto_p.NutritionDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service_p.CalendarService;
@@ -22,6 +26,16 @@ public class CalendarMain implements CalendarService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		MainDTO mdto = new MainDAO().detail();
+	      
+	    NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender());
+	    int dayAvg = (int)((ndto.getKcal()+ndto.getCarbo()+ndto.getNa()+ndto.getSugar()+ndto.getProtein()+ndto.getChole()+ndto.getFat()+ndto.getsFat()+ndto.gettFat())/9);
+	    request.setAttribute("dayAvg", dayAvg);
+	      
+	      
+	    ndto = new NutritionDTO();
+	    new NutritionDAO().dayAvg(dayAvg);
+	    
 		ArrayList<CalendarDTO> calDto = new CalendarDAO().list();
 		ArrayList<HashMap> events = new ArrayList<HashMap>();
 		for (CalendarDTO dto : calDto) {
@@ -69,8 +83,6 @@ public class CalendarMain implements CalendarService {
 			hm5.put("textColor", "white");
 			hm5.put("sortIdx", 4);
 			events.add(hm5);
-			
-			
 		}
 		
 		JSONArray ja = new JSONArray();
