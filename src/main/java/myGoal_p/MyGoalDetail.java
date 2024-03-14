@@ -18,8 +18,8 @@ public class MyGoalDetail implements MyGoalService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		MainDTO mdto = new MainDAO().detail();
 		
-		NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender());
-		NutritionDTO total = new NutritionDAO().totalNutrition();
+		NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender(), mdto.getName());
+		NutritionDTO total = new NutritionDAO().totalNutrition(mdto.getName());
 		
 		request.setAttribute("total", total);
 		request.setAttribute("mdata", mdto);
@@ -34,7 +34,7 @@ public class MyGoalDetail implements MyGoalService {
 		
 		
 		ndto = new NutritionDTO();
-		new NutritionDAO().dayAvg(dayAvg);
+		new NutritionDAO().dayAvg(dayAvg, mdto.getName());
 		
 		
 		}
