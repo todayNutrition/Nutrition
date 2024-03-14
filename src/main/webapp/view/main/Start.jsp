@@ -1,31 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<form action="/Nutrition/main/StartReg" method="post">
-	<table border="">
-		<h1>기초 정보 입력</h1>
-		<tr>
-			<td>닉네임</td>
-			<td><input type="text" name="name"/></td>
-		</tr>
-		<tr>
-			<td>키</td>
-			<td><input type="text" name="height"/></td>
-		</tr>
-		<tr>
-			<td>몸무게</td>
-			<td><input type="text" name="weight"/></td>
-		</tr>
-		<tr>
-			<td>나이</td>
-			<td><input type="text" name="age"/></td>
-		</tr>
-		<tr>
-			<td>성별</td>
-			<td><input type="radio" name="gender" value="남"/>남자<input type="radio" name="gender" value="여"/>여자</td>
-		</tr>
-		<tr>
-			<td colspan="2">시작하시겠습니까?<input type="submit" value="Start"/></td>
-		</tr>
-	</table>
+<style>
+/*혜성언니 수정버튼  */
+.btn-mini {
+  color: white; 
+  padding: 2.5px 12px;  
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.21);
+  border-bottom-color: rgba(0,0,0,0.34);
+  text-shadow:0 1px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.34) inset, 
+              0 2px 0 -1px rgba(0,0,0,0.13), 
+              0 3px 0 -1px rgba(0,0,0,0.08), 
+              0 3px 13px -1px rgba(0,0,0,0.21);
+  background-color: #7fccde;
+  font-size: 15px;
+  margin-left: 5px;
+  margin-top: 40px;
+}
+.btn-mini:active {
+  top: 1px;
+  border-color: rgba(0,0,0,0.34) rgba(0,0,0,0.21) rgba(0,0,0,0.21);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.89),0 1px rgba(0,0,0,0.05) inset;
+  position: relative;
+}
+
+/*글자*/
+.title {
+	  text-align: center;
+	  font-size: 35px;
+	  margin: 20px;
+}
+
+/*프로필, 섭취량 감싸는 틀*/
+.big {
+	margin:auto;
+	margin-top: 100px;
+	width: 1000px;
+	height: 300px;
+}
+/*프로필, 섭취량*/
+.profile{
+	width: 350px;
+	height: 430px;
+	margin:auto;
+}
+.cate{
+	float: left;
+	width: 100px;
+	margin-left: 25px;
+	font-size: 17px;
+}
+.litle_d{
+	margin-bottom: 15px;
+}
+input[type="text"]{
+	width: 150px;
+	border: none;
+	border-bottom: 1px solid #000;
+}
+
+</style> 
+<div class="big">
+<form action="/Nudivition/main/Stardiveg" method="post">
+	<div class="profile">
+		<h1 class="title">기초 정보 입력</h1>
+		<div class="litle_d">
+			<div class="cate">닉네임</div>
+			<div><input type="text" name="name"/></div>
+		</div>
+		<div class="litle_d">
+			<div class="cate">키</div>
+			<div><input type="text" name="height"/></div>
+		</div>
+		<div class="litle_d">
+			<div class="cate">몸무게</div>
+			<div><input type="text" name="weight"/></div>
+		</div>
+		<div class="litle_d">
+			<div class="cate">나이</div>
+			<div><input type="text" name="age"/></div>
+		</div>
+		<div class="litle_d">
+			<div class="cate">성별</div>
+				<div>
+					<input type="radio" name="gender" value="남"/>남자
+					<input type="radio" name="gender" value="여"/>여자
+				</div>
+		</div>
+		<div>
+			<div align="center" class="litle_d"><input type="submit" value="Start" class="btn-mini"/></div>
+		</div>
+	</div>
 </form>
+</div>

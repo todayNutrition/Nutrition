@@ -22,55 +22,39 @@
   <div class="container">
     <canvas id="myChart"></canvas>
   </div>
-  
-  <div>
-  	<a href="MonthGraph">month</a>
-  	<a href="#">week</a>
-  	<a href="Graph">day</a>
-  </div>
-  
- <script>
+
+  <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['나트륨', '탄수화물', '당류', '지방', '트렌스지방', '포화지방', '콜레스테롤', '단백질'],
-        datasets: [{
-          label: '하루 섭취량',
-          data: [${readDay.na}, ${readDay.carbo}, ${readDay.sugar}, ${readDay.fat},${readDay.tFat},${readDay.sFat},${readDay.chole},${readDay.protein}],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(17, 44, 98, 0.2)',  
-            'rgba(255, 0, 0, 0.2)',
-            'rgba(150, 75, 0, 0.2)',
-            'rgba(153, 102, 255, 0.2)'
-            
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(17, 44, 98, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(150, 75, 0, 1)',
-            'rgba(153, 102, 255, 1)'
-          ],
+    	  labels: ['나트륨', '탄수화물', '당류', '지방', '트렌스지방', '포화지방', '콜레스테롤', '단백질'],
+          datasets: [{
+            label: '하루 섭취량',
+            data: [${readDay.na}, ${readDay.carbo}, ${readDay.sugar}, ${readDay.fat},${readDay.tFat},${readDay.sFat},${readDay.chole},${readDay.protein}],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(17, 44, 98, 0.2)',  
+              'rgba(255, 0, 0, 0.2)',
+              'rgba(150, 75, 0, 0.2)',
+              'rgba(153, 102, 255, 0.2)'
+              
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(17, 44, 98, 1)',
+              'rgba(255, 0, 0, 1)',
+              'rgba(150, 75, 0, 1)',
+              'rgba(153, 102, 255, 1)'
+            ],
           borderWidth: 1
-        },
-        {
-            label: '하루 평균 권장 섭취량',
-             data: 
-             	<c:forEach items="${readUser}" var="dto">
-        			[${dto.na}, ${dto.carbo}, ${dto.sugar}, ${dto.fat},${dto.tFat},${dto.sFat},${dto.chole},${dto.protein}],
-            	</c:forEach>
-            backgroundColor: 'transparent',
-            borderColor: 'skyblue',
-            type: 'line'
-          }]
+        }]
       },
       options: {
         scales: {
@@ -82,11 +66,4 @@
         }
       }
     });
-
   </script>
-  
-  <c:forEach items="${readUser}" var="dto">
-        			[${dto.na}, ${dto.carbo}, ${dto.sugar}, ${dto.fat},${dto.tFat},${dto.sFat},${dto.chole},${dto.protein}],
-            	</c:forEach>
-  
-  
