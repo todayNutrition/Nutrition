@@ -10,7 +10,7 @@ public class FileHandler {
 	String directory;
 	
 	public FileHandler(HttpServletRequest request) {
-		directory = request.getServletContext().getRealPath("fff/");
+		directory = new FFFPath(request).directory;
 		System.out.println(directory);
 		
 	}	
@@ -33,7 +33,7 @@ public class FileHandler {
 				cnt++;
 			}
 			file.write(directory+fileName);
-			file.delete();
+			//file.delete();
 			
 			return fileName;
 		}

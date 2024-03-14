@@ -126,6 +126,7 @@ public class NutritionDAO {
 		}
 	}
 	
+
 	/**하루 섭취량과 권장섭취량 비교해 평균치 보기*/
 	public NutritionDTO todayGraph(String kind, String gender){
 		NutritionDTO dto = null;
@@ -166,5 +167,32 @@ public class NutritionDAO {
 		return dto;
 	}
 	
+
+	public void write(NutritionDTO dto) {
+		
+		sql = "insert into nutrition(regDate, na, carbo, sugar, fat, tFat, sFat, chole, protein, kcal) values (sysdate(),?,?,?,?,?,?,?,?,?)";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1,  dto.getNa());
+			psmt.setInt(2,  dto.getCarbo());
+			psmt.setInt(3,  dto.getSugar());
+			psmt.setInt(4,  dto.getFat());
+			psmt.setInt(5,  dto.gettFat());
+			psmt.setInt(6,  dto.getsFat());
+			psmt.setInt(7,  dto.getChole());
+			psmt.setInt(8,  dto.getProtein());
+			psmt.setInt(9,  dto.getKcal());
+			
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+	}
+
 	
 }
