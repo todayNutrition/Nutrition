@@ -27,7 +27,8 @@
         #cont {
             margin: 50px auto;
             width: 50%;
-            height: 75%;
+            border-radius: 3%;
+            height: 81%;
             background-color: green;
             color: white;
         }       
@@ -67,6 +68,18 @@
 			background-color: #CAD6FA;
 			border-color: 1px solid black;
 		}
+		.zz{
+			float : left;
+			width:170px;
+			margin-bottom:3px;
+		}
+		.yy{
+			float : left;
+			width:100px;
+			margin-left:90px;
+			margin-right:20px;
+		}
+		
 
 
   }
@@ -79,9 +92,9 @@
         <div id="cont" style="text-align: center;">
             <br>
             <h1>일일 성취표</h1>
-            날짜 <input type="text" id="schStart" value="" readonly="readonly"><br>
-            점수 <input type="text" id="schJum" value="" readonly="readonly"><br>
-            평가 <input type="text" id="schComment" value="" readonly="readonly"><br>
+            <div class="yy">날짜</div> <input class="form-control zz" type="text" id="schStart" value="" readonly="readonly">
+            <div class="yy">오늘의 점수</div> <input class="form-control zz" type="text" id="schJum" value="" readonly="readonly"><br>
+            <div class="yy">평가</div><input class="form-control zz" type="text" id="schComment" value="" readonly="readonly"><br>
             <div><img id="schImg" style="width:300px; height:300px; margin:10px;" src=""></div>
             <button onclick="fMClose()">X</button>
         </div>
@@ -152,9 +165,9 @@
         calendar.on("eventRemove", info => console.log("Remove:", info));
         calendar.on("eventClick", info => {
             mySchStart.value = info.event.startStr;
-            let jum = info.event.title;
-            console.log(jum);
-            mySchJum.value = info.event.title;
+            let jum = info.event.extendedProps.description;
+            console.log(info.event.extendedProps.description);
+            mySchJum.value = jum+"점";
             let num = parseInt((parseInt(jum))/20);
             mySchComment.value = "${comments}".split(",")[num];
             mySchImg.src = "/Nutrition/fff/pepe"+num+".jpg";

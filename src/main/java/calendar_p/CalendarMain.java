@@ -26,16 +26,16 @@ public class CalendarMain implements CalendarService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+		String name = ss.getName();
 		MainDTO mdto = new MainDAO().detail();
 	    NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender(),mdto.getName());
 	    int dayAvg = (int)((ndto.getKcal()+ndto.getCarbo()+ndto.getNa()+ndto.getSugar()+ndto.getProtein()+ndto.getChole()+ndto.getFat()+ndto.getsFat()+ndto.gettFat())/9);
-	    request.setAttribute("dayAvg", dayAvg);
 	    
 	    ndto = new NutritionDTO();
-	    new NutritionDAO().dayAvg(dayAvg,request.getParameter("name"));
-	    MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+	    new NutritionDAO().dayAvg(dayAvg,name);
 	    
-		ArrayList<CalendarDTO> calDto = new CalendarDAO().list(ss.getName());
+		ArrayList<CalendarDTO> calDto = new CalendarDAO().list(name);
 		ArrayList<HashMap> events = new ArrayList<HashMap>();
 		for (CalendarDTO dto : calDto) {
 			HashMap hm1 = new HashMap();
@@ -44,6 +44,7 @@ public class CalendarMain implements CalendarService {
 			hm1.put("backgroundColor", "white");
 			hm1.put("allDay", true);
 			hm1.put("textColor", "purple");
+			hm1.put("description", dto.getDayavg());
 			hm1.put("sortIdx", 0);
 			events.add(hm1);
 			
@@ -53,6 +54,7 @@ public class CalendarMain implements CalendarService {
 			hm2.put("allDay", true);
 			hm2.put("backgroundColor", "pink");
 			hm2.put("textColor", "white");
+			hm2.put("description", dto.getDayavg());
 			hm2.put("sortIdx", 1);
 			events.add(hm2);
 			
@@ -62,6 +64,7 @@ public class CalendarMain implements CalendarService {
 			hm3.put("allDay", true);
 			hm3.put("backgroundColor", "rgba(54, 162, 235, 0.5)");
 			hm3.put("textColor", "white");
+			hm3.put("description", dto.getDayavg());
 			hm3.put("sortIdx", 2);
 			events.add(hm3);
 			
@@ -71,6 +74,7 @@ public class CalendarMain implements CalendarService {
 			hm4.put("allDay", true);
 			hm4.put("backgroundColor", "rgba(153, 102, 255, 0.5)");
 			hm4.put("textColor", "white");
+			hm4.put("description", dto.getDayavg());
 			hm4.put("sortIdx", 3);
 			events.add(hm4);
 			
@@ -80,6 +84,7 @@ public class CalendarMain implements CalendarService {
 			hm5.put("allDay", true);
 			hm5.put("backgroundColor", "rgba(75, 192, 192, 0.5)");
 			hm5.put("textColor", "white");
+			hm5.put("description", dto.getDayavg());
 			hm5.put("sortIdx", 4);
 			events.add(hm5);
 		}
