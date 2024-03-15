@@ -37,7 +37,6 @@
 .big {
 	margin:auto;
 	margin-top: 100px;
-	width: 1000px;
 	height: 300px;
 }
 /*프로필, 섭취량*/

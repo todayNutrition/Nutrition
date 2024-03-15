@@ -42,15 +42,14 @@
 .big {
 	margin:auto;
 	margin-top: 100px;
-	width: 1000px;
-	height: 300px;
+	height: 400px;
 }
 /*프로필, 섭취량*/
 .profile{
 	width: 350px;
 	height: 430px;
 	float: left;
-	margin-left: 120px;
+ 	margin-bottom: 40px;
 	border: 7px solid #00ADB2;
 	border-radius: 65px;
 	background-color: #fff;
@@ -81,84 +80,100 @@ input{
 	border-radius: 50px;
 }
 
+.container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+}
+
+@media(max-width: 767px){
+
+	.container{
+		flex-direction: column;
+	}
+}
 
 </style>    
-
-<div class="big">
-	<div class="profile">
-		<div class="dash">
-		<form action="ModifyReg" method="get">
-			<div>
-	 			<h1 class="title">나의 프로필</h1>
-				<div class="litle_d">
-					<div class="cate">닉네임</div>
-					<div><input type="text" name="name" value="${MainUser.name}"/>◁</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate">키</div>
-					<div><input type="text" name="height" value="${MainUser.height}"/>◁</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate">몸무게</div>
-					<div><input type="text" name="weight" value="${MainUser.weight}"/>◁</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate">나이</div>
-					<div><input type="text" name="age" value="${MainUser.age}"/>◁</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate">성별</div>
-					<div><input type="text" name="gender" value="${MainUser.gender}" readonly="readonly"/></div>
-				</div>
+<div class="container">
+	<div class="big col-sm-12 col-md-3">
+		<div class="profile">
+			<div class="dash">
+			<form action="ModifyReg" method="get">
 				<div>
-					<div align="center" class="litle_d"><input type="submit" value="수정" class="btn-mini"/></div>
+		 			<h1 class="title">나의 프로필</h1>
+					<div class="litle_d">
+						<div class="cate">닉네임</div>
+						<div><input type="text" name="name" value="${MainUser.name}"/>◁</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate">키</div>
+						<div><input type="text" name="height" value="${MainUser.height}"/>◁</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate">몸무게</div>
+						<div><input type="text" name="weight" value="${MainUser.weight}"/>◁</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate">나이</div>
+						<div><input type="text" name="age" value="${MainUser.age}"/>◁</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate">성별</div>
+						<div><input type="text" name="gender" value="${MainUser.gender}" readonly="readonly"/></div>
+					</div>
+					<div>
+						<div align="center" class="litle_d"><input type="submit" value="수정" class="btn-mini"/></div>
+					</div>
 				</div>
+			</form>
 			</div>
-		</form>
 		</div>
+	</div>	
+		
+	<div class="big col-sm-12 col-md-3">
+		 <div class="profile">
+			 <div class="dash">
+				<div>
+		 			<h1 class="title">오늘 섭취량</h1>
+					<div class="litle_d">
+						<div class="cate1">칼로리</div>
+						<div>${readDay.kcal}kcal</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">나트륨</div>
+						<div>${readDay.na}mg</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">탄수화물</div>
+						<div>${readDay.carbo}g</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">당류</div>
+						<div>${readDay.sugar}g</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">지방</div>
+						<div>${readDay.fat}g</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">트렌스지방</div>
+						<div>${readDay.tFat}g</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">포화지방</div>
+						<div>${readDay.sFat}g</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">콜레스테롤</div>
+						<div>${readDay.chole}mg</div>
+					</div>
+					<div class="litle_d">
+						<div class="cate1">단백질</div>
+						<div>${readDay.protein}g</div>
+					</div>
+				</div>
+			</div>	 
+		</div> 
 	</div>
-
-	 <div class="profile">
-		 <div class="dash">
-			<div>
-	 			<h1 class="title">오늘 섭취량</h1>
-				<div class="litle_d">
-					<div class="cate1">칼로리</div>
-					<div>${readDay.kcal}kcal</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">나트륨</div>
-					<div>${readDay.na}mg</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">탄수화물</div>
-					<div>${readDay.carbo}g</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">당류</div>
-					<div>${readDay.sugar}g</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">지방</div>
-					<div>${readDay.fat}g</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">트렌스지방</div>
-					<div>${readDay.tFat}g</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">포화지방</div>
-					<div>${readDay.sFat}g</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">콜레스테롤</div>
-					<div>${readDay.chole}mg</div>
-				</div>
-				<div class="litle_d">
-					<div class="cate1">단백질</div>
-					<div>${readDay.protein}g</div>
-				</div>
-			</div>
-		</div>	 
-	</div> 
 </div>
