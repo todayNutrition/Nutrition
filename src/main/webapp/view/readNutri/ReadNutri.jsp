@@ -37,6 +37,9 @@
 					if(ttt=='err'){
 						alert("이미지 데이터 형식 오류");
 						return
+					}else if(ttt=='FileErr'){
+						alert("이미지 파일만 가능합니다(JPG,PNG,JPEG,BMP)");
+						return
 					}
 					
 					var arr = ttt.split("/")
@@ -133,39 +136,39 @@
 				<table class="table table-striped-columns">
 					<tr>
 						<td class="table-dark">칼로리</td>
-						<td><input class="form-control" id="kcal" name="kcal" type="text"></td>
+						<td><input class="form-control" id="kcal" name="kcal" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">나트륨</td>
-						<td><input class="form-control" id="na" name="na" type="text"></td>
+						<td><input class="form-control" id="na" name="na" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">탄수화물</td>
-						<td><input class="form-control" id="carbo" name="carbo" type="text"></td>
+						<td><input class="form-control" id="carbo" name="carbo" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">당류</td>
-						<td><input class="form-control" id="sugar" name="sugar" type="text"></td>
+						<td><input class="form-control" id="sugar" name="sugar" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">지방</td>
-						<td><input class="form-control" id="fat" name="fat" type="text"></td>
+						<td><input class="form-control" id="fat" name="fat" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">트랜스지방</td>
-						<td><input class="form-control" id="tFat" name="tFat" type="text"></td>
+						<td><input class="form-control" id="tFat" name="tFat" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">포화지방</td>
-						<td><input class="form-control" id="sFat" name="sFat" type="text"></td>
+						<td><input class="form-control" id="sFat" name="sFat" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">콜레스테롤</td>
-						<td><input class="form-control" id="chole" name="chole" type="text"></td>
+						<td><input class="form-control" id="chole" name="chole" type="number" required></td>
 					</tr>
 					<tr>
 						<td class="table-dark">단백질</td>
-						<td><input class="form-control" id="protein" name="protein" type="text"></td>
+						<td><input class="form-control" id="protein" name="protein" type="number" required></td>
 					</tr>
 				</table>
 			</div>

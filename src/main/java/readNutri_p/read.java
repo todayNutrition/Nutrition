@@ -23,53 +23,58 @@ public class read implements ReadNutriService{
 			path = request.getServletContext().getRealPath("ppy/ReadNu.py");
 			
 			
-			//String [] nm = request.getParameter("nm").split("\\\\");
-			//String pp = nm[2];
-			//System.out.println(pp);
-			
-			
-			String pyPh =  new FFFPath(request).directory+upLoadFile;
-			
-			System.out.println(pyPh);
-			ProcessBuilder pb = new ProcessBuilder("python",path,pyPh);
-			
-			Process process = pb.start();
-			// 실행중에 print()로 출력하는 내용 가져오기
-			InputStreamReader isr = new InputStreamReader(process.getInputStream(),"ms949");
-			BufferedReader br = new BufferedReader(isr);
-			
-			response.setContentType("text/html; charset=UTF-8");
+			String pp = (upLoadFile.substring(upLoadFile.lastIndexOf(".")+1)).toUpperCase();
+			System.out.println(pp);
 			
 			String info = "";
-			String line = null;
-			
-			boolean chk = true;
-			while((line=br.readLine())!=null) {
-				System.out.println("pythonf 출력 : "+line);
-				if(line.equals("err")) {
-					chk = false;
-					System.out.println("에러");
-					info="err";
-					break;
-				}else {
-					info += line+"/";
+			if(pp.equals("JPG")||pp.equals("PNG")||pp.equals("JPEG")||pp.equals("BMP")) {
+				String pyPh =  new FFFPath(request).directory+upLoadFile;
+				
+				//System.out.println(pyPh);
+				ProcessBuilder pb = new ProcessBuilder("python",path,pyPh);
+				
+				Process process = pb.start();
+				// 실행중에 print()로 출력하는 내용 가져오기
+				InputStreamReader isr = new InputStreamReader(process.getInputStream(),"ms949");
+				BufferedReader br = new BufferedReader(isr);
+				
+				response.setContentType("text/html; charset=UTF-8");
+				
+				String line = null;
+				
+				boolean chk = true;
+				while((line=br.readLine())!=null) {
+					System.out.println("pythonf 출력 : "+line);
+					if(line.equals("err")) {
+						chk = false;
+						System.out.println("에러");
+						info="err";
+						break;
+					}else {
+						info += line+"/";
+					}
 				}
-			}
-			
-			br.close();
-			isr.close();
-			
-			
-			if(chk) {
-				info += upLoadFile;
-			}
-			System.out.println(info);
+				
+				br.close();
+				isr.close();
+				
+				
+				if(chk) {
+					info += upLoadFile;
+				}
+				System.out.println(info);
 
-			int exitCode = process.waitFor();
-			System.out.println("종료 코드 : "+ exitCode);
+				int exitCode = process.waitFor();
+				System.out.println("종료 코드 : "+ exitCode);
+				response.getWriter().append(info);
+			}else {
+				info="FileErr";
+				response.getWriter().append(info);
+			}
 			
 			
-			response.getWriter().append(info);
+			
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
