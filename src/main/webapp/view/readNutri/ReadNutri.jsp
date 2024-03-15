@@ -5,21 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <script src="../js/jquery-3.7.1.js"></script>
 <script>
-/* 	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				document.getElementById('preview').src = e.target.result;
-			};
-		    reader.readAsDataURL(input.files[0]);
-		} else {
-			document.getElementById('preview').src = "";
-		}
-	} */
-		
 	$(function(){
+		$("#nuUp").prop('disabled', true);
+		
+		$("#nuImg").on('input',function(){
+			const inputValue = $("#nuImg").val().trim();
+			
+			$("#nuUp").prop('disabled', inputValue ==='')
+		})
+		
+		
 		$("#nuUp").on("click",function(){
 			
 			var fData = new FormData()
@@ -63,22 +61,77 @@
 </script>
 <style>
 	img{
-		width:498px;
-		height:568px;
+		width:100%;
+		height:100%;
+	}
+	.input-group mb-3{
+		align-items: center; 
+		height: 60px; 
+		width: 100%;
+	}
+	.ffBox{
+		justify-content: center; 
+		display: grid; 
+		margin: 10px;
+	}
+	.ttBox{
+		justify-content: space-around; 
+		display:flex; 
+		height: 600px
+	}
+	.textBox{
+		width: 500px; 
+		height: 570px;
+	}
+	.imgBox{
+		width: 500px; 
+		height: 570px;
+	}
+
+	@media (max-width: 500px)  {
+		.input-group mb-3{
+			align-items: center; 
+			height: 60px; 
+			width: 95%;
+		}
+		.ffBox{
+			justify-content: center; 
+			display: grid; 
+			margin: 10px;
+			position: relative;
+		}
+		.ttBox{
+            flex-direction: column;
+            align-items: center; 
+			display:flex;  
+			height: 900px;
+			position: relative;
+		}
+		.textBox{
+			width: 400px; 
+			height: 570px;
+		}
+		.imgBox{
+			width: 400px; 
+			height: 300px;
+		}
+
 	}
 </style>
 <title>성분표 업로드</title>
 </head>
 <body>
-<div style="width: 100%; justify-content: center; display: grid;">
+<div style="width: 100%;">
 	<h2 style="text-align: center; margin: 20px;">성분표 업로드</h2>
-		<div class="input-group mb-3" style=" align-items: center; height: 60px; width: 1000px;">
-			<input class="form-control" id="nuImg" type="file" name="nuImg"  style="border: 1px solid #000;">
-			<input class="btn btn-outline-secondary" type="button" value="성분표올리기" id="nuUp"  >
+	<div class="ffBox">
+		<div class="input-group mb-3">
+			<input class="form-control" id="nuImg" type="file" name="nuImg">
+			<input class="btn btn-success" type="button" value="성분표올리기" id="nuUp">
 		</div>
+	</div>
 	<form action="ReadNutriReg" method="post" enctype="multipart/form-data">
-		<div style="justify-content: space-around; display:flex; width: 1200px; height: 602px">
-			<div style="border: 1px solid #000; width: 500px;  height: 570px;">
+		<div class="ttBox">
+			<div  class="textBox">
 				<table class="table table-striped-columns">
 					<tr>
 						<td class="table-dark">칼로리</td>
@@ -118,13 +171,11 @@
 					</tr>
 				</table>
 			</div>
-			<div style="border: 1px solid #000; width: 500px; height: 570px;">
-				<div id="image_container">
-					<img id="preview">
-				</div>
+			<div class="imgBox">
+				<img id="preview">
 			</div>
 		</div>
-			<div align="right" style="width: 1150px;">
+			<div align="center">
 				<input class="btn btn-dark" type="submit" value="등록">
 			</div>
 	</form>
