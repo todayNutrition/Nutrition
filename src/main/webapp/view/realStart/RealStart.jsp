@@ -40,6 +40,9 @@ div{
 	margin-top: 100px;
 	margin-bottom: 40px;
 }
+.info{
+	text-align: center;
+}
 </style>    
 
 

@@ -10,5 +10,8 @@ public class RealStart implements RealStartService{
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
+		request.getSession().invalidate();
+		
+		 request.setAttribute("mainUrl", "/view/realStart/RealStart.jsp");
 	}
 }

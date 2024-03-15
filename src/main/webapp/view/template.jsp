@@ -20,11 +20,8 @@ body{
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
-<%--와 안 먹녀,, 토글 없어야하는디 --%>
-<c:if test="${mainUrl != '/Nutrition/realStart/RealStart'}">
+
     <jsp:include page="inc/header.jsp" />
-<%--     <output>${mainUrl}</output> --%>
-</c:if>
 	
 	<main>
 		<jsp:include page="${mainUrl }"/>

@@ -10,6 +10,5 @@ public class UserStart implements MainService{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("유조스타뚜");
 	}
 }

@@ -79,20 +79,4 @@ public class CalendarDAO {
 	    return res;
 	}
    
-	/**새로운 user 입장시 기존 사용자 정보 삭제*/
-	public CalendarDTO delete(Cookie coo) {
-		CalendarDTO dto = null;
-		sql = "delete from nutrition";
-		
-		try {
-			psmt = con.prepareStatement(sql);
-			psmt.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-		return dto;
-	}
 }	
