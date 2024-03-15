@@ -16,11 +16,11 @@ public class MyGoalModify implements MyGoalService{
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		MainDTO dto = new MainDTO();
-		
+		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
 		dto.setGoalKcal(Integer.parseInt(request.getParameter("kcal")));		
 		
-		new NutritionDAO().dayAvg(Integer.parseInt(request.getParameter("dayAvg")),request.getParameter("name"));
-		new MainDAO().modify(dto, request.getParameter("name"));
+		new NutritionDAO().dayAvg(Integer.parseInt(request.getParameter("dayAvg")),ss.getName());
+		new MainDAO().modify(dto,ss.getName());
 		
 		request.setAttribute("msg", "목표칼로리가 수정되었습니다");
 		request.setAttribute("move", "MyGoalDetail");

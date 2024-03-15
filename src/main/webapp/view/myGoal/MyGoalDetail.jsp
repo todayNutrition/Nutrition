@@ -33,12 +33,19 @@ $(function(){
  
 <style>
 .myGoalPage{
-	width: 1000px;
-	margin: auto;
+	width: 100%;
+}
+.myGoalTitle{
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align:center;
+	height: 100px;
+	line-height: 100px;
+	
 }
 .todayMyGoal{
 	text-align: center;
-	padding: 40px 0 40px;
 	font-weight: bold;
 	font-size: 24px;
 }
@@ -61,7 +68,6 @@ $(function(){
 .goalKcal{
 	border:none;
 	text-align: center;
-	width: 80px;
 }
 .btn-mini {
   color: white; 
@@ -89,22 +95,24 @@ $(function(){
 </style>
 
 <div class="myGoalPage">
-<div class="todayMyGoal"><fmt:formatDate value="<%= new Date() %>" pattern="yyyy-MM-dd (E) "/></div>
+<div class="myGoalTitle">
+	<div class="todayMyGoal"><fmt:formatDate value="<%= new Date() %>" pattern="yyyy-MM-dd (E) "/></div>
+	<div style="width: 70px;">
+		<canvas id="doughnutChartCanvas"></canvas>
+	</div>
+</div>
 
 <form action="MyGoalModify">
 <input type="hidden" name="age" value="${mdata.age }">
 <input type="hidden" name="gender" value="${mdata.gender }">
-<input type="hidden" name="name" value="${mdata.name }">
 <input type="hidden" name="dayAvg" value="${dayAvg }">
 	<div class="changeMyGoal">
 		<div>목표칼로리</div>
  	 	<c:forEach items="${data}" var="dto">	
- 		<div><input type="range" min="0" max="3000" step="1" style="width: 400px" id="rangeInput" class="rangeInput" value="${dto.kcal }"/></div>
-		<div><input type="number" class="goalKcal" value="${dto.kcal }" name="kcal" min="0" max="3000">kcal</div>
+ 		<div><input type="range" min="0" max="3000" step="1" style="id="rangeInput" class="rangeInput" value="${mdata.goalKcal }"/></div>
+		<div><input type="number" class="goalKcal" value="${mdata.goalKcal }" name="kcal" min="0" max="3000">kcal</div>
  		<div><input type="submit" value="수정" class="btn-mini"/></div>
- 		<div style="width: 100px;">
-			<canvas id="doughnutChartCanvas"></canvas>
-		</div>
+ 		
  	</div>
 	
 </form>

@@ -16,10 +16,11 @@ public class MyGoalDetail implements MyGoalService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		MainDTO mdto = new MainDAO().detail();
+		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+		MainDTO mdto = new MainDAO().detail(ss.getName());
 		
-		NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender(), mdto.getName());
-		NutritionDTO total = new NutritionDAO().totalNutrition(mdto.getName());
+		NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender(),ss.getName());
+		NutritionDTO total = new NutritionDAO().totalNutrition(ss.getName());
 		
 		request.setAttribute("total", total);
 		request.setAttribute("mdata", mdto);
@@ -34,7 +35,7 @@ public class MyGoalDetail implements MyGoalService {
 		
 		
 		ndto = new NutritionDTO();
-		new NutritionDAO().dayAvg(dayAvg, mdto.getName());
+		new NutritionDAO().dayAvg(dayAvg, ss.getName());
 		
 		
 		}
