@@ -33,6 +33,7 @@
             color: white;
         }       
         .fc-day-sun a {
+
     		color: red;
 		}
 		.fc-day-sat a {
@@ -90,8 +91,6 @@
 			width: 100%;
 		}
 		
-		
-
 
   }
     </style>
@@ -124,7 +123,7 @@
         <div id='calendar'></div>
     </div>
     <script>
-		
+      
         const YrModal = document.querySelector("#yrModal");
         const calendarEl = document.querySelector('#calendar');
         const mySchStart = document.querySelector("#schStart");
@@ -171,7 +170,7 @@
             nowIndicator: true,
             //events:[],
             events: ev,
-        	eventOrder: 'sortIdx'
+           eventOrder: 'sortIdx'
         }
 
         // 캘린더 생성
@@ -196,7 +195,7 @@
         });
         calendar.on("dateClick", info => console.log("dateClick:", info));
         
-		
+      
         // 모달 닫기
         function fMClose() {
             YrModal.style.display = "none";
