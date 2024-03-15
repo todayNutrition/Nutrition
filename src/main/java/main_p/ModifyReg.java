@@ -14,8 +14,8 @@ public class ModifyReg implements MainService{
 		// 메인페이지 기초 입력 정보 수정
 		MainDTO dto = new MainDTO();
 		dto.setName(request.getParameter("name"));
-		dto.setHeight(request.getParameter("height"));
-		dto.setWeight(request.getParameter("weight"));
+		dto.setHeight(Double.parseDouble(request.getParameter("height")));
+		dto.setWeight(Double.parseDouble(request.getParameter("weight")));
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
 		dto.setGender(request.getParameter("gender"));
 		

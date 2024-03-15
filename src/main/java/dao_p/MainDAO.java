@@ -48,8 +48,8 @@ public class MainDAO {
 			psmt = con.prepareStatement(sql);
 
 			psmt.setString(1, dto.getName());
-			psmt.setString(2, dto.getHeight());
-			psmt.setString(3, dto.getWeight());
+			psmt.setDouble(2, dto.getHeight());
+			psmt.setDouble(3, dto.getWeight());
 			psmt.setInt(4, dto.getAge());
 			psmt.setString(5, dto.getGender());
 			
@@ -105,8 +105,8 @@ public class MainDAO {
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, dto.getName());
-			psmt.setString(2, dto.getHeight());
-			psmt.setString(3, dto.getWeight());
+			psmt.setDouble(2, dto.getHeight());
+			psmt.setDouble(3, dto.getWeight());
 			psmt.setInt(4, dto.getAge());
 			
 			
@@ -145,8 +145,8 @@ public class MainDAO {
 			if(rs.next()) {
 				res = new MainDTO();
 				res.setName(rs.getString("name")); 
-				res.setHeight(rs.getString("height")); 
-				res.setWeight(rs.getString("weight")); 
+				res.setHeight(rs.getDouble("height")); 
+				res.setWeight(rs.getDouble("weight")); 
 				res.setAge(Integer.parseInt(rs.getString("age")));
 				res.setGender(rs.getString("gender")); 
 				res.setGoalKcal(rs.getInt("goalKcal")); 
@@ -197,8 +197,8 @@ public class MainDAO {
 			if(rs.next()) {
 				res = new MainDTO();
 				res.setName(rs.getString("name")); 
-				res.setHeight(rs.getString("height")); 
-				res.setWeight(rs.getString("weight")); 
+				res.setHeight(rs.getDouble("height")); 
+				res.setWeight(rs.getDouble("weight")); 
 				res.setAge(Integer.parseInt(rs.getString("age")));
 				res.setGender(rs.getString("gender")); 
 				res.setGoalKcal(rs.getInt("goalKcal")); 

@@ -13,7 +13,7 @@ public class RealStartReg implements RealStartService{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-
+    	
     	// 로그인 이름으로 확인
     	String name = request.getParameter("name");
     	MainDTO res = new MainDAO().nameChk(name);
