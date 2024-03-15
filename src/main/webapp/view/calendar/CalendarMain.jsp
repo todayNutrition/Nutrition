@@ -91,8 +91,34 @@
 			width: 100%;
 		}
 		
-
+		#schImg{
+  			width:300px; 
+  			height:300px; 
+  			margin:10px;
+  		}
+  
+  
+  @media (max-width: 767px)  {
+  	#schImg{
+	  	width:90%;
+	  	height:45%; 
+		margin:10px;
+  	}
+ 	.xx{
+		/* margin-left:10%; */
+		padding-left: 12%;
+		float : left;
+		width: 100%;
+	}
+ 	
+ 	.yy{
+		float : left;
+		width:100px;
+		
+		margin-left:28px;
+	}
   }
+  
     </style>
 </head>
 
@@ -114,7 +140,7 @@
             	<div class="yy">평가</div>
             	<input class="form-control zz" type="text" id="schComment" value="" readonly="readonly"><br>
             </div>
-            <div><img id="schImg" style="width:300px; height:300px; margin:10px;" src="" class="img-fluid"></div>
+            <div><img id="schImg" src=""></div>
             <button onclick="fMClose()">X</button>
         </div>
     </div>

@@ -92,6 +92,17 @@ $(function(){
 }
 .chart {float: left; width: 50px; height: 50px; text-align: center;}
 .chart span.title{position: relative; display: block; width: 100%; text-align: center; }
+
+.container{
+		height: 500px;
+}
+
+@media(max-width: 767px){
+	.container{
+		height: 300px;
+	}
+}
+
 </style>
 
 <div class="myGoalPage">
@@ -242,7 +253,9 @@ $(function(){
           data: [${ndata.kcal}, ${ndata.na}, ${ndata.carbo}, ${ndata.sugar}, ${ndata.fat}, ${ndata.tFat}, ${ndata.sFat}, ${ndata.chole}, ${ndata.protein}]
         }]
       },
-      options: {}
+      options: {maintainAspectRatio:false,
+    	  max:100,
+    	  stepSize:10}
     });
 </script>
 </c:forEach>
