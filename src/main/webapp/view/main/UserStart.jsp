@@ -75,6 +75,5 @@ input[type="text"]{
 			<div align="center" class="litle_d"><input type="submit" value="Start" class="btn-mini"/></div>
 		</div>
 	</div>
-	<div><a href="/Nutrition/main/Start">기초정보입력</a></div>
 </form>
 </div>

@@ -21,15 +21,16 @@ public class Graph implements GraphService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("하이 난 그래프~");
 		
-		// 연령과 성별을 확인해 평균 권장 섭취량 데이터 가져오기
-		MainDTO dto = new MainDAO().detail();
+		// 로그인 유지
+		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+		
+		// 연령과 성별을 확인해 평균 권장 섭취량 데이터 가져오기위한 녀석
+		MainDTO dto = new MainDAO().detail(ss.getName());
 
 		// 평균 가져오기
 		NutritionDTO ndto = new NutritionDAO().todayGraph(dto.getKind(), dto.getGender(),dto.getName());
 		request.setAttribute("readDay", ndto);
-		System.out.println(ndto);
 
 	}
 

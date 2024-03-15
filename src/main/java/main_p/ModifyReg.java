@@ -10,7 +10,7 @@ public class ModifyReg implements MainService{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+
 		// 메인페이지 기초 입력 정보 수정
 		MainDTO dto = new MainDTO();
 		dto.setName(request.getParameter("name"));
@@ -19,15 +19,20 @@ public class ModifyReg implements MainService{
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
 		dto.setGender(request.getParameter("gender"));
 		
+		// 로그인 유지
 		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+		
 		// 메인 페이지 저장된 기초정보
 		MainDTO user = new MainDAO().nameChk(dto.getName());
 		request.setAttribute("MainUser", user);
 		
+		// 메인 페이지 저장된 기초정보 수정
 		new MainDAO().userModify(dto, dto.getKind(),ss.getName());
 		request.setAttribute("msg", "수정이 완료되었습니다.");
 		request.setAttribute("move", "/Nutrition/main/Main?name="+dto.getName());
 		request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
+		
+		// 로그인 정보 변경 유지
 		request.getSession().setAttribute("UserSS",dto);
 	}
 }

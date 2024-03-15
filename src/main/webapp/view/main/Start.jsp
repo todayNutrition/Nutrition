@@ -94,7 +94,5 @@ input[type="text"]{
 			<div align="center" class="litle_d"><input type="submit" value="Start" class="btn-mini"/></div>
 		</div>
 	</div>
-	<div><a href="/Nutrition/realStart/RealStart">메인화면</a></div>
-	<div><a href="/Nutrition/main/UserStart">회원</a></div>
 </form>
 </div>

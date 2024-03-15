@@ -10,9 +10,8 @@ public class StartReg implements MainService{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		//System.out.println("웅 입력을 시작해보께~");
-		// 시작페이지 기초 입력 정보		
 		
+		// 시작페이지 기초 입력 정보		
 		MainDTO dto = new MainDTO();
 		dto.setName(request.getParameter("name"));
 		dto.setHeight(request.getParameter("height"));
@@ -20,11 +19,14 @@ public class StartReg implements MainService{
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
 		dto.setGender(request.getParameter("gender"));
 		
+		// 시작페이지 기초 입력 정보 입력	
 		new MainDAO().userWrite(dto, dto.getKind());
 		request.setAttribute("msg", "영양해를 시작합니다.");
 		request.setAttribute("move", "/Nutrition/main/Main?name="+dto.getName());
 		request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
-		request.getSession().setAttribute("UserSS", dto); //로그인정보/상태 유지를 위한 세션 생성데스!
+		
+		// 로그인 정보 변경 유지
+		request.getSession().setAttribute("UserSS", dto); 
 
 	}
 }

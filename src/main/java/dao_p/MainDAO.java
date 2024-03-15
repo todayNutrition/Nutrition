@@ -44,7 +44,6 @@ public class MainDAO {
 	public void userWrite(MainDTO dto, String kind) {
 		
 		sql = "insert into user(name, height, weight, age, gender, kind, goalKcal) values(?,?,?,?,?,?,?)";
-//		System.out.println("저장 확인해보께1");
 		try {
 			psmt = con.prepareStatement(sql);
 
@@ -102,7 +101,6 @@ public class MainDAO {
 	public void userModify(MainDTO dto, String kind, String name) {
 		
 		sql ="update user set name = ?, height = ?, weight = ?, age = ?, kind = ? where name = ?";
-//		System.out.println("수정 확인해보께1");
 		
 		try {
 			psmt = con.prepareStatement(sql);
@@ -124,7 +122,6 @@ public class MainDAO {
 			psmt.setString(5, kind);
 			psmt.setString(6, name);
 			
-//			System.out.println("수정 확인해보께2");
 			psmt.executeUpdate();	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -182,23 +179,6 @@ public class MainDAO {
 		}finally {
 			close();
 		}		
-		return dto;
-	}
-	
-	/**새로운 user 입장시 기존 사용자 정보 삭제*/
-	public MainDTO delete(Cookie coo) {
-		MainDTO dto = null;
-		sql = "delete from user";
-		
-		try {
-			psmt = con.prepareStatement(sql);
-			psmt.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close();
-		}
 		return dto;
 	}
 	

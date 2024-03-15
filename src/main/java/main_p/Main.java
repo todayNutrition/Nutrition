@@ -18,19 +18,16 @@ public class Main implements MainService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("메인띠");
-
+		// 로그인 유지
 		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
 		
 		// 메인 페이지 저장된 기초정보
 		MainDTO user = new MainDAO().nameChk(ss.getName());
 		request.setAttribute("MainUser", user);
-		System.out.println(user.getGoalKcal());
 		
 		// 메인페이지 하루 섭취량 데이터 정보 
 		Date da = new Date();
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
-		//System.out.println(day.format(da));
 		// 전체 DB가 오기 때문에 오늘날짜일 때 자료만 불러오게 조건 걸자
 		ArrayList<CalendarDTO> dayData = new CalendarDAO().list(ss.getName());
 		CalendarDTO ddd = new CalendarDTO();
@@ -39,7 +36,6 @@ public class Main implements MainService {
 				ddd = ddt;
 			}
 		}
-		System.out.println(dayData);
 		request.setAttribute("readDay", ddd);
 
 	}
