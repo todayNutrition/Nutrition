@@ -127,23 +127,23 @@ input{
 		 			<h1 class="title">나의 프로필</h1>
 					<div class="litle_d">
 						<div class="cate">닉네임</div>
-						<div><input type="text" name="name" value="${MainUser.name}"/>◁</div>
+						<div><input type="text" name="name" value="${MainUser.name}" required/>◁</div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">키</div>
-						<div><input type="text" name="height" value="${MainUser.height}"/>◁</div>
+						<div><input type="number" name="height" value="${MainUser.height}" step="0.1" pattern="\\d*" required min="50"/>◁</div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">몸무게</div>
-						<div><input type="text" name="weight" value="${MainUser.weight}"/>◁</div>
+						<div><input type="number" name="weight" value="${MainUser.weight}" step="0.1" pattern="\\d*" required min="10"/>◁</div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">나이</div>
-						<div><input type="text" name="age" value="${MainUser.age}"/>◁</div>
+						<div><input type="number" name="age" value="${MainUser.age}" min="6" required/>◁</div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">성별</div>
-						<div><input type="text" name="gender" value="${MainUser.gender}" readonly="readonly"/></div>
+						<div><input type="text" name="gender" value="${MainUser.gender}" readonly="readonly" required/></div>
 					</div>
 					<div>
 						<div align="center" class="litle_d"><input type="submit" value="수정" class="btn-mini"/></div>

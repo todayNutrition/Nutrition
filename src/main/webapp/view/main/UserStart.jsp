@@ -68,7 +68,7 @@ input[type="text"]{
 		<h1 class="title">회원</h1>
 		<div class="litle_d">
 			<div class="cate">닉네임</div>
-			<div><input type="text" name="name"/></div>
+			<div><input type="text" name="name" required/></div>
 		</div>
 		<div>
 			<div align="center" class="litle_d"><input type="submit" value="Start" class="btn-mini"/></div>

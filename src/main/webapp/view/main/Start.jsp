@@ -68,19 +68,19 @@ input[type="text"]{
 		<h1 class="title">기초 정보 입력</h1>
 		<div class="litle_d">
 			<div class="cate">닉네임</div>
-			<div><input type="text" name="name" value="${param.name}"/></div>
+			<div><input type="text" name="name" value="${param.name}" required/></div>
 		</div>
 		<div class="litle_d">
 			<div class="cate">키</div>
-			<div><input type="text" name="height"/></div>
+			<div><input type="number" name="height" step="0.1" pattern="\\d*" min="50" required/></div>
 		</div>
 		<div class="litle_d">
 			<div class="cate">몸무게</div>
-			<div><input type="text" name="weight"/></div>
+			<div><input type="number" name="weight" step="0.1" pattern="\\d*" min="10" required/></div>
 		</div>
 		<div class="litle_d">
 			<div class="cate">나이</div>
-			<div><input type="text" name="age"/></div>
+			<div><input type="number" name="age" min="6" required/></div>
 		</div>
 		<div class="litle_d">
 			<div class="cate">성별</div>

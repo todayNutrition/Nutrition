@@ -1,9 +1,9 @@
 package dto_p;
 
 public class MainDTO {
-	String name, height, weight, gender, kind; // 이름, 키, 몸무게, 성별, 구분
+	String name, gender, kind; // 이름, 키, 몸무게, 성별, 구분
 	int age, goalKcal;	// 나이, 목표칼로리
-	
+	double height, weight;
 	
 	public String getName() {
 		return name;
@@ -11,16 +11,16 @@ public class MainDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getHeight() {
+	public double getHeight() {
 		return height;
 	}
-	public void setHeight(String height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
-	public String getWeight() {
+	public double getWeight() {
 		return weight;
 	}
-	public void setWeight(String weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 	public String getGender() {
