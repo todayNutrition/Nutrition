@@ -121,7 +121,7 @@ $(function(){
 		<div>목표칼로리</div>
  	 	<c:forEach items="${data}" var="dto">	
  		<div><input type="range" min="0" max="3000" step="1" style="id="rangeInput" class="rangeInput" value="${mdata.goalKcal }"/></div>
-		<div><input type="number" class="goalKcal" value="${mdata.goalKcal }" name="kcal" min="0" max="3000">kcal</div>
+		<div><input type="number" class="goalKcal" value="${mdata.goalKcal }" name="kcal" min="0" max="3000" pattern="\\d*" >kcal</div>
  		<div><input type="submit" value="수정" class="btn-mini"/></div>
  		
  	</div>
