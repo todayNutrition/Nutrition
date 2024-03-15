@@ -25,16 +25,11 @@ recArr = numpy.array([p[0] for p in recPP])
 recImg = four_point_transform(ori,recArr)
 recImg = cv2.resize(recImg,dsize=(800,860))
 
-def mouse_event(event,x,y, flags, param):
-    if event == cv2.EVENT_FLAG_LBUTTON:
-        print(x,y,ori[y,x])
-
-
 pts = [numpy.array([   #kcal
-     [[550,80]],
+     [[550,70]],
      [[550,130]],
      [[780,130]],
-     [[780,80]]
+     [[780,70]]
      ])
 ,
 numpy.array([
@@ -67,16 +62,16 @@ numpy.array([
 ,
 numpy.array([
      [[300, 470]],
-     [[300, 530]],
-     [[420, 530]],
-     [[420, 470]]  # 트랜스지방
+     [[300, 535]],
+     [[425, 535]],
+     [[425, 470]]  # 트랜스지방
 ])
 ,
 numpy.array([
      [[250, 550]],
      [[250, 610]],
-     [[450, 610]],
-     [[450, 550]]  # 포화지방
+     [[375, 610]],
+     [[375, 550]]  # 포화지방
 ])
 ,
 numpy.array([
@@ -118,7 +113,9 @@ for i, cc in enumerate( pts):
 
     rectangle = recImg[lowY:highY, lowX:highX].copy()
     ttt = pytesseract.image_to_string(rectangle, lang='kor+eng')
-    if(len(ttt[:-1].split(' '))!=2):
-        print("err")
+    if(ttt[-2:-1]=="8" and len(ttt[:-1].split(' '))!=2):
+        print(ttt[:-2]+" "+"g")
+    elif(len(ttt[:-1].split(' '))!=2):
+        print("err : ",ttt[:-1])
     else:
         print(ttt[:-1])

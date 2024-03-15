@@ -70,11 +70,11 @@
 <title>성분표 업로드</title>
 </head>
 <body>
-	<h2>성분표 업로드</h2>
-	
-		<div style="justify-content: space-around; display: flex; align-items: center; width: 1200px; height: 60px;">
-			<input class="form-control" id="nuImg" type="file" name="nuImg"  style="border: 1px solid #000; width: 800px;">
-			<input type="button" value="성분표올리기" id="nuUp"  >
+<div style="width: 100%; justify-content: center; display: grid;">
+	<h2 style="text-align: center; margin: 20px;">성분표 업로드</h2>
+		<div class="input-group mb-3" style=" align-items: center; height: 60px; width: 1000px;">
+			<input class="form-control" id="nuImg" type="file" name="nuImg"  style="border: 1px solid #000;">
+			<input class="btn btn-outline-secondary" type="button" value="성분표올리기" id="nuUp"  >
 		</div>
 	<form action="ReadNutriReg" method="post" enctype="multipart/form-data">
 		<div style="justify-content: space-around; display:flex; width: 1200px; height: 602px">
@@ -128,5 +128,6 @@
 				<input class="btn btn-dark" type="submit" value="등록">
 			</div>
 	</form>
+</div>
 </body>
 </html>
