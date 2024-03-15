@@ -116,6 +116,6 @@ for i, cc in enumerate( pts):
     if(ttt[-2:-1]=="8" and len(ttt[:-1].split(' '))!=2):
         print(ttt[:-2]+" "+"g")
     elif(len(ttt[:-1].split(' '))!=2):
-        print("err : ",ttt[:-1])
+        print("err")
     else:
         print(ttt[:-1])
