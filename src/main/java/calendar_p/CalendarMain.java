@@ -28,7 +28,7 @@ public class CalendarMain implements CalendarService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
 		String name = ss.getName();
-		MainDTO mdto = new MainDAO().detail();
+		MainDTO mdto = new MainDAO().detail(name);
 	    NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender(),mdto.getName());
 	    int dayAvg = (int)((ndto.getKcal()+ndto.getCarbo()+ndto.getNa()+ndto.getSugar()+ndto.getProtein()+ndto.getChole()+ndto.getFat()+ndto.getsFat()+ndto.gettFat())/9);
 	    

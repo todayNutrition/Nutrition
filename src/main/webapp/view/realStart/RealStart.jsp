@@ -5,7 +5,7 @@
 #st {
   flex: 1 1 auto;
   margin: 10px;
-  padding: 0px 300px;
+  padding: 0px 100px;
   text-align: center;
   font-size: 50px;
   text-transform: uppercase;
@@ -31,9 +31,6 @@
 	  text-align: center;
 	  font-size: 25px;
 	  margin-bottom: 40px;
-}
-div{
-	width: 1000px;
 }
 .big {
 	margin: auto;

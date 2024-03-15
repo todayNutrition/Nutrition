@@ -10,7 +10,7 @@
 
     <style>
         #calendar {
-            width: 1000px;
+            width: 100%;
             margin: auto;
             padding-top: 70px;
         }
@@ -33,53 +33,53 @@
             color: white;
         }       
         .fc-day-sun a {
-    		color: red;
-		}
-		.fc-day-sat a {
-   			 color: blue;
-		}
-		.fc-h-event{
-			font-weight: 500;
-			border: none;
-		}
-		 .fc .fc-daygrid-day-frame {
-    		padding-bottom: 17px;
-  		}
+          color: red;
+      }
+      .fc-day-sat a {
+             color: blue;
+      }
+      .fc-h-event{
+         font-weight: 500;
+         border: none;
+      }
+       .fc .fc-daygrid-day-frame {
+          padding-bottom: 17px;
+        }
 
-  		.fc .fc-button-primary:disabled {
-		    background-color: #C8D1FF;
-		    border: none;
-		
-		}
-		.fc .fc-button-primary:not(:disabled),.fc .fc-button-primary:not(:disabled).fc-button-active {
-		  	border: none;
-			background-color: #C8E5FA;
-			font-weight: bold;
-		    span {
-		      font-weight: 600;
-		    }
-		}		
+        .fc .fc-button-primary:disabled {
+          background-color: #C8D1FF;
+          border: none;
+      
+      }
+      .fc .fc-button-primary:not(:disabled),.fc .fc-button-primary:not(:disabled).fc-button-active {
+           border: none;
+         background-color: #C8E5FA;
+         font-weight: bold;
+          span {
+            font-weight: 600;
+          }
+      }      
 
-		.fc .fc-button-primary:hover,  .fc .fc-button-primary:not(:disabled).fc-button-active:hover {
-			background-color: #CAD6FA;
+      .fc .fc-button-primary:hover,  .fc .fc-button-primary:not(:disabled).fc-button-active:hover {
+         background-color: #CAD6FA;
 
-		}
-		.fc .fc-button-primary:not(:disabled):active{
-			background-color: #CAD6FA;
-			border-color: 1px solid black;
-		}
-		.zz{
-			float : left;
-			width:170px;
-			margin-bottom:3px;
-		}
-		.yy{
-			float : left;
-			width:100px;
-			margin-left:90px;
-			margin-right:20px;
-		}
-		
+      }
+      .fc .fc-button-primary:not(:disabled):active{
+         background-color: #CAD6FA;
+         border-color: 1px solid black;
+      }
+      .zz{
+         float : left;
+         width:170px;
+         margin-bottom:3px;
+      }
+      .yy{
+         float : left;
+         width:100px;
+         margin-left:90px;
+         margin-right:20px;
+      }
+      
 
 
   }
@@ -104,7 +104,7 @@
         <div id='calendar'></div>
     </div>
     <script>
-		
+      
         const YrModal = document.querySelector("#yrModal");
         const calendarEl = document.querySelector('#calendar');
         const mySchStart = document.querySelector("#schStart");
@@ -151,7 +151,7 @@
             nowIndicator: true,
             //events:[],
             events: ev,
-        	eventOrder: 'sortIdx'
+           eventOrder: 'sortIdx'
         }
 
         // 캘린더 생성
@@ -176,7 +176,7 @@
         });
         calendar.on("dateClick", info => console.log("dateClick:", info));
         
-		
+      
         // 모달 닫기
         function fMClose() {
             YrModal.style.display = "none";
