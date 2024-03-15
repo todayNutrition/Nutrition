@@ -15,7 +15,8 @@ public class ReadNutriReg implements ReadNutriService {
 
 		try {
 			NutritionDTO dto = new NutritionDTO();
-			MainDTO mdto = new MainDAO().detail();
+			MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
+			MainDTO mdto = new MainDAO().detail(ss.getName());
 			
 			dto.setNa(Integer.parseInt(request.getParameter("na")));
 			dto.setCarbo(Integer.parseInt(request.getParameter("carbo")));

@@ -160,11 +160,12 @@ public class MainDAO {
 		return res;
 	}
 	
-	public MainDTO detail(){
+	public MainDTO detail(String name){
 		MainDTO dto = null;
-		sql = "select age, gender,kind, name from user ";
+		sql = "select age, gender,kind,name,goalKcal from user where name = ?";
 		try {
 			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
 			rs = psmt.executeQuery();		
 			while(rs.next()) {
 				dto = new MainDTO();
@@ -172,6 +173,7 @@ public class MainDAO {
 				dto.setGender(rs.getString("gender"));
 				dto.setKind(rs.getString("kind"));
 				dto.setName(rs.getString("name"));
+				dto.setGoalKcal(rs.getInt("goalKcal"));
 			}
 		
 		} catch (SQLException e) {
