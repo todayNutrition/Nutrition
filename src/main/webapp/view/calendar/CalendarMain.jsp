@@ -7,7 +7,7 @@
 <head>
     <meta charset='utf-8' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-
+	<link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet'>
     <style>
         #calendar {
             width: 100%;
@@ -26,61 +26,71 @@
 
         #cont {
             margin: 50px auto;
-            width: 50%;
-            border-radius: 3%;
-            height: 81%;
-            background-color: green;
+            width: 80%;
+            border-radius: 10px;
+            height: 77%;
+            background-color: rgba(0, 80, 0, 0.95);
             color: white;
         }       
         .fc-day-sun a {
-          color: red;
-      }
-      .fc-day-sat a {
-             color: blue;
-      }
-      .fc-h-event{
-         font-weight: 500;
-         border: none;
-      }
-       .fc .fc-daygrid-day-frame {
-          padding-bottom: 17px;
-        }
 
-        .fc .fc-button-primary:disabled {
-          background-color: #C8D1FF;
-          border: none;
-      
-      }
-      .fc .fc-button-primary:not(:disabled),.fc .fc-button-primary:not(:disabled).fc-button-active {
-           border: none;
-         background-color: #C8E5FA;
-         font-weight: bold;
-          span {
-            font-weight: 600;
-          }
-      }      
+    		color: red;
+		}
+		.fc-day-sat a {
+   			 color: blue;
+		}
+		.fc-h-event{
+			font-weight: 500;
+			border: none;
+		}
+		 .fc .fc-daygrid-day-frame {
+    		padding-bottom: 17px;
+  		}
+		
+		
+  		.fc .fc-button-primary:disabled {
+		    background-color: #C8D1FF;
+		    border: none;
+		
+		}
+		.fc .fc-button-primary:not(:disabled),.fc .fc-button-primary:not(:disabled).fc-button-active {
+		  	border: none;
+			background-color: #C8E5FA;
+			font-weight: bold;
+		    span {
+		      font-weight: 600;
+		    }
+		}
+		.fc .fc-toolbar-title{
+			font-size: 1em;
+		}		
 
-      .fc .fc-button-primary:hover,  .fc .fc-button-primary:not(:disabled).fc-button-active:hover {
-         background-color: #CAD6FA;
+		.fc .fc-button-primary:hover,  .fc .fc-button-primary:not(:disabled).fc-button-active:hover {
+			background-color: #CAD6FA;
 
-      }
-      .fc .fc-button-primary:not(:disabled):active{
-         background-color: #CAD6FA;
-         border-color: 1px solid black;
-      }
-      .zz{
-         float : left;
-         width:170px;
-         margin-bottom:3px;
-      }
-      .yy{
-         float : left;
-         width:100px;
-         margin-left:90px;
-         margin-right:20px;
-      }
-      
-
+		}
+		.fc .fc-button-primary:not(:disabled):active{
+			background-color: #CAD6FA;
+			border-color: 1px solid black;
+		}
+		.zz{
+			float : left;
+			width:170px;
+			margin-bottom:3px;
+		}
+		.yy{
+			float : left;
+			width:100px;
+			
+			margin-right:20px;
+		}
+		.xx{
+			margin-left:10%;
+			padding-left:20%;
+			float : left;
+			width: 100%;
+		}
+		
 
   }
     </style>
@@ -91,11 +101,20 @@
     <div id="yrModal">
         <div id="cont" style="text-align: center;">
             <br>
-            <h1>일일 성취표</h1>
-            <div class="yy">날짜</div> <input class="form-control zz" type="text" id="schStart" value="" readonly="readonly">
-            <div class="yy">오늘의 점수</div> <input class="form-control zz" type="text" id="schJum" value="" readonly="readonly"><br>
-            <div class="yy">평가</div><input class="form-control zz" type="text" id="schComment" value="" readonly="readonly"><br>
-            <div><img id="schImg" style="width:300px; height:300px; margin:10px;" src=""></div>
+            <div><h4>일일 성취표</h4></div>
+            <div class="xx">
+            	<div class="yy">날짜</div> 
+            	<input class="form-control zz" type="text" id="schStart" value="" readonly="readonly"><br>
+            </div>
+            <div class="xx">
+            	<div class="yy">오늘의 점수</div> 
+            	<input class="form-control zz" type="text" id="schJum" value="" readonly="readonly"><br>
+            </div>
+            <div class="xx">
+            	<div class="yy">평가</div>
+            	<input class="form-control zz" type="text" id="schComment" value="" readonly="readonly"><br>
+            </div>
+            <div><img id="schImg" style="width:300px; height:300px; margin:10px;" src="" class="img-fluid"></div>
             <button onclick="fMClose()">X</button>
         </div>
     </div>
@@ -115,9 +134,9 @@
 
         //캘린더 헤더 옵션
         const headerToolbar = {
-            left: 'prevYear,prev,next,nextYear today',
+            left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,dayGridWeek,timeGridDay'
+            right: 'dayGridMonth,dayGridWeek'
         }
         
         var ev = ${events};
