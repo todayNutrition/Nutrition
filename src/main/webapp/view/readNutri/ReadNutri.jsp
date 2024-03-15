@@ -88,7 +88,7 @@
 		height: 570px;
 	}
 
-	@media (max-width: 500px)  {
+	@media (max-width: 767px)  {
 		.input-group mb-3{
 			align-items: center; 
 			height: 60px; 
@@ -98,21 +98,19 @@
 			justify-content: center; 
 			display: grid; 
 			margin: 10px;
-			position: relative;
 		}
 		.ttBox{
             flex-direction: column;
             align-items: center; 
 			display:flex;  
 			height: 900px;
-			position: relative;
 		}
 		.textBox{
-			width: 400px; 
+			width: 95%; 
 			height: 570px;
 		}
 		.imgBox{
-			width: 400px; 
+			width: 95%; 
 			height: 300px;
 		}
 
