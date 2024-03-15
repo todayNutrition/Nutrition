@@ -1,6 +1,8 @@
 package readNutri_p;
 
+import dao_p.MainDAO;
 import dao_p.NutritionDAO;
+import dto_p.MainDTO;
 import dto_p.NutritionDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +15,8 @@ public class ReadNutriReg implements ReadNutriService {
 
 		try {
 			NutritionDTO dto = new NutritionDTO();
+			MainDTO mdto = new MainDAO().detail();
+			
 			dto.setNa(Integer.parseInt(request.getParameter("na")));
 			dto.setCarbo(Integer.parseInt(request.getParameter("carbo")));
 			dto.setSugar(Integer.parseInt(request.getParameter("sugar")));
@@ -22,6 +26,7 @@ public class ReadNutriReg implements ReadNutriService {
 			dto.setChole(Integer.parseInt(request.getParameter("chole")));
 			dto.setProtein(Integer.parseInt(request.getParameter("protein")));
 			dto.setKcal(Integer.parseInt(request.getParameter("kcal")));
+			dto.setName(mdto.getName());
 
 			new NutritionDAO().write(dto);
 			

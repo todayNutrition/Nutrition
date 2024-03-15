@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import dto_p.MainDTO;
+import dto_p.RecommendNutriDTO;
 import jakarta.servlet.http.Cookie;
 
 public class MainDAO {
@@ -164,7 +165,7 @@ public class MainDAO {
 	
 	public MainDTO detail(){
 		MainDTO dto = null;
-		sql = "select age, gender,kind from user ";
+		sql = "select age, gender,kind, name from user ";
 		try {
 			psmt = con.prepareStatement(sql);
 			rs = psmt.executeQuery();		
@@ -173,6 +174,7 @@ public class MainDAO {
 				dto.setAge(rs.getInt("age"));
 				dto.setGender(rs.getString("gender"));
 				dto.setKind(rs.getString("kind"));
+				dto.setName(rs.getString("name"));
 			}
 		
 		} catch (SQLException e) {
@@ -227,5 +229,21 @@ public class MainDAO {
 			close();
 		}
 		return res;
+	}
+	
+	public void modify(MainDTO dto,String name) {
+		sql = "update user set goalKcal=? where name = ? ";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, dto.getGoalKcal());
+			psmt.setString(2,name);
+			
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
