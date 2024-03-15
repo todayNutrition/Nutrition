@@ -4,13 +4,12 @@
 <style>
 #st {
   flex: 1 1 auto;
-  margin: 10px;
   padding: 0px 100px;
   text-align: center;
   font-size: 50px;
   text-transform: uppercase;
   transition: 0.5s;
-  background-size: 200% auto;
+  background-size: 100% auto;
   color: white;
  /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
   box-shadow: 0 0 20px #eee;

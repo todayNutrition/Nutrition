@@ -6,7 +6,16 @@
 	.container{
 		margin-top: 100px;
 		background-color: #fff;
+		height: 600px;
 	}
+	@media(max-width: 767px){
+		.container{
+		margin-top: 100px;
+		background-color: #fff;
+		height: 400px;
+		}
+	}
+
 </style>
  <!-- 차트 링크 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -64,6 +73,7 @@
           }]
       },
       options: {
+    	  maintainAspectRatio:false,
         scales: {
           yAxes: [{
             ticks: {

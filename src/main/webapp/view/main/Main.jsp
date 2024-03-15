@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <style>
+
 /*혜성언니 수정버튼  */
 .btn-mini {
   color: white; 
@@ -40,6 +41,7 @@
 
 /*프로필, 섭취량 감싸는 틀*/
 .big {
+	width:95%;
 	margin:auto;
 	margin-top: 100px;
 	height: 400px;
@@ -92,15 +94,36 @@ input{
 	.container{
 		flex-direction: column;
 	}
+	.dash{
+		width: 95%;
+		height: 400px;
+		margin-top: 7px;
+		margin-left: 7px;
+		border: 2px dashed #00ADB2;
+		border-radius: 50px;
+	}
+	.profile{
+		width: 100%;
+		height: 430px;
+		float: left;
+	 	margin-bottom: 40px;
+		border: 7px solid #00ADB2;
+		border-radius: 65px;
+		background-color: #fff;
+	}
+	
+	input{
+	width: 110px;
+}
 }
 
 </style>    
 <div class="container">
-	<div class="big col-sm-12 col-md-3">
+	<div class="big">
 		<div class="profile">
 			<div class="dash">
 			<form action="ModifyReg" method="get">
-				<div>
+				<div style="width: 100%;">
 		 			<h1 class="title">나의 프로필</h1>
 					<div class="litle_d">
 						<div class="cate">닉네임</div>
@@ -131,10 +154,10 @@ input{
 		</div>
 	</div>	
 		
-	<div class="big col-sm-12 col-md-3">
+	<div class="big">
 		 <div class="profile">
 			 <div class="dash">
-				<div>
+				<div  style="width: 100%;">
 		 			<h1 class="title">오늘 섭취량</h1>
 					<div class="litle_d">
 						<div class="cate1">칼로리</div>
