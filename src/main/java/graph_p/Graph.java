@@ -27,7 +27,7 @@ public class Graph implements GraphService {
 		MainDTO dto = new MainDAO().detail();
 
 		// 평균 가져오기
-		NutritionDTO ndto = new NutritionDAO().todayGraph(dto.getKind(), dto.getGender());
+		NutritionDTO ndto = new NutritionDAO().todayGraph(dto.getKind(), dto.getGender(),dto.getName());
 		request.setAttribute("readDay", ndto);
 		System.out.println(ndto);
 

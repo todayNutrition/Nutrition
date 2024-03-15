@@ -86,7 +86,7 @@ public class NutritionDAO {
 	public NutritionDTO totalNutrition(String name){
 		NutritionDTO dto = null;
 		sql = "select "
-				+ " sum(a.na), sum(b.goalKcal), sum(a.carbo), sum(a.sugar), sum(a.protein), "
+				+ " sum(a.na), sum(a.kcal), sum(a.carbo), sum(a.sugar), sum(a.protein), "
 				+ " sum(a.fat), sum(a.tFat), sum(a.sFat), sum(a.chole), a.regDate "
 				+ " from nutrition a "
 				+ " LEFT OUTER JOIN user b "
@@ -98,7 +98,7 @@ public class NutritionDAO {
 			rs = psmt.executeQuery();		
 			while(rs.next()) {
 				dto = new NutritionDTO();
-				dto.setKcal(rs.getInt("sum(b.goalKcal)"));
+				dto.setKcal(rs.getInt("sum(a.kcal)"));
 				dto.setCarbo(rs.getInt("sum(a.carbo)"));
 				dto.setNa(rs.getInt("sum(a.na)"));
 				dto.setSugar(rs.getInt("sum(a.sugar)"));

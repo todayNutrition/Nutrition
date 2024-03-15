@@ -27,12 +27,12 @@ public class CalendarMain implements CalendarService {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		MainDTO mdto = new MainDAO().detail();
-	    NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender());
+	    NutritionDTO ndto = new NutritionDAO().todayNutrition(mdto.getKind(), mdto.getGender(),mdto.getName());
 	    int dayAvg = (int)((ndto.getKcal()+ndto.getCarbo()+ndto.getNa()+ndto.getSugar()+ndto.getProtein()+ndto.getChole()+ndto.getFat()+ndto.getsFat()+ndto.gettFat())/9);
 	    request.setAttribute("dayAvg", dayAvg);
 	    
 	    ndto = new NutritionDTO();
-	    new NutritionDAO().dayAvg(dayAvg);
+	    new NutritionDAO().dayAvg(dayAvg,request.getParameter("name"));
 	    MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
 	    
 		ArrayList<CalendarDTO> calDto = new CalendarDAO().list(ss.getName());
