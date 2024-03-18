@@ -13,7 +13,6 @@ public class ModifyReg implements MainService {
 
 		// 메인페이지 기초 입력 정보 수정
 		MainDTO dto = new MainDTO();
-		dto.setName(request.getParameter("name"));
 		dto.setHeight(Double.parseDouble(request.getParameter("height")));
 		dto.setWeight(Double.parseDouble(request.getParameter("weight")));
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
@@ -22,22 +21,20 @@ public class ModifyReg implements MainService {
 		// 로그인 유지
 		MainDTO ss = (MainDTO) request.getSession().getAttribute("UserSS");
 
+		System.out.println(ss.getName());
 		// 메인 페이지 저장된 기초정보
-		MainDTO user = new MainDAO().nameChk(dto.getName());
+		MainDTO user = new MainDAO().nameChk(ss.getName());
 		request.setAttribute("MainUser", user);
 
-		if(user != null && dto.getName().equals(user.getName())) {
-			request.setAttribute("msg", "이미 존재하는 닉네임입니다."); 
-			request.setAttribute("move", "/Nutrition/main/Main?name="+ss.getName()); 
-			request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
-		}else{
+		
 		// 메인 페이지 저장된 기초정보 수정
 		new MainDAO().userModify(dto, dto.getKind(), ss.getName());
 		request.setAttribute("msg", "수정이 완료되었습니다.");
-		request.setAttribute("move", "/Nutrition/main/Main?name=" + dto.getName());
+		request.setAttribute("move", "/Nutrition/main/Main?name=" + ss.getName());
 		request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
+		
 		// 로그인 정보 변경 유지
-		request.getSession().setAttribute("UserSS", dto);
-		}
+		request.getSession().setAttribute("UserSS", user);
+
 	}
 }
