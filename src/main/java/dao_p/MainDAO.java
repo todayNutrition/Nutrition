@@ -100,14 +100,15 @@ public class MainDAO {
 	/**메인 사용자 기초정보 수정*/
 	public void userModify(MainDTO dto, String kind, String name) {
 		
-		sql ="update user set name = ?, height = ?, weight = ?, age = ?, kind = ? where name = ?";
+		sql ="update user set height = ?, weight = ?, age = ?, kind = ? where name = ?";
+//		sql ="update user set name = ?, height = ?, weight = ?, age = ?, kind = ? where name = ?";
 		
 		try {
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, dto.getName());
-			psmt.setDouble(2, dto.getHeight());
-			psmt.setDouble(3, dto.getWeight());
-			psmt.setInt(4, dto.getAge());
+//			psmt.setString(1, dto.getName());
+			psmt.setDouble(1, dto.getHeight());
+			psmt.setDouble(2, dto.getWeight());
+			psmt.setInt(3, dto.getAge());
 			
 			
 			if (dto.getAge()>=6 && dto.getAge()<=8) {
@@ -119,9 +120,27 @@ public class MainDAO {
 			}else if(dto.getAge() >= 65) {
 				kind="노년";
 			}
-			psmt.setString(5, kind);
-			psmt.setString(6, name);
+			psmt.setString(4, kind);
+			psmt.setString(5, name);
 			
+			psmt.executeUpdate();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+	}
+	
+	/**메인 사용자 닉네임 기초정보 수정*/
+	public void userNameModify(String modifyName, String originName) {
+		
+		sql ="update user set name = ? where name = ?";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, modifyName);
+			psmt.setString(2, originName);
 			psmt.executeUpdate();	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

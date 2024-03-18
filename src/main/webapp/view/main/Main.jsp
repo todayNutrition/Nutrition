@@ -71,7 +71,7 @@
 	margin-bottom: 7px;
 }
 input{
-	width: 150px;
+	width: 120px;
 }
  .dash{
 	width: 320px;
@@ -114,20 +114,33 @@ input{
 	
 	input{
 	width: 110px;
-}
+	}
+
 }
 
 </style>    
+
+<script>
+	function ModifyName() {
+		if(confirm("수정하시겠습니까?")){
+			var name = document.querySelector("#ModifyName");
+			name.action = "ModifyName";
+			name.submit();
+		}
+	}
+</script>
+
+
 <div class="container">
 	<div class="big">
 		<div class="profile">
 			<div class="dash">
-			<form action="ModifyReg" method="get">
+			<form action="ModifyReg" method="get" id="ModifyName">
 				<div style="width: 100%;">
 		 			<h1 class="title">나의 프로필</h1>
 					<div class="litle_d">
 						<div class="cate">닉네임</div>
-						<div><input type="text" name="name" value="${MainUser.name}" required/>◁</div>
+						<div><input type="text" name="name" value="${MainUser.name}" required/><button onclick="ModifyName()" class="btn-mini" style="width: 40px; margin: 0px;">◁</button></div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">키</div>
