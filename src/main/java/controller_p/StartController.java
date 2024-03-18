@@ -23,7 +23,7 @@ public class StartController extends HttpServlet {
 		String mainfolder = "realStart/";
 		String mainJsp = request.getRequestURI().substring((request.getContextPath()+"/"+mainfolder).length());
 		request.setAttribute("mainUrl", mainfolder+mainJsp+".jsp");
-
+		
 		try {
 			RealStartService ser = (RealStartService)Class.forName("realStart_p."+mainJsp).newInstance();
 			ser.execute(request, response); 

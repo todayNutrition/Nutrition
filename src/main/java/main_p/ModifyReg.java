@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service_p.MainService;
 
-public class ModifyReg implements MainService{
+public class ModifyReg implements MainService {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -18,21 +18,26 @@ public class ModifyReg implements MainService{
 		dto.setWeight(Double.parseDouble(request.getParameter("weight")));
 		dto.setAge(Integer.parseInt(request.getParameter("age")));
 		dto.setGender(request.getParameter("gender"));
-		
+
 		// 로그인 유지
-		MainDTO ss = (MainDTO)request.getSession().getAttribute("UserSS");
-		
+		MainDTO ss = (MainDTO) request.getSession().getAttribute("UserSS");
+
 		// 메인 페이지 저장된 기초정보
 		MainDTO user = new MainDAO().nameChk(dto.getName());
 		request.setAttribute("MainUser", user);
-		
+
+		if(user != null && dto.getName().equals(user.getName())) {
+			request.setAttribute("msg", "이미 존재하는 닉네임입니다."); 
+			request.setAttribute("move", "/Nutrition/main/Main?name="+ss.getName()); 
+			request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
+		}else{
 		// 메인 페이지 저장된 기초정보 수정
-		new MainDAO().userModify(dto, dto.getKind(),ss.getName());
+		new MainDAO().userModify(dto, dto.getKind(), ss.getName());
 		request.setAttribute("msg", "수정이 완료되었습니다.");
-		request.setAttribute("move", "/Nutrition/main/Main?name="+dto.getName());
+		request.setAttribute("move", "/Nutrition/main/Main?name=" + dto.getName());
 		request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
-		
 		// 로그인 정보 변경 유지
-		request.getSession().setAttribute("UserSS",dto);
+		request.getSession().setAttribute("UserSS", dto);
+		}
 	}
 }
