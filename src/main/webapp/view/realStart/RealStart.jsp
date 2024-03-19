@@ -14,6 +14,7 @@
  /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
   box-shadow: 0 0 20px #eee;
   border-radius: 10px;
+  margin: auto;
  }
 #st:hover {
   background-position: right center; /* change the direction of the change here */
@@ -35,10 +36,28 @@
 	margin: auto;
 	margin-top: 100px;
 	margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+   	align-items:center;
+   	justify-content: space-around;
 }
 .info{
 	text-align: center;
 }
+p{
+	margin: 20px;
+}
+@media (max-width: 767px)  {
+	#st{
+		padding: 0px;
+		text-align: center;
+		width: 90%;
+	}
+	p{
+		font-size: 12px;
+	}
+}
+
 </style>    
 
 
@@ -56,5 +75,5 @@
 	</p>
 	</div>
 	<div id="gogo">영양해! 지금 시작하시겠습니까?</div>
-	<div align="center"><a id="st" href="/Nutrition/main/UserStart">Start</a></div>
+	<a id="st" href="/Nutrition/main/UserStart">Start</a>
 </div>

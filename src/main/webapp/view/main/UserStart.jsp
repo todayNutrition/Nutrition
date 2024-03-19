@@ -60,6 +60,51 @@ input[type="text"]{
 	border-bottom: 1px solid #000;
 }
 
+@media (max-width: 767px)  {
+	.title {
+	     text-align: center;
+	     font-size: 200%;
+	     margin: 20px;
+	}
+	
+	/*프로필, 섭취량 감싸는 틀*/
+	.big {
+	   margin:auto;
+	   margin-top: 100px;
+	   width:100%;
+	   height: 300px;
+	}
+	/*프로필, 섭취량*/
+	.profile{
+	   width: 95%;
+	   height: 430px;
+	   margin:auto;
+	   
+	}
+	.cate{
+	   float: left;
+	   width: 30%;
+	   margin-left: 25px;
+	   font-size: 17px;
+	}
+	.litle_d{
+	   margin-bottom: 15px;
+	   display: flex;
+	   align-items:center;
+	   justify-content: space-around;
+
+	}
+	.litle_d > div:last-child{
+		width: 70%;
+		margin-right: 25px;
+	}
+	input[type="text"]{
+	   width: 100%;
+	   border: none;
+	   border-bottom: 1px solid #000;
+	}
+}
+
 </style>
  
 <div class="big">
