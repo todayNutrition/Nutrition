@@ -27,6 +27,18 @@
   box-shadow: 0 1px 0 rgba(255,255,255,0.89),0 1px rgba(0,0,0,0.05) inset;
   position: relative;
 }
+.chomini{
+	color: white; 
+	display: inline-block;
+	border: 1px solid rgba(0,0,0,0.21);
+	border-bottom-color: rgba(0,0,0,0.34);
+	text-shadow:0 1px 0 rgba(0,0,0,0.15);
+	box-shadow: 0 1px 0 rgba(255,255,255,0.34) inset, 
+	            0 2px 0 -1px rgba(0,0,0,0.13), 
+	            0 3px 0 -1px rgba(0,0,0,0.08), 
+	            0 3px 13px -1px rgba(0,0,0,0.21);
+	background-color: #7fccde;
+}
 
 /*글자*/
 .title {
@@ -41,10 +53,11 @@
 
 /*프로필, 섭취량 감싸는 틀*/
 .big {
-	width:95%;
+	width:100%;
 	margin:auto;
 	margin-top: 100px;
-	height: 400px;
+	display: flex;
+	justify-content: center;
 }
 /*프로필, 섭취량*/
 .profile{
@@ -70,6 +83,7 @@
 .litle_d{
 	margin-bottom: 7px;
 }
+
 input{
 	width: 120px;
 }
@@ -89,33 +103,94 @@ input{
     gap: 1.4rem;
 }
 
-@media(max-width: 767px){
-
+@media (max-width: 767px)  {
 	.container{
 		flex-direction: column;
+		padding: 0px;
 	}
-	.dash{
-		width: 95%;
-		height: 400px;
-		margin-top: 7px;
-		margin-left: 7px;
-		border: 2px dashed #00ADB2;
-		border-radius: 50px;
+	.title {
+	     text-align: center;
+	     font-size: 200%;
+	     margin: 20px;
 	}
+	
+	/*프로필, 섭취량 감싸는 틀*/
+	.big {
+	   margin:auto;
+	   margin-top: 100px;
+	   width:100%;
+	}
+	/*프로필, 섭취량*/
 	.profile{
-		width: 100%;
-		height: 430px;
+		width: 95%;
+		/* height: 430px; */
+		margin:auto;
 		float: left;
-	 	margin-bottom: 40px;
+		margin-bottom: 40px;
 		border: 7px solid #00ADB2;
 		border-radius: 65px;
 		background-color: #fff;
+	   
 	}
-	
-	input{
-	width: 110px;
+	.cate{
+	   float: left;
+	   width: 30%;
+	   margin-left: 25px;
+	   font-size: 17px;
 	}
+	.cate1{
+		float: left;
+		width: 45%;
+		margin-left: 25px;
+	}
+	.litle_d{
+	   margin-bottom: 15px;
+	   display: flex;
+	   align-items:center;
+	   justify-content: space-around;
 
+	}
+	.bot_litle_d{
+		margin-bottom: 10px;
+	}
+	.bot_text{
+		text-align: right;
+	}
+	.litle_d > div:last-child{
+	    position: relative;
+	    width: 50%;
+		margin-right: 25px;
+	}
+	input[type="text"], input[type="number"]{
+	   width: 100%;
+	   border: none;
+	   border-bottom: 1px solid #000;
+	}
+	.dash{
+		width: 97%;	
+		/* height: 400px; */
+		margin-top: 7px;
+		margin-left: 4px;
+		border: 2px dashed #00ADB2;
+		border-radius: 50px;
+	}
+ 	.chomini{
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		padding: 0;
+		color: white; 
+		display: inline-block;
+		border: 1px solid rgba(0,0,0,0.21);
+		border-bottom-color: rgba(0,0,0,0.34);
+		text-shadow:0 1px 0 rgba(0,0,0,0.15);
+		box-shadow: 0 1px 0 rgba(255,255,255,0.34) inset, 
+		            0 2px 0 -1px rgba(0,0,0,0.13), 
+		            0 3px 0 -1px rgba(0,0,0,0.08), 
+		            0 3px 13px -1px rgba(0,0,0,0.21);
+		background-color: #7fccde;
+	}
 }
 
 </style>    
@@ -125,6 +200,10 @@ input{
 		if(confirm("수정하시겠습니까?")){
 			var name = document.querySelector("#ModifyName");
 			name.action = "ModifyName";
+			name.submit();
+		}else{
+			var name = document.querySelector("#ModifyName");
+			name.action = "Main";
 			name.submit();
 		}
 	}
@@ -140,19 +219,23 @@ input{
 		 			<h1 class="title">나의 프로필</h1>
 					<div class="litle_d">
 						<div class="cate">닉네임</div>
-						<div><input type="text" name="name" value="${MainUser.name}" required/><button onclick="ModifyName()" class="btn-mini" style="width: 40px; margin: 0px;">◁</button></div>
+						<div>
+							<input type="text" name="name" value="${MainUser.name}" required/>
+							<button onclick="ModifyName()" class="chomini">수정</button>
+						</div>
+						
 					</div>
 					<div class="litle_d">
 						<div class="cate">키</div>
-						<div><input type="number" name="height" value="${MainUser.height}" step="0.1" pattern="\\d*" required min="50"/>◁</div>
+						<div><input type="number" name="height" value="${MainUser.height}" step="0.1" pattern="\\d*" required min="50"/></div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">몸무게</div>
-						<div><input type="number" name="weight" value="${MainUser.weight}" step="0.1" pattern="\\d*" required min="10"/>◁</div>
+						<div><input type="number" name="weight" value="${MainUser.weight}" step="0.1" pattern="\\d*" required min="10"/></div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">나이</div>
-						<div><input type="number" name="age" value="${MainUser.age}" min="6" required/>◁</div>
+						<div><input type="number" name="age" value="${MainUser.age}" min="6" required/></div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">성별</div>
@@ -170,43 +253,43 @@ input{
 	<div class="big">
 		 <div class="profile">
 			 <div class="dash">
-				<div  style="width: 100%;">
+				<div>
 		 			<h1 class="title">오늘 섭취량</h1>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">칼로리</div>
-						<div>${readDay.kcal}kcal</div>
+						<div class="bot_text">${readDay.kcal}kcal</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">나트륨</div>
-						<div>${readDay.na}mg</div>
+						<div class="bot_text">${readDay.na}mg</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">탄수화물</div>
-						<div>${readDay.carbo}g</div>
+						<div class="bot_text">${readDay.carbo}g</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">당류</div>
-						<div>${readDay.sugar}g</div>
+						<div class="bot_text">${readDay.sugar}g</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">지방</div>
-						<div>${readDay.fat}g</div>
+						<div class="bot_text">${readDay.fat}g</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">트렌스지방</div>
-						<div>${readDay.tFat}g</div>
+						<div class="bot_text">${readDay.tFat}g</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">포화지방</div>
-						<div>${readDay.sFat}g</div>
+						<div class="bot_text">${readDay.sFat}g</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">콜레스테롤</div>
-						<div>${readDay.chole}mg</div>
+						<div class="bot_text">${readDay.chole}mg</div>
 					</div>
-					<div class="litle_d">
+					<div class="bot_litle_d litle_d">
 						<div class="cate1">단백질</div>
-						<div>${readDay.protein}g</div>
+						<div class="bot_text">${readDay.protein}g</div>
 					</div>
 				</div>
 			</div>	 
