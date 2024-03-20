@@ -28,7 +28,45 @@ $(function(){
 		$(".goalKcal").val($(this).val())		
 		event.target.style.background = 'linear-gradient(to right, #7fccde 0%, #7fccde '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 	})	
-})
+	
+	
+	for(var i = 0; i<$(".score").length; i++){
+		var jum = parseInt($(".score").eq(i).text()) //점수
+		var goal = parseInt($(".goal").eq(i).text()) //권장섭취량
+		var goalKcal = parseInt($(".goalKcal").val()) //목표칼로리
+		var todayKcalT = parseInt($(".tot").eq(0).text())
+		var todayTot = parseInt($(".tot").eq(i).text()) //총 섭취량(칼로리제외)
+		
+
+		// 점수 90~100 : 초록 , 권장량 넘었을 경우 : 빨강
+		if(jum >= 90){ 
+			if(todayTot > goal){
+				$(".tot").eq(i).css("color","red")
+			}else{
+				$(".tot").eq(i).css("color","green")
+			}
+			if(todayKcalT > goalKcal){
+				$(".tot").eq(0).css("color","red")
+			}
+		}
+		// 점수 90 아래 : 파랑, 권장량 넘었을 겨우 : 빨강??
+		else {
+			if(todayTot > goal){
+				$(".tot").eq(i).css("color","red")
+			}else{
+				$(".tot").eq(i).css("color","blue")
+			}
+			if(todayKcalT > goalKcal){
+				$(".tot").eq(0).css("color","red")
+			}
+			
+			
+		}
+	}
+		
+
+	})
+	
  </script>
  
 <style>
@@ -133,60 +171,67 @@ $(function(){
       <th scope="col">성분</th>
       <th scope="col">권장 섭취량</th>
       <th scope="col">총 섭취량</th>
+        <th scope="col">점수</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th scope="row">칼로리</th>
       <td>${dto.kcal}kcal</td>
-      <td>${total.kcal }kcal</td>
+      <td class="tot">${total.kcal }kcal</td>
+      <td class="score">${ndata.kcal }점</td>
     </tr>
     <tr>
       <th scope="row">나트륨</th>
-      <td>${dto.na}mg</td>
-      <td>${total.na }mg</td>
+      <td class = "goal">${dto.na}mg</td>
+      <td class="tot">${total.na }mg</td>
+      <td class="score">${ndata.na }점</td>
     </tr>
      <tr>
       <th scope="row">탄수화물</th>
-      <td>${dto.carbo}g</td>
-      <td>${total.carbo }g</td>
+      <td class = "goal">${dto.carbo}g</td>
+      <td class="tot">${total.carbo }g</td>
+       <td class="score">${ndata.carbo }점</td>
     </tr>
      <tr>
       <th scope="row">당류</th>
-      <td>${dto.sugar}g</td>
-      <td>${total.sugar }g</td>
+      <td class = "goal">${dto.sugar}g</td>
+      <td class="tot">${total.sugar }g</td>
+       <td class="score">${ndata.sugar }점</td>
     </tr>
      <tr>
       <th scope="row">지방</th>
-      <td>${dto.fat}g</td>
-      <td>${total.fat }g</td>
+      <td class = "goal">${dto.fat}g</td>
+      <td class="tot">${total.fat }g</td>
+       <td class="score">${ndata.fat }점</td>
     </tr>
      <tr>
       <th scope="row">트렌스지방</th>
-      <td>${dto.tFat}g</td>
-      <td>${total.tFat }g</td>
+      <td class = "goal">${dto.tFat}g</td>
+      <td class="tot">${total.tFat }g</td>
+       <td class="score">${ndata.tFat }점</td>
     </tr>
      <tr>
       <th scope="row">포화지방</th>
-      <td>${dto.sFat}g</td>
-      <td>${total.sFat }g</td>
+      <td class = "goal">${dto.sFat}g</td>
+      <td class="tot">${total.sFat }g</td>
+       <td class="score">${ndata.sFat }점</td>
     </tr>
     <tr>
       <th scope="row">콜레스테롤</th>
-      <td>${dto.chole}mg</td>
-      <td>${total.chole }mg</td>
+      <td class = "goal">${dto.chole}mg</td>
+      <td class="tot">${total.chole }mg</td>
+       <td class="score">${ndata.chole }점</td>
     </tr>
     <tr>
       <th scope="row">단백질</th>
-      <td>${dto.protein}g</td>
-      <td>${total.protein }g</td>
+      <td class = "goal">${dto.protein}g</td>
+      <td class="tot">${total.protein }g</td>
+       <td class="score">${ndata.protein }점</td>
     </tr>
   </tbody>
 </table>
 
-  <div class="container pb-3">
-    <canvas id="myChart"></canvas>
-  </div>
 
  <script>
  var data = {
@@ -238,25 +283,7 @@ $(function(){
 		  }
 		});
  
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = new Chart(ctx, {
-      // 챠트 종류를 선택
-      type: 'line',
-
-      // 챠트를 그릴 데이타
-      data: {
-        labels: ['칼로리', '나트륨', '탄수화물', '당류', '지방', '트렌스지방', '포화지방', '콜레스테롤', '단백질'],
-        datasets: [{
-          label: '내 점수',
-          backgroundColor: 'transparent',
-          borderColor: 'skyblue',
-          data: [${ndata.kcal}, ${ndata.na}, ${ndata.carbo}, ${ndata.sugar}, ${ndata.fat}, ${ndata.tFat}, ${ndata.sFat}, ${ndata.chole}, ${ndata.protein}]
-        }]
-      },
-      options: {maintainAspectRatio:false,
-    	  max:100,
-    	  stepSize:10}
-    });
+ 
 </script>
 </c:forEach>
 </div>
