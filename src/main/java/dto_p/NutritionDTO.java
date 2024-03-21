@@ -1,17 +1,35 @@
 package dto_p;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NutritionDTO {
 	int kcal, na, carbo, sugar, protein, fat, tFat, sFat, chole, dayAvg;
-	String name;
+	String name, regDateStr;
+	Date regDate;
+	
 	public int getDayAvg() {
 		return dayAvg;
 	}
 	public void setDayAvg(int dayAvg) {
 		this.dayAvg = dayAvg;
 	}
-	Date regDate;
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+	public String getRegDateStr() {
+		String tt = sdf.format(regDate).substring(3,8);
+	   return tt;
+	}
+	public void setRegDateStr(String regDate) {
+	   try {
+	      this.regDate = sdf.parse(regDate);
+	      System.out.println(this.regDate);
+	   } catch (ParseException e) {
+	        
+	      e.printStackTrace();
+	   }
+	}
 	
 	public Date getRegDate() {
 		return regDate;

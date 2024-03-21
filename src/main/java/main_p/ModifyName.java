@@ -28,7 +28,15 @@ public class ModifyName implements MainService{
 			request.setAttribute("move", "/Nutrition/main/Main?name="+ss.getName()); 
 			request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
 			
-		}else {
+		}else if(user!=null && dto.getName().equals(ss.getName())) {
+			request.setAttribute("msg", "수정이 완료되었습니다.");
+			request.setAttribute("move", "/Nutrition/main/Main?name=" + dto.getName());
+			request.setAttribute("mainUrl", "/view/inc/moveUrl.jsp");
+			
+			// 로그인 정보 변경 유지
+			request.getSession().setAttribute("UserSS", dto);
+		}
+		else {
 			// 중복이 아닐 경우 닉네임 수정
 			new MainDAO().userNameModify(dto.getName(), ss.getName());
 			request.setAttribute("msg", "수정이 완료되었습니다.");

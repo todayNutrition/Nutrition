@@ -120,7 +120,7 @@ input{
 
 </style>    
 
-<script>
+<!-- <script>
 	function ModifyName() {
 		if(confirm("수정하시겠습니까?")){
 			var name = document.querySelector("#ModifyName");
@@ -128,19 +128,19 @@ input{
 			name.submit();
 		}
 	}
-</script>
+</script> -->
 
 
 <div class="container">
 	<div class="big">
 		<div class="profile">
 			<div class="dash">
-			<form action="ModifyReg" method="get" id="ModifyName">
+			<form action="ModifyReg" method="get">
 				<div style="width: 100%;">
 		 			<h1 class="title">나의 프로필</h1>
 					<div class="litle_d">
 						<div class="cate">닉네임</div>
-						<div><input type="text" name="name" value="${MainUser.name}" required/><button onclick="ModifyName()" class="btn-mini" style="width: 40px; margin: 0px;">◁</button></div>
+						<div><input type="text" name="name" value="${MainUser.name}" required/></div>
 					</div>
 					<div class="litle_d">
 						<div class="cate">키</div>
