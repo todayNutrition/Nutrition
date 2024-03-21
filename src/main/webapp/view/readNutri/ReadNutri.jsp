@@ -35,10 +35,13 @@
 				contentType:false,
 				success:function(ttt){
 					if(ttt=='err'){
-						alert("이미지 데이터 형식 오류");
+						alert("이미지 데이터 오류 사진을 재업로드 해주세요");
 						return
 					}else if(ttt=='FileErr'){
 						alert("이미지 파일만 가능합니다(JPG,PNG,JPEG,BMP)");
+						return
+					}else if(ttt=='ValueErr'){
+						alert("데이터 밸류 에러 사진을 재업로드 해주세요");
 						return
 					}
 					

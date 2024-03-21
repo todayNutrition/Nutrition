@@ -50,7 +50,12 @@ public class read implements ReadNutriService{
 						System.out.println("에러");
 						info="err";
 						break;
-					}else {
+					}else if(line.equals("ValueErr")){
+						chk = false;
+						System.out.println("데이터값에러");
+						info="ValueErr";
+						break;
+					}else{
 						info += line+"/";
 					}
 				}
