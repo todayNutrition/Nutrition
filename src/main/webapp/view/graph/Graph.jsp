@@ -8,11 +8,18 @@
 		background-color: #fff;
 		height: 600px;
 	}
+	.btn-group{
+		margin-left: 45%;
+	}
 	@media(max-width: 767px){
 		.container{
 		margin-top: 100px;
 		background-color: #fff;
 		height: 400px;
+		}
+		.btn-group{
+			margin-top:10%;
+			margin-left: 30%;
 		}
 	}
 
@@ -28,9 +35,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	
-	<a href="/Nutrition/graph/Graph">Graph</a>
-	<a href="/Nutrition/graph/SevenGraph">SevenGraph</a>
+
+	<div class="btn-group" role="group" aria-label="Basic example">
+	  <button type="button" class="btn btn-primary" onclick="location.href='/Nutrition/graph/Graph'">Today</button>
+	  <button type="button" class="btn btn-primary" onclick="location.href='/Nutrition/graph/SevenGraph'">Week</button>
+	</div>
 
   <div class="container">
     <canvas id="myChart"></canvas>
@@ -43,7 +52,7 @@
       data: {
         labels: ['나트륨', '탄수화물', '당류', '지방', '트렌스지방', '포화지방', '콜레스테롤', '단백질'],
         datasets: [{
-          label: '하루 섭취량',
+          label: '일일 섭취량',
           data: [${readDay.na}, ${readDay.carbo}, ${readDay.sugar}, ${readDay.fat},${readDay.tFat},${readDay.sFat},${readDay.chole},${readDay.protein}],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -69,7 +78,7 @@
           borderWidth: 1
         },
         {
-            label: '하루 평균 권장 섭취량(백분율)',
+            label: '일일 평균 권장 섭취량(백분율)',
              data: [100, 100, 100, 100, 100, 100, 100, 100],
             backgroundColor: 'transparent',
             borderColor: 'red',

@@ -9,11 +9,18 @@
 		background-color: #fff;
 		height: 600px;
 	}
+	.btn-group{
+		margin-left: 45%;
+	}
 	@media(max-width: 767px){
 		.container{
 		margin-top: 100px;
 		background-color: #fff;
 		height: 400px;
+		}
+		.btn-group{
+			margin-top:10%;
+			margin-left: 30%;
 		}
 	}
 
@@ -28,9 +35,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-	<a href="/Nutrition/graph/Graph">Graph</a>
-	<a href="/Nutrition/graph/SevenGraph">SevenGraph</a>
+	<div class="btn-group" role="group" aria-label="Basic example">
+	  <button type="button" class="btn btn-primary" onclick="location.href='/Nutrition/graph/Graph'">Today</button>
+	  <button type="button" class="btn btn-primary" onclick="location.href='/Nutrition/graph/SevenGraph'">Week</button>
+	</div>
   <div class="container">
     <canvas id="myChart"></canvas>
   </div>
@@ -99,11 +107,11 @@
        borderWidth: 3
      },
      {
-       label: '100분율',
+       label: '백분율',
        data: ${size},
-       backgroundColor: 'transparent',
-       borderColor: 'black',
-       borderWidth: 3
+       backgroundColor: 'rgba(180, 255, 191, 0.33)',
+       borderColor: 'rgba(132, 255, 188, 1)',
+       borderWidth: 0
      }]
   };
 
