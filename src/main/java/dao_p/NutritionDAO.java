@@ -179,6 +179,101 @@ public class NutritionDAO {
 		return dto;
 	}
 	
+	/**연습!!!!하루 섭취량과 권장섭취량 비교해 평균치 보기*/
+	public NutritionDTO todayGraph1(String kind, String gender, String name){
+		NutritionDTO dto = null;
+		sql = "select"
+				+ " sum(a.na)/b.na*100 AS na,"
+				+ " sum(a.carbo)/b.carbo*100 AS carbo,"
+				+ "	sum(a.sugar)/b.sugar*100 AS sugar,"
+				+ "	sum(a.fat)/b.fat*100 AS fat,"
+				+ "	sum(a.tFat)/b.tFat*100 AS tFat,"
+				+ "	sum(a.sFat)/b.sFat*100 AS sFat,"
+				+ "	sum(a.chole)/b.chole*100 AS chole,"
+				+ "	sum(a.protein)/b.protein*100 AS protein,"
+				+ "	sum(a.kcal)/c.goalKcal*100 AS kcal "
+				+ "	from nutrition a"
+				+ " JOIN rda b"
+				+ " LEFT OUTER JOIN user c"
+				+ " ON a.name = c.name"
+				+ "	where regDate = curdate() && b.kind = ? && b.gender = ? && a.name = ? ";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, kind);
+			psmt.setString(2, gender);
+			psmt.setString(3, name);
+			rs = psmt.executeQuery();		
+			while(rs.next()) {
+				dto = new NutritionDTO();
+				dto.setKcal(rs.getInt("kcal"));
+				dto.setCarbo(rs.getInt("carbo"));
+				dto.setNa(rs.getInt("na"));
+				dto.setSugar(rs.getInt("sugar"));
+				dto.setProtein(rs.getInt("protein"));
+				dto.setFat(rs.getInt("fat"));
+				dto.settFat(rs.getInt("tFat"));
+				dto.setsFat(rs.getInt("sFat"));
+				dto.setChole(rs.getInt("chole"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}		
+		return dto;
+	}
+	
+	
+	/**한 주 섭취량과 권장섭취량 비교해 평균치 보기*/
+	public ArrayList<NutritionDTO> weekGraph(String kind, String gender, String name){
+		ArrayList<NutritionDTO> res = new ArrayList<NutritionDTO>(); 
+		NutritionDTO dto = null;
+		sql = "SELECT regdate, "
+				+ "SUM(a.na)/b.na*100 AS na, "
+				+ "SUM(a.carbo)/b.carbo*100 AS carbo, "
+				+ "SUM(a.sugar)/b.sugar*100 AS sugar, "
+				+ "SUM(a.fat)/b.fat*100 AS fat, "
+				+ "SUM(a.tFat)/b.tFat*100 AS tFat, "
+				+ "SUM(a.sFat)/b.sFat*100 AS sFat, "
+				+ "SUM(a.chole)/b.chole*100 AS chole, "
+				+ "SUM(a.protein)/b.protein*100 AS protein, "
+				+ "SUM(a.kcal)/c.goalKcal*100 AS kcal  "
+				+ "FROM nutrition a  "
+				+ "JOIN rda b "
+				+ "LEFT OUTER JOIN user c "
+				+ "ON a.name = c.name "
+				+ "WHERE regdate BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE() AND b.kind = ? && b.gender = ? && a.name = ? "
+				+ "GROUP BY regdate ";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, kind);
+			psmt.setString(2, gender);
+			psmt.setString(3, name);
+			rs = psmt.executeQuery();		
+			while(rs.next()) {
+				dto = new NutritionDTO();
+				dto.setRegDateStr(rs.getString("regDate"));
+				dto.setKcal(rs.getInt("kcal"));
+				dto.setCarbo(rs.getInt("carbo"));
+				dto.setNa(rs.getInt("na"));
+				dto.setSugar(rs.getInt("sugar"));
+				dto.setProtein(rs.getInt("protein"));
+				dto.setFat(rs.getInt("fat"));
+				dto.settFat(rs.getInt("tFat"));
+				dto.setsFat(rs.getInt("sFat"));
+				dto.setChole(rs.getInt("chole"));
+				
+				res.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}		
+		return res;
+	}
+	
 
 	public void write(NutritionDTO dto) {
 		
