@@ -113,9 +113,13 @@ for i, cc in enumerate( pts):
 
     rectangle = recImg[lowY:highY, lowX:highX].copy()
     ttt = pytesseract.image_to_string(rectangle, lang='kor+eng')
-    if(ttt[-2:-1]=="8" and len(ttt[:-1].split(' '))!=2):
-        print(ttt[:-2]+" "+"g")
-    elif(len(ttt[:-1].split(' '))!=2):
-        print("err")
-    else:
-        print(ttt[:-1])
+    try:
+        a = int(ttt[:-1].split(' ')[0])
+        if(ttt[-2:-1]=="8" and len(ttt[:-1].split(' '))!=2):
+            print(ttt[:-2]+" "+"g")
+        elif(len(ttt[:-1].split(' '))!=2):
+            print("err")
+        else:
+            print(ttt[:-1])
+    except ValueError:
+        print("ValueErr")

@@ -26,11 +26,12 @@
 
         #cont {
             margin: 50px auto;
-            width: 80%;
+            width: 95%;
             border-radius: 10px;
-            height: 77%;
+            height: 85%;
             background-color: rgba(0, 80, 0, 0.95);
             color: white;
+            overflow: auto;
         }       
         .fc-day-sun a {
 
@@ -75,18 +76,17 @@
 		}
 		.zz{
 			float : left;
-			width:170px;
+			width: 80%;
 			margin-bottom:3px;
 		}
 		.yy{
 			float : left;
-			width:100px;
+			width: 40%;
 			
-			margin-right:20px;
+			margin-right:5%;
 		}
 		.xx{
-			margin-left:10%;
-			padding-left:20%;
+			margin-left:5%;
 			float : left;
 			width: 100%;
 		}
@@ -96,6 +96,15 @@
   			height:300px; 
   			margin:10px;
   		}
+  		.xbutton{
+			text-align: right;
+			padding-right: 3px;	
+		}
+		.table{
+			width: 90%;
+			height: 80%;
+			margin: 5%;
+		}
   
   
   @media (max-width: 767px)  {
@@ -105,18 +114,24 @@
 		margin:10px;
   	}
  	.xx{
-		/* margin-left:10%; */
-		padding-left: 12%;
 		float : left;
 		width: 100%;
 	}
  	
  	.yy{
-		float : left;
-		width:100px;
-		
-		margin-left:28px;
+		width: 80%;
+	    display: flex;
+	    flex-direction: row;
+		margin-right: 20%;
 	}
+	.table{
+		width: 90%;
+		height: 80%;
+		margin: 5%;
+		text-align: center;
+			
+	}
+	
   }
   
     </style>
@@ -126,22 +141,68 @@
     <!-- 모달은 메인 영역 밖으로 빼어 놓는게 좋음-->
     <div id="yrModal">
         <div id="cont" style="text-align: center;">
-            <br>
-            <div><h4>일일 성취표</h4></div>
+            <div class="xbutton"><button onclick="fMClose()">X</button></div>
+            <div><h4>일일 섭취량</h4></div>
             <div class="xx">
-            	<div class="yy">날짜</div> 
-            	<input class="form-control zz" type="text" id="schStart" value="" readonly="readonly"><br>
+            	<div class="yy">
+            		<div style="width: 60%;">날짜</div>
+            		<input class="form-control zz" type="text" id="schStart" value="" readonly="readonly">
+            	</div>
             </div>
             <div class="xx">
-            	<div class="yy">오늘의 점수</div> 
-            	<input class="form-control zz" type="text" id="schJum" value="" readonly="readonly"><br>
+            	<div class="yy">
+	            	<div style="width: 60%;">오늘의 점수</div>
+	            	<input class="form-control zz" type="text" id="schJum" value="" readonly="readonly">
+	            </div>
             </div>
-            <div class="xx">
-            	<div class="yy">평가</div>
-            	<input class="form-control zz" type="text" id="schComment" value="" readonly="readonly"><br>
-            </div>
-            <div><img id="schImg" src=""></div>
-            <button onclick="fMClose()">X</button>
+            <table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col" style="width: 50%;">영양소</th>
+			      <th scope="col">섭취량</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td>칼로리</td>
+			      <td><input class="form-control zz" id="kcal" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>탄수화물</td>
+			      <td><input class="form-control zz" id="carbo" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>단백질</td>
+			      <td><input class="form-control zz" id="protein" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>지방</td>
+			      <td><input class="form-control zz" id="fat" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>나트륨</td>
+			      <td><input class="form-control zz" id="na" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>당류</td>
+			      <td><input class="form-control zz" id="sugar" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>콜레스테롤</td>
+			      <td><input class="form-control zz" id="chole" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>트렌스지방</td>
+			      <td><input class="form-control zz" id="tfat" readonly="readonly" /></td>
+			    </tr>
+			    <tr>
+			      <td>포화지방</td>
+			      <td><input class="form-control zz" id="sfat" readonly="readonly" /></td>
+			    </tr>
+			    
+			  </tbody>
+			</table>
+            
         </div>
     </div>
     <!-- 실제 화면을 담을 영역 -->
@@ -153,6 +214,17 @@
         const YrModal = document.querySelector("#yrModal");
         const calendarEl = document.querySelector('#calendar');
         const mySchStart = document.querySelector("#schStart");
+        const mySchKcal = document.querySelector("#kcal");
+        const mySchCarbo = document.querySelector("#carbo");
+        const mySchProtein = document.querySelector("#protein");
+        const mySchFat = document.querySelector("#fat");
+        const mySchNa = document.querySelector("#na");
+        const mySchSugar = document.querySelector("#sugar");
+        const mySchChole = document.querySelector("#chole");
+        const mySchSfat = document.querySelector("#sfat");
+        const mySchTfat = document.querySelector("#tfat");
+        
+        
         const mySchJum = document.querySelector("#schJum");
         const mySchComment = document.querySelector("#schComment");
         const mySchImg = document.querySelector("#schImg");
@@ -160,9 +232,9 @@
 
         //캘린더 헤더 옵션
         const headerToolbar = {
-            left: 'prev,next today',
+            left: 'prev,next',
             center: 'title',
-            right: 'dayGridMonth,dayGridWeek'
+            right: 'today'
         }
         
         var ev = ${events};
@@ -210,12 +282,17 @@
         calendar.on("eventRemove", info => console.log("Remove:", info));
         calendar.on("eventClick", info => {
             mySchStart.value = info.event.startStr;
-            let jum = info.event.extendedProps.description;
-            console.log(info.event.extendedProps.description);
-            mySchJum.value = jum+"점";
-            let num = parseInt((parseInt(jum))/20);
-            mySchComment.value = "${comments}".split(",")[num];
-            mySchImg.src = "/Nutrition/fff/pepe"+num+".jpg";
+            mySchKcal.value = info.event.extendedProps.kcal;
+            mySchCarbo.value = info.event.extendedProps.carbo;
+            mySchProtein.value = info.event.extendedProps.protein;
+            mySchFat.value = info.event.extendedProps.fat;
+            mySchNa.value = info.event.extendedProps.na;
+            mySchSugar.value = info.event.extendedProps.sugar;
+            mySchChole.value = info.event.extendedProps.chole;
+            mySchSfat.value = info.event.extendedProps.sfat;
+            mySchTfat.value = info.event.extendedProps.tfat;
+            mySchJum.value = info.event.title;
+      
 
             YrModal.style.display = "block";
         });
