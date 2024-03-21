@@ -31,41 +31,22 @@ $(function(){
 	
 	
 	for(var i = 0; i<$(".score").length; i++){
-		var jum = parseInt($(".score").eq(i).text()) //점수
+		//var jum = parseInt($(".score").eq(i).text()) //점수
 		var goal = parseInt($(".goal").eq(i).text()) //권장섭취량
-		var goalKcal = parseInt($(".goalKcal").val()) //목표칼로리
-		var todayKcalT = parseInt($(".tot").eq(0).text())
-		var todayTot = parseInt($(".tot").eq(i).text()) //총 섭취량(칼로리제외)
+		//var goalKcal = parseInt($(".goalKcal").val()) //목표칼로리
+		//var todayKcalT = parseInt($(".tot").eq(0).text())
+		var todayTot = parseInt($(".tot").eq(i).text()) //총 섭취량
 		
-
-		// 점수 90~100 : 초록 , 권장량 넘었을 경우 : 빨강
-		if(jum >= 90){ 
-			if(todayTot > goal){
+			if(goal < todayTot){ 
 				$(".tot").eq(i).css("color","red")
-			}else{
+				
+			}else if(goal == todayTot){
 				$(".tot").eq(i).css("color","green")
-			}
-			if(todayKcalT > goalKcal){
-				$(".tot").eq(0).css("color","red")
-			}
-		}
-		// 점수 90 아래 : 파랑, 권장량 넘었을 겨우 : 빨강??
-		else {
-			if(todayTot > goal){
-				$(".tot").eq(i).css("color","red")
 			}else{
 				$(".tot").eq(i).css("color","blue")
 			}
-			if(todayKcalT > goalKcal){
-				$(".tot").eq(0).css("color","red")
-			}
-			
-			
-		}
 	}
-		
-
-	})
+})
 	
  </script>
  
@@ -177,13 +158,13 @@ $(function(){
   <tbody>
     <tr>
       <th scope="row">칼로리</th>
-      <td>${dto.kcal}kcal</td>
+      <td class ="goal">${dto.kcal}kcal</td>
       <td class="tot">${total.kcal }kcal</td>
       <td class="score">${ndata.kcal }점</td>
     </tr>
     <tr>
       <th scope="row">나트륨</th>
-      <td class = "goal">${dto.na}mg</td>
+      <td class ="goal">${dto.na}mg</td>
       <td class="tot">${total.na }mg</td>
       <td class="score">${ndata.na }점</td>
     </tr>
