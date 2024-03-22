@@ -56,28 +56,28 @@ public class MainDAO {
 			int gk = 0;
 			if (dto.getAge()>=6 && dto.getAge()<=8) {
 				kind="어린이";
-				if(dto.getGender()=="남") {
+				if(dto.getGender().equals("남")) {
 					gk = 1700;
 				}else {
 					gk = 1500;
 				}
 			}else if(dto.getAge() >= 9 && dto.getAge() <= 18) {
 				kind="청소년";
-				if(dto.getGender()=="남") {
+				if(dto.getGender().equals("남")) {
 					gk = 2500;
 				}else {
 					gk = 2000;
 				}
 			}else if(dto.getAge() >=19 && dto.getAge() < 65) {
 				kind="성인";
-				if(dto.getGender()=="남") {
+				if(dto.getGender().equals("남")) {
 					gk = 2500;
 				}else {
 					gk = 2000;
 				}
 			}else if(dto.getAge() >= 65) {
 				kind="노년";
-				if(dto.getGender()=="남") {
+				if(dto.getGender().equals("남")) {
 					gk = 1950;
 				}else {
 					gk = 1550;
